@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include<display.h>
 
 
 void menu_principal(){
@@ -10,16 +11,17 @@ void menu_principal(){
     printf("|||                                              ||| \n");
     printf("|||                                              ||| \n");
     printf("|||                                              ||| \n");
-    printf("|||                NOUVELLE PARTIE               ||| \n");
+    printf("|||               1. NOUVELLE PARTIE               ||| \n");
     printf("|||                                              ||| \n");
     printf("|||                                              ||| \n");
     printf("|||                                              ||| \n");
     printf("|||                                              ||| \n");
-    printf("|||  QUITTER                                     ||| \n");
+    printf("|||  2.QUITTER                                     ||| \n");
     printf("==================================================== \n");
     printf(RESET "\n");
-
     printf("Votre choix : \n");
+        
+    
 
 
 
@@ -28,7 +30,7 @@ void menu_principal(){
 
 
 
-void choisir_joueurs(Plateau *plateau){
+void choisir_joueur(Plateau *plateau){
     int nb;
 
     printf(GRAS "     ======= CHOIX DES JOUEURS =======   ");
