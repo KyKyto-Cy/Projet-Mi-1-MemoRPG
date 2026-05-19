@@ -8,7 +8,7 @@ typedef enum {
     ZOMBIE,
     TROLL,
     HARPIE
-} TypeMonstre;
+} TypeMonstre; // en doublons, faire un choix 
 
 extern char *nomMonstre[];
 
