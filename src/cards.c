@@ -6,7 +6,7 @@
 
 
 
-void creer_cartes(Case cartes[], NB_CARTES){
+void creer_cartes(Case cartes[]){
  
    
     int i;
@@ -78,7 +78,7 @@ void creer_cartes(Case cartes[], NB_CARTES){
 
 
     /* Mélange aléatoire des 25 cartes avec Fisher-Yates */
-    melanger_fisher_yates(cartes, NB_CARTES);
+    melanger_fisher_yates(cartes,);
 
 }
 
@@ -89,7 +89,7 @@ void creer_cartes(Case cartes[], NB_CARTES){
 
 
 
-void melanger_fisher_yates(Case cartes[], NB_CARTES) {
+void melanger_fisher_yates(Case cartes[],) {
 
     for (int i = nb_cartes - 1; i > 0; i--) {
         /* Choisit un indice aléatoire entre 0 et i (inclus) */
