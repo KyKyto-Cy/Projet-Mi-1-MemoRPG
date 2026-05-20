@@ -1,6 +1,6 @@
 
 #include "board.h"
-
+#include "cards.h"
 /* Mélange le tableau de cartes en place avec l'algorithme Fisher-Yates.
    Chaque carte a une probabilité égale de se retrouver à n'importe quelle position. */
 void melanger_fisher_yates(Case cartes[], int nb_cartes) {
