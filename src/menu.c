@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include<display.h>
+#include"display.h"
 
 
 void menu_principal(){
@@ -53,7 +53,7 @@ void choisir_joueur(Plateau *plateau){
 
 
 
-    for (int i= 0; i < nb, i++){
+    for (int i= 0; i < nb; i++){
         int choix_aventurier;
         do{
             printf("Nom du joueur %d :", i+1);
@@ -65,7 +65,7 @@ void choisir_joueur(Plateau *plateau){
             printf(" 4.Voleur\n");
             printf("Votre choix :");
             scanf("%d", &choix_aventurier);
-        }while (choix_aventurier < 1 || choix_aventurier > 4)
+        }while (choix_aventurier < 1 || choix_aventurier > 4);
 
         switch (choix_aventurier) {
             case 1: 
@@ -89,7 +89,7 @@ void choisir_joueur(Plateau *plateau){
 }
 
 
-void menu_fin_partie(Plateau *plateau){
+void menu_final(Plateau *plateau){
     int choix;
 
     printf(GRAS " === FIN DE PARTIE ===  ");
