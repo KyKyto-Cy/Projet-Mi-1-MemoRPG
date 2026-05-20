@@ -1,6 +1,6 @@
 #ifndef CARDS_H
 #define CARDS_H
-
+#define NB_CARTES 25
 /* Type de contenu d'une case du plateau */
 typedef enum {
     VIDE,        /* Case sans contenu particulier */
@@ -26,5 +26,11 @@ typedef enum {
     GRIMOIRE_INTERDIT,   /* Arme : grimoire de magie interdite */
     DAGUE_DE_SOMMEIL,    /* Arme : dague infligeant le sommeil */
 } TypeArmeAntique;
-
+/* Représente une case individuelle du plateau */
+typedef struct {
+    TypeCase type;       /* Type de contenu de la case */
+    TypeMonstre monstre; /* Monstre présent (valide si type == MONSTRE) */
+    TypeArmeAntique arme;/* Arme présente (valide si type == ARME_ANTIQUE) */
+    int revelee;         /* 1 si la case a été révélée, 0 sinon */
+} Case;
 #endif

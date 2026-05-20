@@ -7,17 +7,11 @@
 #define NB_CARTES (TAILLE_PLATEAU * TAILLE_PLATEAU) /* Nombre total de cases sur le plateau */
 
 #include "player.h"
+#include "cards.h"
 
 /* Type de contenu d'une case du plateau */
 
 
-/* Représente une case individuelle du plateau */
-typedef struct {
-    TypeCase type;       /* Type de contenu de la case */
-    TypeMonstre monstre; /* Monstre présent (valide si type == MONSTRE) */
-    TypeArmeAntique arme;/* Arme présente (valide si type == ARME_ANTIQUE) */
-    int revelee;         /* 1 si la case a été révélée, 0 sinon */
-} Case;
 
 /* Représente l'état global du plateau de jeu */
 typedef struct {
