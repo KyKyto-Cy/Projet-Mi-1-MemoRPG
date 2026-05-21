@@ -34,7 +34,7 @@ typedef struct {
     int revelee;         /* 1 si la case a été révélée, 0 sinon */
 } Case;
 
-void melanger_fisher_yates(Case cartes[],);
+void melanger_fisher_yates(Case cartes[]);
 void creer_cartes(Case cartes[]);
 
 #endif
