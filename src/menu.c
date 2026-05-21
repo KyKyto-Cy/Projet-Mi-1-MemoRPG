@@ -61,7 +61,7 @@ void choisir_joueur(Plateau *plateau){
 }
 
 
-void menu_final(Plateau *plateau){
+int menu_final(){
     int choix;
 
     printf(GRAS " === FIN DE PARTIE ===  "RESET);
@@ -73,12 +73,5 @@ void menu_final(Plateau *plateau){
         scanf("%d", &choix);
     } while (choix < 1 || choix > 2);
 
-    if(choix == 1){
-        for(int i = 0; i < plateau->nb_joueurs; i++){
-            plateau->joueurs[i].a_coffre = 0;
-            plateau->joueurs[i].a_arme = 0;
-        }
-    }else{
-        menu_principal();
-    }
+    return choix;
 }

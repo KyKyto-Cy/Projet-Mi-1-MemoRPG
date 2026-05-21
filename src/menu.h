@@ -7,7 +7,7 @@
 
 void menu_principal();
 void choisir_joueur();
-void menu_final();
+int menu_final();
 
 // TODO: prototypes des fonctions du module menu
 
