@@ -40,17 +40,17 @@ const char* NomArme(armeActive arme){
     }
 }
 
-const char* NomArmeAntique(armeAntique arme){
+const char* NomArmeAntique(TypeArmeAntique arme){
 
-    if(arme == EPEE){
+    if(arme == EPEE_DE_FEU){
         return "Epee de feu";
     }
 
-    else if(arme == BATON){
+    else if(arme == BATON_DES_FAMILIERS){
         return "Baton de controle des familiers";
     }
 
-    else if(arme == GRIMOIRE){
+    else if(arme == GRIMOIRE_INTERDIT){
         return "Grimoire interdit";
     }
 
@@ -59,22 +59,22 @@ const char* NomArmeAntique(armeAntique arme){
     }
 }
 
-armeAntique associerArmeAntique(TypeAventurier type) {
+TypeArmeAntique associerArmeAntique(TypeAventurier type) {
 
     if (type == GUERRIER){
-        return EPEE;
+        return EPEE_DE_FEU;
     }
 
     else if (type == RANGER){
-        return BATON;
+        return BATON_DES_FAMILIERS;
     }
 
     else if (type == MAGICIEN){
-        return GRIMOIRE;
+        return GRIMOIRE_INTERDIT;
     }
 
     else{
-        return DAGUE;
+        return DAGUE_DE_SOMMEIL;
     }
 }
 
