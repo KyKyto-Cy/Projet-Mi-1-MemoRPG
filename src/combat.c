@@ -72,9 +72,9 @@ void combat(Joueur *joueur, TypeMonstre monstre){
     }
 }
 
-int joueurGagne(Joueur joueur){
+int joueurGagne(Joueur *joueur){
 
-    if (joueur.trouveCoffre == 1 && joueur.trouveArmeAntique == 1){
+    if (joueur->trouveCoffre == 1 && joueur->trouveArmeAntique == 1){
         return 1;
     }
 
