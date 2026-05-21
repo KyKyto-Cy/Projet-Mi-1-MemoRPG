@@ -3,8 +3,13 @@
 #include "saisie.h"
 
 char *lire_chaine(char *chaine, int taille){
-    fgets(chaine, taille, stdin);
-    chaine[strcspn(chaine, "\n")] = '\0';
+    do {
+        fgets(chaine, taille, stdin);
+        chaine[strcspn(chaine, "\n")] = '\0';
+        if (chaine[0] == '\0') {
+            printf("Erreur, le nom ne peut pas etre vide : \n");
+        }
+    } while (chaine[0] == '\0');
     return chaine;
 }
 
