@@ -24,7 +24,7 @@ int menu_principal(void){
     printf("==================================================== \n");
     printf(RESET "\n");
     printf("Votre choix : \n");
-    choix = lire_entier(1, 2);
+    choix = lire_entier(1, 2); //scanf sécurisé 
 
 
     return choix;
@@ -40,7 +40,7 @@ void choisir_joueur(Plateau *plateau){
 
     
     printf("Nombre de joueurs de 2 à 4 joueurs : ");
-    nb = lire_entier(2, 4);
+    nb = lire_entier(2, 4); //scanf sécurisé
     
 
     plateau->nb_joueurs = nb;
