@@ -16,6 +16,6 @@ typedef struct {
     int nb_joueurs;                              /* Nombre de joueurs actifs */
 } Plateau;
 
-void initialiser_plateau(Plateau *plateau);
+void initialiser_plateau(Plateau *plateau);     /* Mélange et place les cartes sur la grille */
 
 #endif
