@@ -41,9 +41,9 @@ typedef struct{
 
 } Joueur;
 
-extern char *nomAventurier[];
-extern char *nomArme[];
-extern char *nomArmeAntique[];
+const char* NomAventurier(TypeAventurier type);
+const char* NomArme(armeActive arme);
+const char* NomArmeAntique(armeAntique arme);
 
 armeAntique associerArmeAntique(TypeAventurier type);
 
