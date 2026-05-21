@@ -1,5 +1,7 @@
 #include <stdio.h>
+#include "cards.h"
 #include "display.h"
+
 
 void afficher_case(Case c) {
     if (c.revelee == 0){
@@ -38,7 +40,20 @@ switch (c.type){
     break;
 
     case ARME_ANTIQUE:
-    printf(MAGENTA "[ A ]" RESET);
+    switch (c.arme) {
+        case EPEE_DE_FEU :
+            printf(MAGENTA "[ E ]" RESET); 
+            break;
+        case BATON_DES_FAMILIERS: 
+            printf(MAGENTA "[ B ]" RESET); 
+            break;
+        case GRIMOIRE_INTERDIT:   
+            printf(MAGENTA "[ G ]" RESET); 
+            break;
+        case DAGUE_DE_SOMMEIL:    
+            printf(MAGENTA "[ D ]" RESET); 
+            break;
+    }
     break;
 
     case PORTAIL:
@@ -46,7 +61,7 @@ switch (c.type){
     break;
 
     case TOTEM :
-    printf(VERT "[ T ]" RESET);
+    printf(VERT "[ TO]" RESET);
     break;
 
 }
