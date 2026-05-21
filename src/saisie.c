@@ -11,10 +11,14 @@ char *lire_chaine(char *chaine, int taille){
 
 int lire_entier(int min, int max){
     int choix;
-    do{
-        scanf("%d", &choix);
-
-    }while(choix < min || choix > max);
+    do {
+        if (scanf("%d", &choix) != 1) {
+            printf("Erreur, saisissez un nombre : \n");
+            choix = min - 1; //force la boucle à recommencer
+        } else if (choix < min || choix > max) {
+            printf("Erreur, saisissez un entier entre %d et %d : \n", min, max);
+        }
+        while (getchar() != '\n'); // vide le buffer dans tous les cas
+    } while (choix < min || choix > max);
     return choix;
-
 }
