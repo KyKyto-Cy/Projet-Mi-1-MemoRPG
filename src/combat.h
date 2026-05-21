@@ -10,7 +10,7 @@ typedef enum {
     HARPIE
 } TypeMonstre; // en doublons, faire un choix 
 
-extern char *nomMonstre[];
+const char* NomMonstre(TypeMonstre monstre);
 
 int armeBatMonstre(armeActive arme, TypeMonstre monstre);
 
