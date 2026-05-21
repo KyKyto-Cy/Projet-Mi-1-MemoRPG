@@ -88,29 +88,26 @@ void creerJoueur(Joueur *joueur){
     lire_chaine(joueur->nom, 50);
 
     printf("\nChoisissez votre aventurier :\n");
-    printf("0 = Guerrier\n");
-    printf("1 = Ranger\n");
-    printf("2 = Magicien\n");
-    printf("3 = Voleur\n");
+    printf("1 = Guerrier\n");
+    printf("2 = Ranger\n");
+    printf("3 = Magicien\n");
+    printf("4 = Voleur\n");
 
-    choixType = lire_entier(0, 3);
+    choixType = lire_entier(1, 4);
 
-    
-
-    joueur->type = choixType;
+    joueur->type = choixType - 1;
 
     joueur->armeRecherchee = associerArmeAntique(joueur->type);
 
     printf("\nChoisissez votre arme active :\n");
-    printf("0 = Bouclier\n");
-    printf("1 = Torche\n");
-    printf("2 = Arc\n");
-    printf("3 = Hache\n");
+    printf("1 = Bouclier\n");
+    printf("2 = Torche\n");
+    printf("3 = Arc\n");
+    printf("4 = Hache\n");
 
-    choixArme = lire_entier(0, 3);
+    choixArme = lire_entier(1, 4);
 
-
-    joueur->armeChoisi = choixArme;
+    joueur->armeChoisi = choixArme - 1;
 
     joueur->positionLigne = -1;
     joueur->positionColonne = -1;
@@ -151,13 +148,12 @@ void choisirNouvelleArme(Joueur *joueur){
 
     printf("\n%s choisissez votre arme :\n", joueur->nom);
 
-    printf("0 = Bouclier\n");
-    printf("1 = Torche\n");
-    printf("2 = Arc\n");
-    printf("3 = Hache\n");
+    printf("1 = Bouclier\n");
+    printf("2 = Torche\n");
+    printf("3 = Arc\n");
+    printf("4 = Hache\n");
 
-    choixArme = lire_entier(0, 3);
+    choixArme = lire_entier(1, 4);
 
-
-    joueur->armeChoisi = choixArme;
+    joueur->armeChoisi = choixArme - 1;
 }
