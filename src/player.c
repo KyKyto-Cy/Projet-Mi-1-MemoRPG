@@ -2,11 +2,62 @@
 #include <string.h>
 #include "player.h"
 
-char *nomAventurier[] = {"Guerrier","Ranger","Magicien","Voleur"};
+const char* NomAventurier(typeAventurier type){
 
-char *nomArme[] = {"Bouclier","Torche","Arc","Hache"};
+    if(type == Guerrier){
+        return "Guerrier";
+    }
 
-char *nomArmeAntique[] = {"Epee de feu","Baton de controle des familiers","Grimoire interdit","Dague de sommeil"};
+    else if(type == Ranger){
+        return "Ranger";
+    }
+
+    else if(type == Magicien){
+        return "Magicien";
+    }
+
+    else{
+        return "Voleur";
+    }
+}
+
+const char* NomArme(armeActive arme){
+
+    if(arme == BOUCLIER){
+        return "Bouclier";
+    }
+
+    else if(arme == TORCHE){
+        return "Torche";
+    }
+
+    else if(arme == ARC){
+        return "Arc";
+    }
+
+    else{
+        return "Hache";
+    }
+}
+
+const char* NomArmeAntique(armeAntique arme){
+
+    if(arme == EPEE){
+        return "Epee de feu";
+    }
+
+    else if(arme == BATON){
+        return "Baton de controle des familiers";
+    }
+
+    else if(arme == GRIMOIRE){
+        return "Grimoire interdit";
+    }
+
+    else{
+        return "Dague de sommeil";
+    }
+}
 
 armeAntique associerArmeAntique(TypeAventurier type) {
 
