@@ -93,12 +93,9 @@ void creerJoueur(Joueur *joueur){
     printf("2 = Magicien\n");
     printf("3 = Voleur\n");
 
-    scanf("%d", &choixType);
+    choixType = lire_entier(0, 3);
 
-    while (choixType < 0 || choixType > 3){
-        printf("Choix invalide, recommencez :\n");
-        scanf("%d", &choixType);
-    }
+    
 
     joueur->type = choixType;
 
@@ -110,12 +107,8 @@ void creerJoueur(Joueur *joueur){
     printf("2 = Arc\n");
     printf("3 = Hache\n");
 
-    scanf("%d", &choixArme);
+    choixArme = lire_entier(0, 3);
 
-    while (choixArme < 0 || choixArme > 3){
-        printf("Choix invalide, recommencez :\n");
-        scanf("%d", &choixArme);
-    }
 
     joueur->armeChoisi = choixArme;
 
@@ -136,12 +129,8 @@ int choisirNombreJoueur(){
     int nbJoueur;
 
     printf("Nombre de joueurs (entre 2 et 4) :\n");
-    scanf("%d", &nbJoueur);
+    nbJoueur = lire_entier(2, 4);
 
-    while (nbJoueur < 2 || nbJoueur > 4){
-        printf("Nombre invalide :\n");
-        scanf("%d", &nbJoueur);
-    }
 
     return nbJoueur;
 }
@@ -167,12 +156,8 @@ void choisirNouvelleArme(Joueur *joueur){
     printf("2 = Arc\n");
     printf("3 = Hache\n");
 
-    scanf("%d", &choixArme);
+    choixArme = lire_entier(0, 3);
 
-    while (choixArme < 0 || choixArme > 3){
-        printf("Choix invalide :\n");
-        scanf("%d", &choixArme);
-    }
 
     joueur->armeChoisi = choixArme;
 }
