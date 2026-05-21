@@ -1,9 +1,10 @@
 #include <stdio.h>
-#include"display.h"
+#include "display.h"
+#include "menu.h"
 
 
-void menu_principal(){
-    int choix;
+int menu_principal(void){
+    int choix = 0;
 
     do{
 
@@ -24,6 +25,7 @@ void menu_principal(){
         printf("==================================================== \n");
         printf(RESET "\n");
         printf("Votre choix : \n");
+        scanf("%d", &choix);
 
     }while(choix < 1 || choix >2);
 
@@ -36,7 +38,7 @@ void menu_principal(){
 
 
 void choisir_joueur(Plateau *plateau){
-    int nb;
+    int nb = 0;
 
     printf(GRAS "     ======= CHOIX DES JOUEURS =======   ");
 
@@ -53,44 +55,16 @@ void choisir_joueur(Plateau *plateau){
 
 
 
-    for (int i= 0; i < nb; i++){
-        int choix_aventurier;
-        do{
-            printf("Nom du joueur %d :", i+1);
-            scanf("%s", plateau->joueurs[i].nom); //Saisie des noms
-            printf("Choisir votre aventurier : \n");
-            printf(" 1.Guerrier\n");
-            printf(" 2.Ranger\n");
-            printf(" 3.Magicien\n");
-            printf(" 4.Voleur\n");
-            printf("Votre choix :");
-            scanf("%d", &choix_aventurier);
-        }while (choix_aventurier < 1 || choix_aventurier > 4);
-
-        switch (choix_aventurier) {
-            case 1: 
-               plateau->joueurs[i].type = GUERRIER;
-               break;
-            case 2:
-                plateau->joueurs[i].type = RANGER;
-                break;
-            case 3:
-                plateau->joueurs[i].type = MAGICIEN;
-                break;
-            case 4:
-                plateau->joueurs[i].type = VOLEUR;
-                break; 
-
-        }
-        plateau->joueurs[i].a_coffre = 0;
-        plateau->joueurs[i].a_arme = 0;
+    for (int i = 0; i < nb; i++){
+        printf("\n===== Joueur %d =====\n", i + 1);
+        creerJoueur(&plateau->joueurs[i]);
     }
 
 }
 
 
-void menu_final(Plateau *plateau){
-    int choix;
+int menu_final(Plateau *plateau){
+    int choix = 0;
 
     printf(GRAS " === FIN DE PARTIE ===  ");
 
@@ -103,10 +77,10 @@ void menu_final(Plateau *plateau){
 
     if(choix == 1){
         for(int i = 0; i < plateau->nb_joueurs; i++){
-            plateau->joueurs[i].a_coffre = 0;
-            plateau->joueurs[i].a_arme = 0;
+            plateau->joueurs[i].trouveCoffre = 0;
+            plateau->joueurs[i].trouveArmeAntique = 0;
         }
-    }else{
-        menu_principal();
     }
+
+    return choix;
 }

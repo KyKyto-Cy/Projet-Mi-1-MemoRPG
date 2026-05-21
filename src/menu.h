@@ -5,10 +5,10 @@
 #include "board.h"
 #include "player.h"
 
-void menu_principal();
-void choisir_joueur();
-void menu_final();
+int menu_principal(void);
+void choisir_joueur(Plateau *plateau);
+int menu_final(Plateau *plateau);
 
-// TODO: prototypes des fonctions du module menu
+
 
 #endif
