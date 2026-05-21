@@ -1,49 +1,23 @@
 #ifndef BOARD_H
 #define BOARD_H
-#define TAILLE_PLATEAU 5
-#define NB_JOUEUR_MAX 4
-// TODO: prototypes des fonctions du module board
+
+/* Dimensions du plateau et limites */
+#define TAILLE_PLATEAU 5                        /* Nombre de cases par côté (plateau 5x5) */
+#define NB_JOUEUR_MAX 4                         /* Nombre maximum de joueurs simultanés */
+
 
 #include "player.h"
+#include "cards.h"
 
-typedef enum {
-    VIDE,
-    MONSTRE,
-    COFFRE,
-    ARME_ANTIQUE,
-    PORTAIL,
-    TOTEM
+/* Type de contenu d'une case du plateau */
 
-}TypeCase; //COMMENTAIRE A FAIRE//
 
-typedef enum {
-    BASILIC,
-    ZOMBIE,
-    TROLL,
-    HARPIE
 
-}TypeMonstre;
-
-typedef enum {
-    EPEE_DE_FEU,
-    BATON_DES_FAMILIERS,
-    GRIMOIRE_INTERDIT,
-    DAGUE_DE_SOMMEIL,
-}TypeArmeAntique;
-
-typedef struct{
-    TypeCase type;
-    TypeMonstre monstre;
-    TypeArmeAntique arme;
-    int revelee;
-}Case;
-
+/* Représente l'état global du plateau de jeu */
 typedef struct {
-    Case grille[TAILLE_PLATEAU][TAILLE_PLATEAU];
-    Joueur joueurs[NB_JOUEUR_MAX];
-    int nb_joueurs;
+    Case grille[TAILLE_PLATEAU][TAILLE_PLATEAU]; /* Grille 2D des cases */
+    Joueur joueurs[NB_JOUEUR_MAX];               /* Tableau des joueurs en jeu */
+    int nb_joueurs;                              /* Nombre de joueurs actifs */
 } Plateau;
-
-
 
 #endif
