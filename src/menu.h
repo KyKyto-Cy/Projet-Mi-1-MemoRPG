@@ -2,8 +2,8 @@
 #define MENU_H
 
 
-#include <board.h>
-#include <player.h>
+#include "board.h"
+#include "player.h"
 
 void menu_principal();
 void choisir_joueur();
