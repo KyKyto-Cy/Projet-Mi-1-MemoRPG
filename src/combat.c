@@ -1,7 +1,24 @@
 #include <stdio.h>
 #include "combat.h"
 
-char *nomMonstre[] = {"Basilic","Zombie","Troll","Harpie"};
+const char* NomMonstre(TypeMonstre monstre){
+
+    if(monstre == BASILIC){
+        return "Basilic";
+    }
+
+    else if(monstre == ZOMBIE){
+        return "Zombie";
+    }
+
+    else if(monstre == TROLL){
+        return "Troll";
+    }
+
+    else{
+        return "Harpie";
+    }
+}
 
 int armeBatMonstre(armeActive arme, TypeMonstre monstre){
 
@@ -32,9 +49,9 @@ void retourDepart(Joueur *joueur){
 
 void combat(Joueur *joueur, TypeMonstre monstre){
 
-    printf("Monstre rencontre : %s\n", nomMonstre[monstre]);
+    printf("Monstre rencontre : %s\n", NomMonstre(monstre));
 
-    printf("Arme utilisee : %s\n", nomArme[joueur->armeChoisi]);
+    printf("Arme utilisee : %s\n", NomArme(joueur->armeChoisi));
 
     if(armeBatMonstre(joueur->armeChoisi, monstre)){
 
