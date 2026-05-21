@@ -15,12 +15,12 @@ int menu_principal(void){
     printf("|||                                              ||| \n");
     printf("|||                                              ||| \n");
     printf("|||                                              ||| \n");
-    printf("|||               1. NOUVELLE PARTIE               ||| \n");
+    printf("|||               1. NOUVELLE PARTIE             ||| \n");
     printf("|||                                              ||| \n");
     printf("|||                                              ||| \n");
     printf("|||                                              ||| \n");
     printf("|||                                              ||| \n");
-    printf("|||  2.QUITTER                                     ||| \n");
+    printf("|||  2.QUITTER                                   ||| \n");
     printf("==================================================== \n");
     printf(RESET "\n");
     printf("Votre choix : \n");
