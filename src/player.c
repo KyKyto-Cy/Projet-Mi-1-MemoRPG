@@ -2,17 +2,17 @@
 #include <string.h>
 #include "player.h"
 
-const char* NomAventurier(typeAventurier type){
+const char* NomAventurier(TypeAventurier type){
 
-    if(type == Guerrier){
+    if(type == GUERRIER){
         return "Guerrier";
     }
 
-    else if(type == Ranger){
+    else if(type == RANGER){
         return "Ranger";
     }
 
-    else if(type == Magicien){
+    else if(type == MAGICIEN){
         return "Magicien";
     }
 
