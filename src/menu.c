@@ -1,10 +1,10 @@
 #include <stdio.h>
-#include"display.h"
-#include"player.h"
+#include "display.h"
+#include "menu.h"
 
 
-void menu_principal(){
-    int choix;
+int menu_principal(void){
+    int choix = 0;
 
     do{
 
@@ -25,46 +25,39 @@ void menu_principal(){
         printf("==================================================== \n");
         printf(RESET "\n");
         printf("Votre choix : \n");
+        scanf("%d", &choix);
 
-    }while(choix < 1 || choix >2);
+    }while(choix < 1 || choix > 2);
 
     return choix;
-        
-    
 }
 
 
 
 
 void choisir_joueur(Plateau *plateau){
-    int nb;
+    int nb = 0;
 
     printf(GRAS "     ======= CHOIX DES JOUEURS =======   " RESET);
 
-
     do {
-            printf("Nombre de joueurs de 2 à 4 joueurs : "); //Demande le nombre de joueurs 
-            scanf("%d", &nb);
+        printf("Nombre de joueurs de 2 à 4 joueurs : ");
+        scanf("%d", &nb);
+    }while(nb < 2 || nb > 4);
 
+    plateau->nb_joueurs = nb;
 
-    }while(nb < 2 || nb > 4); // si le choix n'appartient pas à [2,4] le programme redemande le nombres de joueurs;
-    plateau->nb_joueurs = nb; 
-
-
-
-
-
-    for (int i= 0; i < nb; i++){
+    for (int i = 0; i < nb; i++){
+        printf("\n===== Joueur %d =====\n", i + 1);
         creerJoueur(&plateau->joueurs[i]);
     }
-
 }
 
 
-int menu_final(){
-    int choix;
+int menu_final(Plateau *plateau){
+    int choix = 0;
 
-    printf(GRAS " === FIN DE PARTIE ===  "RESET);
+    printf(GRAS " === FIN DE PARTIE ===  " RESET);
 
     do {
         printf(" 1. Rejouer avec les mêmes joueurs\n");
@@ -72,6 +65,13 @@ int menu_final(){
         printf(" Votre choix : \n");
         scanf("%d", &choix);
     } while (choix < 1 || choix > 2);
+
+    if(choix == 1){
+        for(int i = 0; i < plateau->nb_joueurs; i++){
+            plateau->joueurs[i].trouveCoffre = 0;
+            plateau->joueurs[i].trouveArmeAntique = 0;
+        }
+    }
 
     return choix;
 }
