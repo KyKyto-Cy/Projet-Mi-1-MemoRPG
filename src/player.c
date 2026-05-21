@@ -84,7 +84,8 @@ void creerJoueur(Joueur *joueur){
     int choixArme;
 
     printf("Entrez votre nom :\n");
-    scanf("%s", joueur->nom);
+    fgets(joueur->nom, 50, stdin);
+    joueur->nom[strcspn(joueur->nom, "\n")] = '\0'; // lit toute la ligne même si il y a des espaces
 
     printf("\nChoisissez votre aventurier :\n");
     printf("0 = Guerrier\n");
