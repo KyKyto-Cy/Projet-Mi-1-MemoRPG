@@ -1,6 +1,5 @@
 #include <stdio.h>
-#include "display.h"
-#include "menu.h"
+#include"display.h"
 
 
 int menu_principal(void){
@@ -40,7 +39,7 @@ int menu_principal(void){
 void choisir_joueur(Plateau *plateau){
     int nb = 0;
 
-    printf(GRAS "     ======= CHOIX DES JOUEURS =======   ");
+    printf(GRAS "     ======= CHOIX DES JOUEURS =======   " RESET);
 
 
     do {
@@ -55,18 +54,46 @@ void choisir_joueur(Plateau *plateau){
 
 
 
-    for (int i = 0; i < nb; i++){
-        printf("\n===== Joueur %d =====\n", i + 1);
-        creerJoueur(&plateau->joueurs[i]);
+    for (int i= 0; i < nb; i++){
+        int choix_aventurier;
+        do{
+            printf("Nom du joueur %d :", i+1);
+            scanf("%s", plateau->joueurs[i].nom); //Saisie des noms
+            printf("Choisir votre aventurier : \n");
+            printf(" 1.Guerrier\n");
+            printf(" 2.Ranger\n");
+            printf(" 3.Magicien\n");
+            printf(" 4.Voleur\n");
+            printf("Votre choix :");
+            scanf("%d", &choix_aventurier);
+        }while (choix_aventurier < 1 || choix_aventurier > 4);
+
+        switch (choix_aventurier) {
+            case 1: 
+               plateau->joueurs[i].type = GUERRIER;
+               break;
+            case 2:
+                plateau->joueurs[i].type = RANGER;
+                break;
+            case 3:
+                plateau->joueurs[i].type = MAGICIEN;
+                break;
+            case 4:
+                plateau->joueurs[i].type = VOLEUR;
+                break; 
+
+        }
+        plateau->joueurs[i].a_coffre = 0;
+        plateau->joueurs[i].a_arme = 0;
     }
 
 }
 
 
-int menu_final(Plateau *plateau){
-    int choix = 0;
+void menu_final(Plateau *plateau){
+    int choix;
 
-    printf(GRAS " === FIN DE PARTIE ===  ");
+    printf(GRAS " === FIN DE PARTIE ===  "RESET);
 
     do {
         printf(" 1. Rejouer avec les mêmes joueurs\n");
@@ -77,10 +104,10 @@ int menu_final(Plateau *plateau){
 
     if(choix == 1){
         for(int i = 0; i < plateau->nb_joueurs; i++){
-            plateau->joueurs[i].trouveCoffre = 0;
-            plateau->joueurs[i].trouveArmeAntique = 0;
+            plateau->joueurs[i].a_coffre = 0;
+            plateau->joueurs[i].a_arme = 0;
         }
+    }else{
+        menu_principal();
     }
-
-    return choix;
 }

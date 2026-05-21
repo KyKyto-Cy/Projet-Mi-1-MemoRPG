@@ -5,9 +5,9 @@
 #include "board.h"
 #include "player.h"
 
-int menu_principal(void);
-void choisir_joueur(Plateau *plateau);
-int menu_final(Plateau *plateau);
+void menu_principal();
+void choisir_joueur();
+void menu_final();
 
 
 
