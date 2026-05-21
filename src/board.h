@@ -9,15 +9,13 @@
 #include "player.h"
 #include "cards.h"
 
-/* Type de contenu d'une case du plateau */
-
-
-
 /* Représente l'état global du plateau de jeu */
 typedef struct {
     Case grille[TAILLE_PLATEAU][TAILLE_PLATEAU]; /* Grille 2D des cases */
     Joueur joueurs[NB_JOUEUR_MAX];               /* Tableau des joueurs en jeu */
     int nb_joueurs;                              /* Nombre de joueurs actifs */
 } Plateau;
+
+void initialiser_plateau(Plateau *plateau);
 
 #endif
