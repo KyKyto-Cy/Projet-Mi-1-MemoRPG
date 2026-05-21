@@ -4,7 +4,7 @@
 /* Dimensions du plateau et limites */
 #define TAILLE_PLATEAU 5                        /* Nombre de cases par côté (plateau 5x5) */
 #define NB_JOUEUR_MAX 4                         /* Nombre maximum de joueurs simultanés */
-#define NB_CARTES (TAILLE_PLATEAU * TAILLE_PLATEAU) /* Nombre total de cases sur le plateau */
+
 
 #include "player.h"
 #include "cards.h"
