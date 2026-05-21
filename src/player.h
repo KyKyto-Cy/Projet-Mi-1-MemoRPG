@@ -44,7 +44,7 @@ TypeArmeAntique associerArmeAntique(TypeAventurier type);
 
 void creerJoueur(Joueur *joueur);
 
-int choisirNombreJoueur();
+int choisirNombreJoueur(void);
 
 void creationJoueur(Joueur joueur[], int nbJoueur);
 

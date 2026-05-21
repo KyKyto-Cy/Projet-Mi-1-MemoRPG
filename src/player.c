@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "player.h"
+#include "saisie.h"
 
 const char* NomAventurier(TypeAventurier type){
 
@@ -84,8 +85,7 @@ void creerJoueur(Joueur *joueur){
     int choixArme;
 
     printf("Entrez votre nom :\n");
-    fgets(joueur->nom, 50, stdin);
-    joueur->nom[strcspn(joueur->nom, "\n")] = '\0'; // lit toute la ligne même si il y a des espaces
+    lire_chaine(joueur->nom, 50);
 
     printf("\nChoisissez votre aventurier :\n");
     printf("0 = Guerrier\n");

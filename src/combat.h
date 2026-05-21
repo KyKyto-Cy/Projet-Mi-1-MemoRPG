@@ -12,6 +12,6 @@ void retourDepart(Joueur *joueur);
 
 void combat(Joueur *joueur, TypeMonstre monstre);
 
-int joueurGagne(Joueur *joueur);
+int joueurGagne(const Joueur *joueur);
 
 #endif

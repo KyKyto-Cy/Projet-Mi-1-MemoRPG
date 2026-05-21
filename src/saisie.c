@@ -15,7 +15,7 @@ char *lire_chaine(char *chaine, int taille){
 
 
 int lire_entier(int min, int max){
-    int choix;
+    int choix = 0;
     do {
         if (scanf("%d", &choix) != 1) {
             printf("Erreur, saisissez un nombre : \n");
