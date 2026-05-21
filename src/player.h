@@ -1,6 +1,6 @@
 #ifndef PLAYER_H
 #define PLAYER_H
-
+#include"cards.h"
 typedef enum{
     GUERRIER,
     RANGER,
@@ -15,19 +15,14 @@ typedef enum {
     HACHE
 } armeActive;
 
-typedef enum {
-    EPEE,
-    BATON,
-    GRIMOIRE,
-    DAGUE
-} armeAntique;
+
 
 typedef struct{
     char nom[50];
 
     TypeAventurier type;
     armeActive armeChoisi;
-    armeAntique armeRecherchee;
+    TypeArmeAntique armeRecherchee;
 
     int ligneDepart;
     int colonneDepart;
@@ -43,9 +38,9 @@ typedef struct{
 
 const char* NomAventurier(TypeAventurier type);
 const char* NomArme(armeActive arme);
-const char* NomArmeAntique(armeAntique arme);
+const char* NomArmeAntique(TypeArmeAntique arme);
 
-armeAntique associerArmeAntique(TypeAventurier type);
+TypeArmeAntique associerArmeAntique(TypeAventurier type);
 
 void creerJoueur(Joueur *joueur);
 
