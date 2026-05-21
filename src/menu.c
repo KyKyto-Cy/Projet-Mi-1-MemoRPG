@@ -1,33 +1,31 @@
 #include <stdio.h>
 #include "display.h"
 #include "menu.h"
-
+#include "saisie.h"
 
 int menu_principal(void){
     int choix = 0;
 
-    do{
 
-        printf(GRAS CYAN "\n");
-        printf("==================================================== \n");
-        printf("|||                                              ||| \n");
-        printf("|||                    MEMO RPG                  ||| \n");
-        printf("|||                                              ||| \n");
-        printf("|||                                              ||| \n");
-        printf("|||                                              ||| \n");
-        printf("|||                                              ||| \n");
-        printf("|||               1. NOUVELLE PARTIE               ||| \n");
-        printf("|||                                              ||| \n");
-        printf("|||                                              ||| \n");
-        printf("|||                                              ||| \n");
-        printf("|||                                              ||| \n");
-        printf("|||  2.QUITTER                                     ||| \n");
-        printf("==================================================== \n");
-        printf(RESET "\n");
-        printf("Votre choix : \n");
-        scanf("%d", &choix);
+    printf(GRAS CYAN "\n");
+    printf("==================================================== \n");
+    printf("|||                                              ||| \n");
+    printf("|||                    MEMO RPG                  ||| \n");
+    printf("|||                                              ||| \n");
+    printf("|||                                              ||| \n");
+    printf("|||                                              ||| \n");
+    printf("|||                                              ||| \n");
+    printf("|||               1. NOUVELLE PARTIE               ||| \n");
+    printf("|||                                              ||| \n");
+    printf("|||                                              ||| \n");
+    printf("|||                                              ||| \n");
+    printf("|||                                              ||| \n");
+    printf("|||  2.QUITTER                                     ||| \n");
+    printf("==================================================== \n");
+    printf(RESET "\n");
+    printf("Votre choix : \n");
+    choix = lire_entier(1, 2);
 
-    }while(choix < 1 || choix > 2);
 
     return choix;
 }
@@ -40,10 +38,10 @@ void choisir_joueur(Plateau *plateau){
 
     printf(GRAS "     ======= CHOIX DES JOUEURS =======   " RESET);
 
-    do {
-        printf("Nombre de joueurs de 2 à 4 joueurs : ");
-        scanf("%d", &nb);
-    }while(nb < 2 || nb > 4);
+    
+    printf("Nombre de joueurs de 2 à 4 joueurs : ");
+    nb = lire_entier(2, 4);
+    
 
     plateau->nb_joueurs = nb;
 
@@ -59,12 +57,12 @@ int menu_final(Plateau *plateau){
 
     printf(GRAS " === FIN DE PARTIE ===  " RESET);
 
-    do {
-        printf(" 1. Rejouer avec les mêmes joueurs\n");
-        printf(" 2. Retour au menu principal\n");
-        printf(" Votre choix : \n");
-        scanf("%d", &choix);
-    } while (choix < 1 || choix > 2);
+    
+    printf(" 1. Rejouer avec les mêmes joueurs\n");
+    printf(" 2. Retour au menu principal\n");
+    printf(" Votre choix : \n");
+    choix = lire_entier(1, 2);
+    
 
     if(choix == 1){
         for(int i = 0; i < plateau->nb_joueurs; i++){
