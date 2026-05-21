@@ -2,13 +2,7 @@
 #define COMBAT_H
 
 #include "player.h"
-
-typedef enum {
-    BASILIC,
-    ZOMBIE,
-    TROLL,
-    HARPIE
-} TypeMonstre; // en doublons, faire un choix 
+#include "cards.h"
 
 const char* NomMonstre(TypeMonstre monstre);
 
