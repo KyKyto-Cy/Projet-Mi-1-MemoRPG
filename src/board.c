@@ -32,8 +32,8 @@ void positionner_joueurs(Plateau *plateau) {
                 break;
             default: /* 4 joueurs */
                 if      (i == 0) { ligne = -1; col =  2; } /* Nord  */
-                else if (i == 1) { ligne =  2; col =  5; } /* Est   */
-                else if (i == 2) { ligne =  5; col =  2; } /* Sud   */
+                else if (i == 1) { ligne =  5; col =  2; } /* Sud   */
+                else if (i == 2) { ligne =  2; col =  5; } /* Est   */
                 else              { ligne =  2; col = -1; } /* Ouest */
                 break;
         }
