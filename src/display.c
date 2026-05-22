@@ -1,6 +1,7 @@
 #include <stdio.h>
-#include "cards.h"
 #include "display.h"
+#include "player.h"
+#include "board.h"
 
 
 void effacer_ecran(void){
@@ -75,7 +76,25 @@ switch (c.type){
 }
 
 
-//Affiche le plateau complet 
+/* Tableau des couleurs par joueur (J1=Rouge, J2=Vert, J3=Jaune, J4=Cyan) */
+static const char* COULEURS_JOUEURS[] = { ROUGE, VERT, JAUNE, CYAN };
+
+void afficher_joueurs(Plateau *plateau) {
+    printf("\n" GRAS "Joueurs :\n" RESET);
+    for (int i = 0; i < plateau->nb_joueurs; i++) {
+        Joueur *j = &plateau->joueurs[i];
+        const char *couleur = COULEURS_JOUEURS[i];
+        printf("  %s[%d] %-12s (%s) - Cote %-6s - Arme: %s\n" RESET,
+            couleur,
+            i + 1,
+            j->nom,
+            NomAventurier(j->type),
+            NomCote(j->ligneDepart, j->colonneDepart),
+            NomArme(j->armeChoisi));
+    }
+}
+
+//Affiche le plateau complet
 void afficher_plateau(Plateau *plateau) {
     printf("\n  +-----+-----+-----+-----+-----+\n");
     for (int i = 0; i < 5; i++){

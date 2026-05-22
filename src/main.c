@@ -24,6 +24,7 @@ int main(void) {
                 positionner_joueurs(&plateau);
                 effacer_ecran();
                 afficher_plateau(&plateau);
+                afficher_joueurs(&plateau);
                 attendre_entree();
 
                 choix_final = menu_final(&plateau);

@@ -7,6 +7,13 @@
 
 
 
+const char* NomCote(int ligneDepart, int colonneDepart) {
+    if (ligneDepart   == -1) return "Nord";
+    if (colonneDepart ==  5) return "Est";
+    if (ligneDepart   ==  5) return "Sud";
+    return "Ouest";
+}
+
 void positionner_joueurs(Plateau *plateau) {
     int nb = plateau->nb_joueurs;
 

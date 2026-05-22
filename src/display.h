@@ -25,6 +25,7 @@
 
 void effacer_ecran(void);               /* Efface l'écran et ajoute une ligne vide */
 void afficher_plateau(Plateau *plateau);
+void afficher_joueurs(Plateau *plateau); /* Affiche la liste des joueurs avec couleur, côté et arme */
 void afficher_case(Case c);
 
 #endif
