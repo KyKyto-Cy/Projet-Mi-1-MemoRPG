@@ -21,6 +21,7 @@ int main(void) {
 
             do {
                 initialiser_plateau(&plateau);
+                positionner_joueurs(&plateau);
                 effacer_ecran();
                 afficher_plateau(&plateau);
                 attendre_entree();

@@ -17,5 +17,7 @@ typedef struct {
 } Plateau;
 
 void initialiser_plateau(Plateau *plateau);     /* Mélange et place les cartes sur la grille */
+/* Positionne chaque joueur sur un côté du plateau avec symétrie radiale (Nord/Est/Sud/Ouest) */
+void positionner_joueurs(Plateau *plateau);
 
 #endif

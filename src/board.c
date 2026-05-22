@@ -7,6 +7,37 @@
 
 
 
+void positionner_joueurs(Plateau *plateau) {
+    int nb = plateau->nb_joueurs;
+
+    for (int i = 0; i < nb; i++) {
+        int ligne, col;
+
+        switch (nb) {
+            case 2:
+                if      (i == 0) { ligne = -1; col =  2; } /* Nord */
+                else              { ligne =  5; col =  2; } /* Sud  */
+                break;
+            case 3:
+                if      (i == 0) { ligne = -1; col =  2; } /* Nord  */
+                else if (i == 1) { ligne =  2; col =  5; } /* Est   */
+                else              { ligne =  2; col = -1; } /* Ouest */
+                break;
+            default: /* 4 joueurs */
+                if      (i == 0) { ligne = -1; col =  2; } /* Nord  */
+                else if (i == 1) { ligne =  2; col =  5; } /* Est   */
+                else if (i == 2) { ligne =  5; col =  2; } /* Sud   */
+                else              { ligne =  2; col = -1; } /* Ouest */
+                break;
+        }
+
+        plateau->joueurs[i].ligneDepart    = ligne;
+        plateau->joueurs[i].colonneDepart  = col;
+        plateau->joueurs[i].positionLigne  = ligne;
+        plateau->joueurs[i].positionColonne = col;
+    }
+}
+
 void initialiser_plateau(Plateau *plateau) {
     Case cartes[NB_CARTES];
     creer_cartes(cartes);
