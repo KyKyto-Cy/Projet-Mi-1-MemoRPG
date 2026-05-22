@@ -39,7 +39,7 @@ void choisir_joueur(Plateau *plateau){
 
     printf(CLEAR_SCREEN);
     fflush(stdout);
-    printf(GRAS "     ======= CHOIX DES JOUEURS =======   " RESET);
+    printf(GRAS "\n     ======= CHOIX DES JOUEURS =======   \n\n" RESET);
 
     
     printf("Nombre de joueurs de 2 à 4 joueurs : ");
