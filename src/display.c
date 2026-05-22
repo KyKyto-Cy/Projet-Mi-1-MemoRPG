@@ -1,7 +1,14 @@
 #include <stdio.h>
-#include "cards.h"
 #include "display.h"
+#include "player.h"
+#include "board.h"
 
+
+void effacer_ecran(void){
+    printf(CLEAR_SCREEN);
+    fflush(stdout);
+    printf("\n");
+}
 
 void afficher_case(Case c) {
     if (c.revelee == 0){
@@ -69,19 +76,66 @@ switch (c.type){
 }
 
 
-//Affiche le plateau complet 
+/* Tableau des couleurs par joueur (J1=Rouge, J2=Vert, J3=Jaune, J4=Cyan) */
+static const char* COULEURS_JOUEURS[] = { ROUGE, VERT, JAUNE, CYAN };
+
+void afficher_joueurs(Plateau *plateau) {
+    printf("\n" GRAS "Joueurs :\n" RESET);
+    for (int i = 0; i < plateau->nb_joueurs; i++) {
+        Joueur *j = &plateau->joueurs[i];
+        const char *couleur = COULEURS_JOUEURS[i];
+        printf("  %s[%d] %-12s (%s) - Cote %-6s - Arme: %s" RESET "\n",
+            couleur,
+            i + 1,
+            j->nom,
+            NomAventurier(j->type),
+            NomCote(j->ligneDepart, j->colonneDepart),
+            NomArme(j->armeChoisi));
+    }
+}
+
+//Affiche le plateau complet avec les joueurs autour
 void afficher_plateau(Plateau *plateau) {
-    printf("  +-----+-----+-----+-----+-----+\n");
-    for (int i = 0; i<5 ; i++){
-        printf("  |");
-        for (int j=0; j<5; j++){
+    int nord = -1, est = -1, sud = -1, ouest = -1;
+    for (int i = 0; i < plateau->nb_joueurs; i++) {
+        Joueur *j = &plateau->joueurs[i];
+        if      (j->ligneDepart   == -1) nord  = i;
+        else if (j->colonneDepart ==  5) est   = i;
+        else if (j->ligneDepart   ==  5) sud   = i;
+        else                             ouest = i;
+    }
+
+    /* Nord : centré sur la colonne 2 du plateau (position 21 = 6 padding + 1 + 12 + 2) */
+    if (nord >= 0)
+        printf("\n%19s%s[P%d]" RESET "\n", "", COULEURS_JOUEURS[nord], nord + 1);
+    else
+        printf("\n\n");
+
+    /* Toutes les lignes séparatrices commencent à la position 6 */
+    printf("      +-----+-----+-----+-----+-----+\n");
+    for (int i = 0; i < 5; i++) {
+        /* Gauche : 6 chars fixes — [Px]  ou 6 espaces */
+        if (i == 2 && ouest >= 0)
+            printf("%s[P%d]" RESET "  ", COULEURS_JOUEURS[ouest], ouest + 1);
+        else
+            printf("      ");
+
+        printf("|");
+        for (int j = 0; j < 5; j++) {
             afficher_case(plateau->grille[i][j]);
             printf("|");
         }
-        printf("\n +-----+-----+-----+-----+-----+\n");
 
+        /* Droite : 2 espaces + [Px] sur la ligne du milieu */
+        if (i == 2 && est >= 0)
+            printf("  %s[P%d]" RESET, COULEURS_JOUEURS[est], est + 1);
+
+        printf("\n      +-----+-----+-----+-----+-----+\n");
     }
 
+    /* Sud : même centrage que Nord */
+    if (sud >= 0)
+        printf("%19s%s[P%d]" RESET "\n", "", COULEURS_JOUEURS[sud], sud + 1);
 }
 
 
