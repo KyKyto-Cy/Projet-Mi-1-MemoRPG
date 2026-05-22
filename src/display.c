@@ -84,7 +84,7 @@ void afficher_joueurs(Plateau *plateau) {
     for (int i = 0; i < plateau->nb_joueurs; i++) {
         Joueur *j = &plateau->joueurs[i];
         const char *couleur = COULEURS_JOUEURS[i];
-        printf("  %s[%d] %-12s (%s) - Cote %-6s - Arme: %s\n" RESET,
+        printf("  %s[%d] %-12s (%s) - Cote %-6s - Arme: %s" RESET "\n",
             couleur,
             i + 1,
             j->nom,
@@ -107,7 +107,7 @@ void afficher_plateau(Plateau *plateau) {
 
     /* Nord : centré sur la colonne 2 du plateau (position 21 = 6 padding + 1 + 12 + 2) */
     if (nord >= 0)
-        printf("\n%19s[P%d]\n", "", nord + 1);
+        printf("\n%19s%s[P%d]" RESET "\n", "", COULEURS_JOUEURS[nord], nord + 1);
     else
         printf("\n\n");
 
@@ -116,7 +116,7 @@ void afficher_plateau(Plateau *plateau) {
     for (int i = 0; i < 5; i++) {
         /* Gauche : 6 chars fixes — [Px]  ou 6 espaces */
         if (i == 2 && ouest >= 0)
-            printf("[P%d]  ", ouest + 1);
+            printf("%s[P%d]" RESET "  ", COULEURS_JOUEURS[ouest], ouest + 1);
         else
             printf("      ");
 
@@ -128,14 +128,14 @@ void afficher_plateau(Plateau *plateau) {
 
         /* Droite : 2 espaces + [Px] sur la ligne du milieu */
         if (i == 2 && est >= 0)
-            printf("  [P%d]", est + 1);
+            printf("  %s[P%d]" RESET, COULEURS_JOUEURS[est], est + 1);
 
         printf("\n      +-----+-----+-----+-----+-----+\n");
     }
 
     /* Sud : même centrage que Nord */
     if (sud >= 0)
-        printf("%19s[P%d]\n", "", sud + 1);
+        printf("%19s%s[P%d]" RESET "\n", "", COULEURS_JOUEURS[sud], sud + 1);
 }
 
 
