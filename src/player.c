@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "player.h"
+#include "saisie.h"
 
 const char* NomAventurier(TypeAventurier type){
 
