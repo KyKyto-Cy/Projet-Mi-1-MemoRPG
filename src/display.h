@@ -23,6 +23,7 @@
 #define BLANC       "\033[37m"
 #define GRAS        "\033[1m"
 
+void effacer_ecran(void);               /* Efface l'écran et ajoute une ligne vide */
 void afficher_plateau(Plateau *plateau);
 void afficher_case(Case c);
 

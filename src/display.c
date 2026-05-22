@@ -3,6 +3,12 @@
 #include "display.h"
 
 
+void effacer_ecran(void){
+    printf(CLEAR_SCREEN);
+    fflush(stdout);
+    printf("\n");
+}
+
 void afficher_case(Case c) {
     if (c.revelee == 0){
         printf(BLEU "[ ? ]" RESET); // affiche la case en bleu si la case n'est pas révélée

@@ -6,8 +6,7 @@
 int menu_principal(void){
     int choix = 0;
 
-    printf(CLEAR_SCREEN);
-    fflush(stdout);
+    effacer_ecran();
     printf(GRAS CYAN "\n");
     printf("==================================================== \n");
     printf("|||                                              ||| \n");
@@ -37,8 +36,7 @@ int menu_principal(void){
 void choisir_joueur(Plateau *plateau){
     int nb = 0;
 
-    printf(CLEAR_SCREEN);
-    fflush(stdout);
+    effacer_ecran();
     printf(GRAS "\n     ======= CHOIX DES JOUEURS =======   \n\n" RESET);
 
     
@@ -49,8 +47,7 @@ void choisir_joueur(Plateau *plateau){
     plateau->nb_joueurs = nb;
 
     for (int i = 0; i < nb; i++){
-        printf(CLEAR_SCREEN);
-        fflush(stdout);
+        effacer_ecran();
         printf("\n===== Joueur %d =====\n", i + 1);
         creerJoueur(&plateau->joueurs[i]);
     }
@@ -60,9 +57,8 @@ void choisir_joueur(Plateau *plateau){
 int menu_final(Plateau *plateau){
     int choix = 0;
 
-    printf(CLEAR_SCREEN);
-    fflush(stdout);
-    printf(GRAS " === FIN DE PARTIE ===\n" RESET);
+    effacer_ecran();
+    printf(GRAS "\n === FIN DE PARTIE ===\n\n" RESET);
 
     
     printf(" 1. Rejouer avec les mêmes joueurs\n");

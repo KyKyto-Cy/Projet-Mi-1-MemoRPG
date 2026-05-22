@@ -21,8 +21,7 @@ int main(void) {
 
             do {
                 initialiser_plateau(&plateau);
-                printf(CLEAR_SCREEN);
-                fflush(stdout);
+                effacer_ecran();
                 afficher_plateau(&plateau);
                 attendre_entree();
 
