@@ -49,6 +49,8 @@ void choisir_joueur(Plateau *plateau){
     plateau->nb_joueurs = nb;
 
     for (int i = 0; i < nb; i++){
+        printf(CLEAR_SCREEN);
+        fflush(stdout);
         printf("\n===== Joueur %d =====\n", i + 1);
         creerJoueur(&plateau->joueurs[i]);
     }
