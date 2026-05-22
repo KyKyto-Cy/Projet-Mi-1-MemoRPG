@@ -3,6 +3,7 @@
 #include <time.h>
 #include "menu.h"
 #include "display.h"
+#include "saisie.h"
 
 int main(void) {
     int choix;
@@ -23,6 +24,7 @@ int main(void) {
                 printf(CLEAR_SCREEN);
                 fflush(stdout);
                 afficher_plateau(&plateau);
+                attendre_entree();
 
                 choix_final = menu_final(&plateau);
             } while (choix_final == 1);

@@ -58,7 +58,7 @@ int menu_final(Plateau *plateau){
 
     printf(CLEAR_SCREEN);
     fflush(stdout);
-    printf(GRAS " === FIN DE PARTIE ===  " RESET);
+    printf(GRAS " === FIN DE PARTIE ===\n" RESET);
 
     
     printf(" 1. Rejouer avec les mêmes joueurs\n");
