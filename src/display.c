@@ -94,17 +94,47 @@ void afficher_joueurs(Plateau *plateau) {
     }
 }
 
-//Affiche le plateau complet
+//Affiche le plateau complet avec les joueurs autour
 void afficher_plateau(Plateau *plateau) {
-    printf("\n  +-----+-----+-----+-----+-----+\n");
-    for (int i = 0; i < 5; i++){
-        printf("  |");
-        for (int j = 0; j < 5; j++){
+    int nord = -1, est = -1, sud = -1, ouest = -1;
+    for (int i = 0; i < plateau->nb_joueurs; i++) {
+        Joueur *j = &plateau->joueurs[i];
+        if      (j->ligneDepart   == -1) nord  = i;
+        else if (j->colonneDepart ==  5) est   = i;
+        else if (j->ligneDepart   ==  5) sud   = i;
+        else                             ouest = i;
+    }
+
+    /* Étiquette Nord (centrée sur la colonne du milieu) */
+    if (nord >= 0)
+        printf("\n               [P%d]\n", nord + 1);
+    else
+        printf("\n\n");
+
+    printf("    +-----+-----+-----+-----+-----+\n");
+    for (int i = 0; i < 5; i++) {
+        /* Étiquette Ouest sur la ligne du milieu */
+        if (i == 2 && ouest >= 0)
+            printf("[P%d]", ouest + 1);
+        else
+            printf("    ");
+
+        printf("|");
+        for (int j = 0; j < 5; j++) {
             afficher_case(plateau->grille[i][j]);
             printf("|");
         }
-        printf("\n  +-----+-----+-----+-----+-----+\n");
+
+        /* Étiquette Est sur la ligne du milieu */
+        if (i == 2 && est >= 0)
+            printf("[P%d]", est + 1);
+
+        printf("\n    +-----+-----+-----+-----+-----+\n");
     }
+
+    /* Étiquette Sud */
+    if (sud >= 0)
+        printf("               [P%d]\n", sud + 1);
 }
 
 
