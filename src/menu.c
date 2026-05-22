@@ -37,6 +37,8 @@ int menu_principal(void){
 void choisir_joueur(Plateau *plateau){
     int nb = 0;
 
+    printf(CLEAR_SCREEN);
+    fflush(stdout);
     printf(GRAS "     ======= CHOIX DES JOUEURS =======   " RESET);
 
     
