@@ -20,6 +20,8 @@ int main(void) {
 
             do {
                 initialiser_plateau(&plateau);
+                printf(CLEAR_SCREEN);
+                fflush(stdout);
                 afficher_plateau(&plateau);
 
                 choix_final = menu_final(&plateau);

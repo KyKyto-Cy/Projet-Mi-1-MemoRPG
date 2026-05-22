@@ -6,7 +6,8 @@
 int menu_principal(void){
     int choix = 0;
 
-
+    printf(CLEAR_SCREEN);
+    fflush(stdout);
     printf(GRAS CYAN "\n");
     printf("==================================================== \n");
     printf("|||                                              ||| \n");
@@ -55,6 +56,8 @@ void choisir_joueur(Plateau *plateau){
 int menu_final(Plateau *plateau){
     int choix = 0;
 
+    printf(CLEAR_SCREEN);
+    fflush(stdout);
     printf(GRAS " === FIN DE PARTIE ===  " RESET);
 
     
