@@ -71,17 +71,15 @@ switch (c.type){
 
 //Affiche le plateau complet 
 void afficher_plateau(Plateau *plateau) {
-    printf("  +-----+-----+-----+-----+-----+\n");
-    for (int i = 0; i<5 ; i++){
+    printf("\n  +-----+-----+-----+-----+-----+\n");
+    for (int i = 0; i < 5; i++){
         printf("  |");
-        for (int j=0; j<5; j++){
+        for (int j = 0; j < 5; j++){
             afficher_case(plateau->grille[i][j]);
             printf("|");
         }
-        printf("\n +-----+-----+-----+-----+-----+\n");
-
+        printf("\n  +-----+-----+-----+-----+-----+\n");
     }
-
 }
 
 
