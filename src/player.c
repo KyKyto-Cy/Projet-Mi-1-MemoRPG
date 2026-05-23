@@ -3,8 +3,10 @@
 #include "player.h"
 #include "saisie.h"
 
+/* Retourne le nom du type d'aventurier sous forme de texte */
 const char* NomAventurier(TypeAventurier type){
 
+    /* Vérifie le type du joueur et retourne le nom correspondant */
     if(type == GUERRIER){
         return "Guerrier";
     }
@@ -22,8 +24,10 @@ const char* NomAventurier(TypeAventurier type){
     }
 }
 
+/* Retourne le nom de l'arme active */
 const char* NomArme(armeActive arme){
 
+    /* Vérifie l'arme choisie et retourne son nom */
     if(arme == BOUCLIER){
         return "Bouclier";
     }
@@ -41,8 +45,10 @@ const char* NomArme(armeActive arme){
     }
 }
 
+/* Retourne le nom de l'arme antique */
 const char* NomArmeAntique(TypeArmeAntique arme){
-
+    
+    /* Vérifie l'arme antique et retourne son nom */
     if(arme == EPEE_DE_FEU){
         return "Epee de feu";
     }
@@ -60,6 +66,7 @@ const char* NomArmeAntique(TypeArmeAntique arme){
     }
 }
 
+/* Associe une arme antique selon le type d'aventurier */
 TypeArmeAntique associerArmeAntique(TypeAventurier type) {
 
     if (type == GUERRIER){
@@ -79,6 +86,7 @@ TypeArmeAntique associerArmeAntique(TypeAventurier type) {
     }
 }
 
+/* Crée et initialise un joueur */
 void creerJoueur(Joueur *joueur){
 
     int choixType;
@@ -121,6 +129,7 @@ void creerJoueur(Joueur *joueur){
     joueur->vivant = 1;
 }
 
+/* Demande le nombre de joueurs */
 int choisirNombreJoueur(){
 
     int nbJoueur;
@@ -132,6 +141,7 @@ int choisirNombreJoueur(){
     return nbJoueur;
 }
 
+/* Crée tous les joueurs de la partie */
 void creationJoueur(Joueur joueur[], int nbJoueur){
 
     for (int i = 0; i < nbJoueur; i++){
@@ -142,6 +152,7 @@ void creationJoueur(Joueur joueur[], int nbJoueur){
     }
 }
 
+/* Permet de choisir une nouvelle arme active */
 void choisirNouvelleArme(Joueur *joueur){
 
     int choixArme;
