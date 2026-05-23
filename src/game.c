@@ -69,14 +69,34 @@ int tour_joueur(Plateau *plateau, Joueur *joueur){
 
             joueur->portail_actif = 0;
         } else {
+            // Première passe : compter les cases accessibles
             int disponibles[4] = {0, 0, 0, 0};
-            int num = 1;
-            printf("Cases accessibles :\n");
+            int nb_accessibles = 0;
             for (int d = 0; d < 4; d++) {
                 int lig = joueur->positionLigne  + dx[d];
                 int col = joueur->positionColonne + dy[d];
                 if (case_accessible(joueur, plateau, lig, col)) {
                     disponibles[d] = 1;
+                    nb_accessibles++;
+                }
+            }
+
+            if (nb_accessibles == 0) {
+                printf("Vous etes bloque dans le labyrinthe ! Fin du tour.\n");
+                retourDepart(joueur);
+                reset_cartes_cachees(plateau);
+                continuer = 0;
+                attendre_entree();
+                continue;
+            }
+
+            // Deuxième passe : afficher la liste
+            printf("Cases accessibles :\n");
+            int num = 1;
+            for (int d = 0; d < 4; d++) {
+                if (disponibles[d]) {
+                    int lig = joueur->positionLigne  + dx[d];
+                    int col = joueur->positionColonne + dy[d];
                     printf("  [%d/%c] %-5s -> (%d, %d)\n", num++, lettres[d], noms[d], lig + 1, col + 1);
                 }
             }
