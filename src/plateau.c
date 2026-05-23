@@ -1,12 +1,19 @@
+/*
+ * plateau.c — Gestion du plateau de jeu
+ *
+ * Initialisation de la grille, positionnement des joueurs sur les bords,
+ * et fonctions utilitaires sur l'état des cases (cacher/révéler).
+ */
 
 #include "plateau.h"
 #include "cartes.h"
 
-/* Mélange le tableau de cartes en place avec l'algorithme Fisher-Yates.
-   Chaque carte a une probabilité égale de se retrouver à n'importe quelle position. */
-
-
-
+/*
+ * Retourne le nom du côté ("Nord", "Est", "Sud", "Ouest") à partir de la
+ * position de départ d'un joueur.
+ * Convention : ligne == -1 → Nord (au-dessus de la grille),
+ *              colonne == 5 → Est, ligne == 5 → Sud, sinon → Ouest.
+ */
 const char* NomCote(int ligneDepart, int colonneDepart) {
     if (ligneDepart   == -1) return "Nord";
     if (colonneDepart ==  5) return "Est";
@@ -14,6 +21,15 @@ const char* NomCote(int ligneDepart, int colonneDepart) {
     return "Ouest";
 }
 
+/*
+ * Assigne à chaque joueur une position de départ sur un bord du plateau.
+ * Les positions -1 et 5 sont hors de la grille (0-4) : elles symbolisent
+ * le couloir d'entrée de chaque côté.
+ * Répartition selon le nombre de joueurs :
+ *   2 joueurs → Nord / Sud
+ *   3 joueurs → Nord / Est / Ouest
+ *   4 joueurs → Nord / Sud / Est / Ouest
+ */
 void positionner_joueurs(Plateau *plateau) {
     int nb = plateau->nb_joueurs;
 
@@ -38,30 +54,36 @@ void positionner_joueurs(Plateau *plateau) {
                 break;
         }
 
-        plateau->joueurs[i].ligneDepart    = ligne;
-        plateau->joueurs[i].colonneDepart  = col;
-        plateau->joueurs[i].positionLigne  = ligne;
+        /* ligneDepart/colonneDepart servent à retourDepart() plus tard */
+        plateau->joueurs[i].ligneDepart     = ligne;
+        plateau->joueurs[i].colonneDepart   = col;
+        plateau->joueurs[i].positionLigne   = ligne;
         plateau->joueurs[i].positionColonne = col;
     }
 }
 
+/* Remet toutes les cases face cachée (revelee = 0).
+   Appelé après une mort, un blocage ou un totem. */
 void reset_cartes_cachees(Plateau *plateau) {
     for (int i = 0; i < TAILLE_PLATEAU; i++)
         for (int j = 0; j < TAILLE_PLATEAU; j++)
             plateau->grille[i][j].revelee = 0;
 }
 
+/* Met toutes les cases face visible (revelee = 1).
+   Appelé en fin de partie pour que les joueurs voient le plateau complet. */
 void reveler_tout(Plateau *plateau) {
     for (int i = 0; i < TAILLE_PLATEAU; i++)
         for (int j = 0; j < TAILLE_PLATEAU; j++)
             plateau->grille[i][j].revelee = 1;
 }
 
+/* Crée et mélange les cartes, puis les place sur la grille 5x5 du plateau. */
 void initialiser_plateau(Plateau *plateau) {
     Case cartes[NB_CARTES];
-    creer_cartes(cartes);
+    creer_cartes(cartes); /* Remplit et mélange le tableau de 25 cartes */
 
-    /* Placement des cartes mélangées sur la grille 5x5 du plateau */
+    /* Copie linéaire du tableau 1D vers la grille 2D */
     for (int row = 0; row < TAILLE_PLATEAU; row++) {
         for (int col = 0; col < TAILLE_PLATEAU; col++) {
             plateau->grille[row][col] = cartes[row * TAILLE_PLATEAU + col];

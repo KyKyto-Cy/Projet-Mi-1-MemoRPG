@@ -1,96 +1,59 @@
+/*
+ * joueur.c — Création et gestion des joueurs
+ *
+ * Gère la saisie des informations de chaque joueur (nom, type d'aventurier),
+ * l'association automatique de l'arme antique recherchée,
+ * et le choix d'arme en début de chaque sous-tour.
+ */
+
 #include <stdio.h>
 #include <string.h>
 #include "joueur.h"
 #include "saisie.h"
 
-/* Retourne le nom du type d'aventurier sous forme de texte */
+/* Retourne le nom lisible du type d'aventurier. */
 const char* NomAventurier(TypeAventurier type){
-
-    /* Vérifie le type du joueur et retourne le nom correspondant */
-    if(type == GUERRIER){
-        return "Guerrier";
-    }
-
-    else if(type == RANGER){
-        return "Ranger";
-    }
-
-    else if(type == MAGICIEN){
-        return "Magicien";
-    }
-
-    else{
-        return "Voleur";
-    }
+    if (type == GUERRIER) return "Guerrier";
+    if (type == RANGER)   return "Ranger";
+    if (type == MAGICIEN) return "Magicien";
+    return "Voleur";
 }
 
-/* Retourne le nom de l'arme active */
+/* Retourne le nom lisible de l'arme active. */
 const char* NomArme(armeActive arme){
-
-    /* Vérifie l'arme choisie et retourne son nom */
-    if(arme == BOUCLIER){
-        return "Bouclier";
-    }
-
-    else if(arme == TORCHE){
-        return "Torche";
-    }
-
-    else if(arme == ARC){
-        return "Arc";
-    }
-
-    else{
-        return "Hache";
-    }
+    if (arme == BOUCLIER) return "Bouclier";
+    if (arme == TORCHE)   return "Torche";
+    if (arme == ARC)      return "Arc";
+    return "Hache";
 }
 
-/* Retourne le nom de l'arme antique */
+/* Retourne le nom lisible de l'arme antique. */
 const char* NomArmeAntique(TypeArmeAntique arme){
-    
-    /* Vérifie l'arme antique et retourne son nom */
-    if(arme == EPEE_DE_FEU){
-        return "Epee de feu";
-    }
-
-    else if(arme == BATON_DES_FAMILIERS){
-        return "Baton de controle des familiers";
-    }
-
-    else if(arme == GRIMOIRE_INTERDIT){
-        return "Grimoire interdit";
-    }
-
-    else{
-        return "Dague de sommeil";
-    }
+    if (arme == EPEE_DE_FEU)         return "Epee de feu";
+    if (arme == BATON_DES_FAMILIERS) return "Baton de controle des familiers";
+    if (arme == GRIMOIRE_INTERDIT)   return "Grimoire interdit";
+    return "Dague de sommeil";
 }
 
-/* Associe une arme antique selon le type d'aventurier */
+/*
+ * Retourne l'arme antique associée au type d'aventurier.
+ * Chaque aventurier recherche une arme précise — cette correspondance
+ * est fixe et définie par le cahier des charges.
+ */
 TypeArmeAntique associerArmeAntique(TypeAventurier type) {
-
-    if (type == GUERRIER){
-        return EPEE_DE_FEU;
-    }
-
-    else if (type == RANGER){
-        return BATON_DES_FAMILIERS;
-    }
-
-    else if (type == MAGICIEN){
-        return GRIMOIRE_INTERDIT;
-    }
-
-    else{
-        return DAGUE_DE_SOMMEIL;
-    }
+    if (type == GUERRIER) return EPEE_DE_FEU;
+    if (type == RANGER)   return BATON_DES_FAMILIERS;
+    if (type == MAGICIEN) return GRIMOIRE_INTERDIT;
+    return DAGUE_DE_SOMMEIL;
 }
 
-/* Crée et initialise un joueur */
+/*
+ * Remplit la structure Joueur par saisie interactive.
+ * Initialise tous les champs à leur valeur de départ :
+ * position à -1 (hors plateau, sera fixée par positionner_joueurs),
+ * arme de départ = Bouclier, tous les flags à 0.
+ */
 void creerJoueur(Joueur *joueur){
-
-    int choixType;
-
     printf("Entrez votre nom :\n");
     lire_chaine(joueur->nom, 50);
 
@@ -100,63 +63,50 @@ void creerJoueur(Joueur *joueur){
     printf("3 = Magicien\n");
     printf("4 = Voleur\n");
 
-    choixType = lire_entier(1, 4);
+    int choixType = lire_entier(1, 4);
+    joueur->type = choixType - 1; /* L'enum commence à 0, le menu à 1 */
 
-    joueur->type = choixType - 1;
-
+    /* L'arme antique est déterminée automatiquement par le type d'aventurier */
     joueur->armeRecherchee = associerArmeAntique(joueur->type);
+    joueur->armeChoisi     = BOUCLIER; /* Arme par défaut au début */
 
-    joueur->armeChoisi = BOUCLIER;
-
-    joueur->positionLigne = -1;
+    /* Position hors plateau : sera affectée par positionner_joueurs() */
+    joueur->positionLigne   = -1;
     joueur->positionColonne = -1;
+    joueur->ligneDepart     = -1;
+    joueur->colonneDepart   = -1;
 
-    joueur->ligneDepart = -1;
-    joueur->colonneDepart = -1;
-
-    joueur->trouveCoffre = 0;
+    /* Flags de progression et d'état */
+    joueur->trouveCoffre     = 0;
     joueur->trouveArmeAntique = 0;
-    joueur->portail_actif = 0;
-
-    joueur->vivant = 1;
+    joueur->portail_actif    = 0;
+    joueur->vivant           = 1;
 }
 
-/* Demande le nombre de joueurs */
+/* Demande le nombre de joueurs (2 à 4). */
 int choisirNombreJoueur(){
-
     int nbJoueur;
-
     printf("Nombre de joueurs (entre 2 et 4) :\n");
     nbJoueur = lire_entier(2, 4);
-
-
     return nbJoueur;
 }
 
-/* Crée tous les joueurs de la partie */
+/* Crée tous les joueurs d'une partie en appelant creerJoueur pour chacun. */
 void creationJoueur(Joueur joueur[], int nbJoueur){
-
     for (int i = 0; i < nbJoueur; i++){
-
         printf("\n===== Joueur %d =====\n", i + 1);
-
         creerJoueur(&joueur[i]);
     }
 }
 
-/* Permet de choisir une nouvelle arme active */
+/* Permet au joueur de choisir son arme au début de chaque sous-tour. */
 void choisirNouvelleArme(Joueur *joueur){
-
-    int choixArme;
-
     printf("\n%s choisissez votre arme :\n", joueur->nom);
-
     printf("1 = Bouclier\n");
     printf("2 = Torche\n");
     printf("3 = Arc\n");
     printf("4 = Hache\n");
 
-    choixArme = lire_entier(1, 4);
-
-    joueur->armeChoisi = choixArme - 1;
+    int choixArme = lire_entier(1, 4);
+    joueur->armeChoisi = choixArme - 1; /* L'enum commence à 0, le menu à 1 */
 }

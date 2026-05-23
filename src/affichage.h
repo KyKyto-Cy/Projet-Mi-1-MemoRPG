@@ -1,31 +1,35 @@
+/*
+ * affichage.h — Macros ANSI et prototypes d'affichage
+ *
+ * Centralise les séquences d'échappement ANSI pour les couleurs et
+ * le contrôle du terminal, ainsi que les prototypes des fonctions d'affichage.
+ */
+
 #ifndef AFFICHAGE_H
 #define AFFICHAGE_H
 
-// TODO: prototypes des fonctions du module display
+#include "plateau.h"
+#include "joueur.h"
 
-#include "plateau.h" //on inclue le fichier du plateau 
-#include "joueur.h"//on inclue le fichier du joueur 
+/* --- Contrôle du terminal --- */
+#define EFFACER_ECRAN    "\033[2J\033[H" /* Efface l'écran et remet le curseur en haut */
+#define MASQUER_CURSEUR  "\033[?25l"     /* Cache le curseur */
+#define AFFICHER_CURSEUR "\033[?25h"     /* Affiche le curseur */
 
-/* Efface l'écran et replace le curseur en haut à gauche */
-#define EFFACER_ECRAN    "\033[2J\033[H"
-/* Cache / affiche le curseur (utiliser en début et fin de programme) */
-#define MASQUER_CURSEUR     "\033[?25l"
-#define AFFICHER_CURSEUR     "\033[?25h"
+/* --- Codes de couleur ANSI --- */
+#define RESET   "\033[0m"  /* Réinitialise toutes les couleurs */
+#define ROUGE   "\033[31m"
+#define VERT    "\033[32m"
+#define JAUNE   "\033[33m"
+#define BLEU    "\033[34m"
+#define MAGENTA "\033[35m"
+#define CYAN    "\033[36m"
+#define BLANC   "\033[37m"
+#define GRAS    "\033[1m"
 
-// couleur ANSI
-#define RESET       "\033[0m"
-#define ROUGE       "\033[31m"
-#define VERT        "\033[32m"
-#define JAUNE       "\033[33m"
-#define BLEU        "\033[34m"
-#define MAGENTA     "\033[35m"
-#define CYAN        "\033[36m"
-#define BLANC       "\033[37m"
-#define GRAS        "\033[1m"
-
-void effacer_ecran(void);               /* Efface l'écran et ajoute une ligne vide */
-void afficher_plateau(Plateau *plateau);
-void afficher_joueurs(Plateau *plateau); /* Affiche la liste des joueurs avec couleur, côté et arme */
-void afficher_case(Case c);
+void effacer_ecran(void);                /* Vide le terminal */
+void afficher_plateau(Plateau *plateau); /* Grille 5x5 avec bordures ASCII et joueurs */
+void afficher_joueurs(Plateau *plateau); /* Liste des joueurs avec couleur et arme */
+void afficher_case(Case c);              /* Affiche une case individuelle colorée */
 
 #endif
