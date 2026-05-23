@@ -1,6 +1,6 @@
 # Projet Mémo RPG
 
-Description
+## Description
 
 Mémo RPG est un jeu dans lequel des aventuriers avance dans un labyrinthe à la recherche de leur arme antique et un coffre au trésor. Au cours de leur périple ils rencontreront différents monstre ennemis qu'ils devront terasser s'ils veulent réussir à s'échapper en vie.
 
@@ -34,51 +34,50 @@ Les différents monstres rencontrés sur le plateau
 - Troll
 - Harpie
 
-Les fonctions utilisées :
+## Les fonctions utilisées :
 
-Board
+### `Board.c`
 
-Card
+- Mélange et place les cartes sur la grille
+- Positionne chaque joueur sur un côté du plateau avec une symétrie radiale
 
-Combat
+### `card.C`
 
-Gestion des combats
-Vérification des armes efficaces sur chaque monstre
-Retour à la case départ en cas d'échec
+- Création des cartes
+- Mélange les cartes
 
-Display
+### `combat.c`
 
-Game
+- Gestion des combats
+- Vérification des armes efficaces sur chaque monstre
+- Retour à la case départ en cas d'échec
 
-Player 
+### `display.c`
 
-Création de plusieurs joueurs
-choix du nom, du type d'aventurier et de l'arme antique
+- Gère l’affichage du plateau
 
-Saisie
+### `game.c`
 
-Save
+- Vérifie qu’une case soit accessible
+- Gère les tours et les déplacements des joueurs
+- Affiche le plateau mise à jour (case révélée ou cachées)
 
+### `player.c` 
 
+- Création de plusieurs joueurs
+- Choix du nom, du type d'aventurier et de l'arme antique
 
+### `menu.c`
 
+- Affiche le menu
+- Choix du nombre de joueur
+- Donne le choix de rejouer avec les mêmes joueurs
 
+### `Saisie.c`
 
+- S’occupe des saisies, vérifie que le nom n’est pas vide
 
+### `Save.c`
 
+- Sauvegarde les stats des joueurs ( parties jouées, nom, nombre de victoire)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
