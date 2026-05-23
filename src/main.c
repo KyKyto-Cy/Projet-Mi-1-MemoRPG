@@ -69,6 +69,7 @@ int main(void) {
 
                 mettre_a_jour_stats(stats, &nb_stats, &plateau, gagnant);
                 sauvegarder_stats(stats, nb_stats);
+                printf(BLEU "\n  (Statistiques mises a jour)\n" RESET);
 
                 attendre_entree();
 

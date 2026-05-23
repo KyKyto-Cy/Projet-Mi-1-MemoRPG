@@ -43,7 +43,19 @@ void afficher_stats(StatJoueur stats[], int nb_joueurs){
         printf("Aucun joueur enregistre\n");
         return;
     }
-    for (int i = 0; i < nb_joueurs; i++ ){
+
+    /* Tri à bulles décroissant par victoires */
+    for (int i = 0; i < nb_joueurs - 1; i++) {
+        for (int j = 0; j < nb_joueurs - 1 - i; j++) {
+            if (stats[j].victoires < stats[j + 1].victoires) {
+                StatJoueur tmp = stats[j];
+                stats[j]       = stats[j + 1];
+                stats[j + 1]   = tmp;
+            }
+        }
+    }
+
+    for (int i = 0; i < nb_joueurs; i++) {
         printf("%-20s  parties : %d  victoires : %d\n",
                stats[i].nom, stats[i].parties_jouees, stats[i].victoires);
     }
