@@ -5,6 +5,7 @@
 #include "display.h"
 #include "saisie.h"
 #include "game.h"
+#include "timer.h"
 
 int main(void) {
     int choix;
@@ -23,6 +24,7 @@ int main(void) {
             do {
                 initialiser_plateau(&plateau);
                 positionner_joueurs(&plateau);
+                time_t debut = timer_demarrer();
                 effacer_ecran();
                 afficher_plateau(&plateau);
                 afficher_joueurs(&plateau);
@@ -54,6 +56,7 @@ int main(void) {
                        plateau.joueurs[gagnant].nom,
                        NomAventurier(plateau.joueurs[gagnant].type));
                 printf(GRAS VERT "==============================\n" RESET);
+                afficher_duree(debut);
                 attendre_entree();
 
                 choix_final = menu_final(&plateau);
