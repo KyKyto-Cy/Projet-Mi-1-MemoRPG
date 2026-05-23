@@ -51,7 +51,7 @@ void retourDepart(Joueur *joueur){
 }
 
 /* Gère le combat entre le joueur et le monstre */
-void combat(Joueur *joueur, TypeMonstre monstre){
+int combat(Joueur *joueur, TypeMonstre monstre){
 
     printf("Monstre rencontre : %s\n", NomMonstre(monstre));
 
@@ -62,6 +62,8 @@ void combat(Joueur *joueur, TypeMonstre monstre){
         printf("L'arme fonctionne contre ce monstre.\n");
 
         printf("%s gagne le combat.\n", joueur->nom);
+
+        return 1;
     }
 
     else{
@@ -71,6 +73,8 @@ void combat(Joueur *joueur, TypeMonstre monstre){
         printf("Retour a la case depart.\n");
 
         retourDepart(joueur);
+
+        return 0;
     }
 }
 

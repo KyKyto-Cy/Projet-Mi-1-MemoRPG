@@ -90,7 +90,6 @@ TypeArmeAntique associerArmeAntique(TypeAventurier type) {
 void creerJoueur(Joueur *joueur){
 
     int choixType;
-    int choixArme;
 
     printf("Entrez votre nom :\n");
     lire_chaine(joueur->nom, 50);
@@ -107,15 +106,7 @@ void creerJoueur(Joueur *joueur){
 
     joueur->armeRecherchee = associerArmeAntique(joueur->type);
 
-    printf("\nChoisissez votre arme active :\n");
-    printf("1 = Bouclier\n");
-    printf("2 = Torche\n");
-    printf("3 = Arc\n");
-    printf("4 = Hache\n");
-
-    choixArme = lire_entier(1, 4);
-
-    joueur->armeChoisi = choixArme - 1;
+    joueur->armeChoisi = BOUCLIER;
 
     joueur->positionLigne = -1;
     joueur->positionColonne = -1;

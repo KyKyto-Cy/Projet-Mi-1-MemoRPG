@@ -66,7 +66,8 @@ int tour_joueur(Plateau *plateau, Joueur *joueur){
 
     switch (c.type){
         case MONSTRE:
-            combat(joueur, c.monstre);
+            if (combat(joueur, c.monstre) == 0)
+                reset_cartes_cachees(plateau);
             break;
         case COFFRE:
             printf("Vous avez trouve un coffre au tresor !\n");
@@ -95,7 +96,9 @@ int tour_joueur(Plateau *plateau, Joueur *joueur){
 
     if (joueurGagne(joueur)) {
         printf("%s a gagne !\n", joueur->nom);
+        attendre_entree();
         return 1;
     }
+    attendre_entree();
     return 0;
 }

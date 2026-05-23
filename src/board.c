@@ -45,6 +45,12 @@ void positionner_joueurs(Plateau *plateau) {
     }
 }
 
+void reset_cartes_cachees(Plateau *plateau) {
+    for (int i = 0; i < TAILLE_PLATEAU; i++)
+        for (int j = 0; j < TAILLE_PLATEAU; j++)
+            plateau->grille[i][j].revelee = 0;
+}
+
 void initialiser_plateau(Plateau *plateau) {
     Case cartes[NB_CARTES];
     creer_cartes(cartes);

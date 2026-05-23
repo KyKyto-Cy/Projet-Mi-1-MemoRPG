@@ -18,7 +18,7 @@ typedef struct {
 
 void initialiser_plateau(Plateau *plateau);     /* Mélange et place les cartes sur la grille */
 const char* NomCote(int ligneDepart, int colonneDepart); /* Retourne "Nord"/"Est"/"Sud"/"Ouest" selon la position de départ */
-/* Positionne chaque joueur sur un côté du plateau avec symétrie radiale (Nord/Est/Sud/Ouest) */
-void positionner_joueurs(Plateau *plateau);
+void positionner_joueurs(Plateau *plateau);     /* Positionne chaque joueur sur un côté du plateau */
+void reset_cartes_cachees(Plateau *plateau);    /* Remet toutes les cases face cachée */
 
 #endif
