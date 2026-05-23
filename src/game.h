@@ -8,9 +8,12 @@
 #include "saisie.h"
 #include "player.h"
 
+//Vérifie si une case est accessible (adjacente et cachée)
+int case_accessible(Plateau *plateau, int ligne, int colonne); 
 
-int case_accessible(Plateau *plateau, int ligne, int colonne);
+//Déplace le joueur sur une case et la révèle
 void deplacer_joueur(Plateau *plateau, Joueur *joueur, int ligne, int colonne);
+// Gère un tour complet d'un joueur
 void tour_joueur(Plateau *plateau, Joueur *joueur);
 
 
