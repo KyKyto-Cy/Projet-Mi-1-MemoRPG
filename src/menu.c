@@ -17,14 +17,15 @@ int menu_principal(void){
     printf("|||                                              ||| \n");
     printf("|||               1. NOUVELLE PARTIE             ||| \n");
     printf("|||                                              ||| \n");
+    printf("|||           2. STATISTIQUES                    ||| \n");
     printf("|||                                              ||| \n");
     printf("|||                                              ||| \n");
     printf("|||                                              ||| \n");
-    printf("|||  2.QUITTER                                   ||| \n");
+    printf("|||  3.QUITTER                                   ||| \n");
     printf("==================================================== \n");
     printf(RESET "\n");
     printf("Votre choix : \n");
-    choix = lire_entier(1, 2); //scanf sécurisé 
+    choix = lire_entier(1, 3); //scanf sécurisé 
 
 
     return choix;

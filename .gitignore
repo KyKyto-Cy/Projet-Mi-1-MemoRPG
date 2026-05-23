@@ -48,3 +48,5 @@ desktop.ini
 # --- Variables d'environnement (ne jamais versionner !) ---
 .env
 .env.*
+# --- Fichiers de données générés ---
+save.txt

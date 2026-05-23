@@ -6,16 +6,25 @@
 #include "saisie.h"
 #include "game.h"
 #include "timer.h"
+#include "save.h"
 
 int main(void) {
     int choix;
+
+    StatJoueur stats[MAX_JOUEURS_SAUVEGARDES];
+    int nb_stats = 0;
+    charger_stats(stats, &nb_stats);
 
     srand(time(NULL));
 
     do {
         choix = menu_principal();
 
-        if (choix == 1) {
+        if (choix == 2) {
+            effacer_ecran();
+            afficher_stats(stats, nb_stats);
+            attendre_entree();
+        } else if (choix == 1) {
             Plateau plateau;
             int choix_final;
 
@@ -57,13 +66,17 @@ int main(void) {
                        NomAventurier(plateau.joueurs[gagnant].type));
                 printf(GRAS VERT "==============================\n" RESET);
                 afficher_duree(debut);
+
+                mettre_a_jour_stats(stats, &nb_stats, &plateau, gagnant);
+                sauvegarder_stats(stats, nb_stats);
+
                 attendre_entree();
 
                 choix_final = menu_final(&plateau);
             } while (choix_final == 1);
         }
 
-    } while (choix != 2);
+    } while (choix != 3);
 
     return 0;
 }
