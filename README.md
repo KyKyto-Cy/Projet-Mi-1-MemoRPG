@@ -36,12 +36,12 @@ Les différents monstres rencontrés sur le plateau
 
 ## Les fonctions utilisées :
 
-### `Board.c`
+### `board.c`
 
 - Mélange et place les cartes sur la grille
 - Positionne chaque joueur sur un côté du plateau avec une symétrie radiale
 
-### `card.C`
+### `card.c`
 
 - Création des cartes
 - Mélange les cartes
@@ -73,11 +73,11 @@ Les différents monstres rencontrés sur le plateau
 - Choix du nombre de joueur
 - Donne le choix de rejouer avec les mêmes joueurs
 
-### `Saisie.c`
+### `saisie.c`
 
 - S’occupe des saisies, vérifie que le nom n’est pas vide
 
-### `Save.c`
+### `save.c`
 
 - Sauvegarde les stats des joueurs ( parties jouées, nom, nombre de victoire)
 
