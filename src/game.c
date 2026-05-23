@@ -112,10 +112,32 @@ int tour_joueur(Plateau *plateau, Joueur *joueur){
             printf("Vous avez trouve un portail magique ! Au prochain tour, vous pourrez vous teleporter n'importe ou.\n");
             joueur->portail_actif = 1;
             break;
-        case TOTEM:
-            printf("Vous avez trouve un totem de transmutation !\n");
-            // fin du tour
+        case TOTEM: {
+            printf("Vous avez trouve un totem de transmutation ! Choisissez une case cachee a echanger avec le totem.\n");
+            afficher_plateau(plateau);
+
+            int lig_cible, col_cible;
+            do {
+                printf("Ligne (1-5) : ");
+                lig_cible = lire_entier(1, 5) - 1;
+                printf("Colonne (1-5) : ");
+                col_cible = lire_entier(1, 5) - 1;
+                if (plateau->grille[lig_cible][col_cible].revelee == 1) {
+                    printf("Cette case est deja revelee. Choisissez une case cachee.\n");
+                } else if (lig_cible == ligne && col_cible == colonne) {
+                    printf("C'est la case du totem elle-meme. Choisissez une autre case.\n");
+                }
+            } while (plateau->grille[lig_cible][col_cible].revelee == 1
+                     || (lig_cible == ligne && col_cible == colonne));
+
+            Case tmp = plateau->grille[ligne][colonne];
+            plateau->grille[ligne][colonne] = plateau->grille[lig_cible][col_cible];
+            plateau->grille[lig_cible][col_cible] = tmp;
+
+            retourDepart(joueur);
+            reset_cartes_cachees(plateau);
             break;
+        }
         case VIDE:
             printf("Case vide, continuez !\n");
             break;
