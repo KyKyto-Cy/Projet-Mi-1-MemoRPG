@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 #include "saisie.h"
 
 char *lire_chaine(char *chaine, int taille){
@@ -18,6 +19,32 @@ void attendre_entree(void){
     printf("\nAppuyez sur Entree pour continuer...");
     fflush(stdout);
     getchar();
+}
+
+Direction lire_direction(int disponibles[4]) {
+    static const char lettres[4] = {'Z', 'D', 'S', 'Q'};
+
+    Direction liste[4];
+    int nb = 0;
+    for (int i = 0; i < 4; i++)
+        if (disponibles[i])
+            liste[nb++] = (Direction)i;
+
+    char saisie[10];
+    while (1) {
+        printf("Votre choix : ");
+        lire_chaine(saisie, sizeof(saisie));
+        char c = toupper((unsigned char)saisie[0]);
+
+        if (c >= '1' && c <= '0' + nb)
+            return liste[c - '1'];
+
+        for (int i = 0; i < 4; i++)
+            if (c == lettres[i] && disponibles[i])
+                return (Direction)i;
+
+        printf("Direction invalide ou inaccessible, recommencez.\n");
+    }
 }
 
 int lire_entier(int min, int max){

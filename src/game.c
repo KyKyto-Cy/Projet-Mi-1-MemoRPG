@@ -1,12 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "direction.h"
 #include "board.h"
 #include "combat.h"
 #include "display.h"
 #include "saisie.h"
 #include "player.h"
 #include "game.h"
+
+static const int    dx[4]      = {-1,  0, +1,  0};
+static const int    dy[4]      = { 0, +1,  0, -1};
+static const char  *noms[4]    = {"Nord", "Est", "Sud", "Ouest"};
+static const char   lettres[4] = {'Z',    'D',   'S',   'Q'   };
 
 
 int case_accessible(Joueur *joueur, Plateau *plateau, int ligne, int colonne){
@@ -42,20 +48,23 @@ int tour_joueur(Plateau *plateau, Joueur *joueur){
     // choisir une arme
     choisirNouvelleArme(joueur);
 
-    //  choisir une case
-    int ligne, colonne;
-    do {
-        printf("Choisissez une ligne (1-5) : ");
-        ligne = lire_entier(1, 5) - 1; // -1 car le tableau commence à 0
-        printf("Choisissez une colonne (1-5) : ");
-        colonne = lire_entier(1, 5) - 1;
-
-        if (case_accessible(joueur, plateau, ligne, colonne) == 0){
-            printf("Case inaccessible, choisissez une case adjacente et cachee !\n");
+    // lister les directions accessibles
+    int disponibles[4] = {0, 0, 0, 0};
+    int num = 1;
+    printf("Cases accessibles :\n");
+    for (int d = 0; d < 4; d++) {
+        int lig = joueur->positionLigne  + dx[d];
+        int col = joueur->positionColonne + dy[d];
+        if (case_accessible(joueur, plateau, lig, col)) {
+            disponibles[d] = 1;
+            printf("  [%d/%c] %-5s -> (%d, %d)\n", num++, lettres[d], noms[d], lig + 1, col + 1);
         }
-    } while (case_accessible(joueur, plateau, ligne, colonne) == 0);
+    }
 
-    //se deplacer sur la case
+    Direction dir = lire_direction(disponibles);
+    int ligne   = joueur->positionLigne   + dx[dir];
+    int colonne = joueur->positionColonne + dy[dir];
+
     deplacer_joueur(plateau, joueur, ligne, colonne);
 
     // afficher le plateau mis à jour
