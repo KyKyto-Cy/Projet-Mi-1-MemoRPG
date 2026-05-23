@@ -38,7 +38,7 @@ void deplacer_joueur(Plateau *plateau, Joueur *joueur, int ligne, int colonne){
 }
 
 
-void tour_joueur(Plateau *plateau, Joueur *joueur){
+int tour_joueur(Plateau *plateau, Joueur *joueur){
     // choisir une arme
     choisirNouvelleArme(joueur);
 
@@ -92,4 +92,10 @@ void tour_joueur(Plateau *plateau, Joueur *joueur){
             printf("Case vide, continuez !\n");
             break;
     }
+
+    if (joueurGagne(joueur)) {
+        printf("%s a gagne !\n", joueur->nom);
+        return 1;
+    }
+    return 0;
 }

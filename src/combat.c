@@ -66,8 +66,6 @@ void combat(Joueur *joueur, TypeMonstre monstre){
 
         printf("Retour a la case depart.\n");
 
-        joueur->vivant = 0;
-
         retourDepart(joueur);
     }
 }
