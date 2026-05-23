@@ -94,7 +94,14 @@ void afficher_joueurs(Plateau *plateau) {
     }
 }
 
-//Affiche le plateau complet avec les joueurs autour
+static const char *legende[5] = {
+    GRAS "  Armes vs Monstres :" RESET,
+    "  Bouclier -> Basilic",
+    "  Torche   -> Zombie",
+    "  Hache    -> Troll",
+    "  Arc      -> Harpie"
+};
+
 void afficher_plateau(Plateau *plateau) {
     int nord = -1, est = -1, sud = -1, ouest = -1;
     for (int i = 0; i < plateau->nb_joueurs; i++) {
@@ -105,16 +112,14 @@ void afficher_plateau(Plateau *plateau) {
         else                             ouest = i;
     }
 
-    /* Nord : centré sur la colonne 2 du plateau (position 21 = 6 padding + 1 + 12 + 2) */
     if (nord >= 0)
         printf("\n%19s%s[P%d]" RESET "\n", "", COULEURS_JOUEURS[nord], nord + 1);
     else
         printf("\n\n");
 
-    /* Toutes les lignes séparatrices commencent à la position 6 */
     printf("      +-----+-----+-----+-----+-----+\n");
     for (int i = 0; i < 5; i++) {
-        /* Gauche : 6 chars fixes — [Px]  ou 6 espaces */
+        /* Gauche : 6 chars fixes — [Px] ou 6 espaces */
         if (i == 2 && ouest >= 0)
             printf("%s[P%d]" RESET "  ", COULEURS_JOUEURS[ouest], ouest + 1);
         else
@@ -126,14 +131,15 @@ void afficher_plateau(Plateau *plateau) {
             printf("|");
         }
 
-        /* Droite : 2 espaces + [Px] sur la ligne du milieu */
+        /* Droite : [Px] sur la ligne du milieu (6 chars), sinon 6 espaces — puis légende */
         if (i == 2 && est >= 0)
             printf("  %s[P%d]" RESET, COULEURS_JOUEURS[est], est + 1);
+        else
+            printf("      ");
 
-        printf("\n      +-----+-----+-----+-----+-----+\n");
+        printf("%s\n      +-----+-----+-----+-----+-----+\n", legende[i]);
     }
 
-    /* Sud : même centrage que Nord */
     if (sud >= 0)
         printf("%19s%s[P%d]" RESET "\n", "", COULEURS_JOUEURS[sud], sud + 1);
 }
