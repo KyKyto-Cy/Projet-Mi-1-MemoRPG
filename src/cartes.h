@@ -1,5 +1,5 @@
-#ifndef CARDS_H
-#define CARDS_H
+#ifndef CARTES_H
+#define CARTES_H
 #define NB_CARTES 25
 /* Type de contenu d'une case du plateau */
 typedef enum {

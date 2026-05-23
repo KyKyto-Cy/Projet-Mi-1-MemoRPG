@@ -1,13 +1,13 @@
-#ifndef BOARD_H
-#define BOARD_H
+#ifndef PLATEAU_H
+#define PLATEAU_H
 
 /* Dimensions du plateau et limites */
 #define TAILLE_PLATEAU 5                        /* Nombre de cases par côté (plateau 5x5) */
 #define NB_JOUEUR_MAX 4                         /* Nombre maximum de joueurs simultanés */
 
 
-#include "player.h"
-#include "cards.h"
+#include "joueur.h"
+#include "cartes.h"
 
 /* Représente l'état global du plateau de jeu */
 typedef struct {

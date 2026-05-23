@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#include "player.h"
+#include "joueur.h"
 #include "saisie.h"
 
 /* Retourne le nom du type d'aventurier sous forme de texte */

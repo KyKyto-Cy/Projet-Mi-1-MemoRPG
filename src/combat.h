@@ -1,8 +1,8 @@
 #ifndef COMBAT_H
 #define COMBAT_H
 
-#include "player.h"
-#include "cards.h"
+#include "joueur.h"
+#include "cartes.h"
 
 /* Retourne le nom du monstre */
 const char* NomMonstre(TypeMonstre monstre);

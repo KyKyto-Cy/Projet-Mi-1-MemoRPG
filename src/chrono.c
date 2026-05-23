@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <time.h>
-#include "timer.h"
+#include "chrono.h"
 
-time_t timer_demarrer(void) {
+time_t chrono_demarrer(void) {
     return time(NULL);
 }
 

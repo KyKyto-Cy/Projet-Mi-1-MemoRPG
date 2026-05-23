@@ -1,6 +1,6 @@
-#ifndef SAVE_H
-#define SAVE_H
-#include "board.h"
+#ifndef SAUVEGARDE_H
+#define SAUVEGARDE_H
+#include "plateau.h"
 
 #define MAX_JOUEURS_SAUVEGARDES 100
 

@@ -2,12 +2,12 @@
 #include <stdlib.h>
 #include <string.h>
 #include "direction.h"
-#include "board.h"
+#include "plateau.h"
 #include "combat.h"
-#include "display.h"
+#include "affichage.h"
 #include "saisie.h"
-#include "player.h"
-#include "game.h"
+#include "joueur.h"
+#include "jeu.h"
 
 static const int    dx[4]      = {-1,  0, +1,  0};
 static const int    dy[4]      = { 0, +1,  0, -1};

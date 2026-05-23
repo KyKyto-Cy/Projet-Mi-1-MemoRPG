@@ -1,8 +1,8 @@
 #ifndef MENU_H
 #define MENU_H
 
-#include "board.h"
-#include "player.h"
+#include "plateau.h"
+#include "joueur.h"
 
 int menu_principal(void);
 void choisir_joueur(Plateau *plateau);

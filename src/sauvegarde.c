@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <string.h>
-#include "save.h"
-#include "display.h"
+#include "sauvegarde.h"
+#include "affichage.h"
 
-#define FICHIER_SAVE "save.txt"
+#define FICHIER_SAUVEGARDE "save.txt"
 
 
 void sauvegarder_stats(StatJoueur stats[], int nb_joueurs){
-    FILE *fichier = fopen(FICHIER_SAVE, "w");
+    FILE *fichier = fopen(FICHIER_SAUVEGARDE, "w");
     if (fichier == NULL){
         printf("Erreur\n");
         return;
@@ -23,7 +23,7 @@ void sauvegarder_stats(StatJoueur stats[], int nb_joueurs){
 
 
 void charger_stats(StatJoueur stats[], int *nb_joueurs){  // pointeur car on va le modifier
-    FILE *fichier = fopen(FICHIER_SAVE, "r");
+    FILE *fichier = fopen(FICHIER_SAUVEGARDE, "r");
     if (fichier == NULL){
         *nb_joueurs = 0;
         return;

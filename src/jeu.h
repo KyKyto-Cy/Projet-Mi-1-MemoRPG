@@ -1,13 +1,13 @@
-#ifndef GAME_H
-#define GAME_H
+#ifndef JEU_H
+#define JEU_H
 
 #include <stdio.h>
 #include <string.h>
 #include "direction.h"
-#include "board.h"
+#include "plateau.h"
 #include "combat.h"
 #include "saisie.h"
-#include "player.h"
+#include "joueur.h"
 
 //Vérifie si une case est accessible (adjacente et cachée)
 int case_accessible(Joueur *joueur, Plateau *plateau, int ligne, int colonne); 

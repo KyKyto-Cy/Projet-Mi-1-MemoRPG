@@ -1,6 +1,6 @@
-#ifndef PLAYER_H
-#define PLAYER_H
-#include"cards.h"
+#ifndef JOUEUR_H
+#define JOUEUR_H
+#include"cartes.h"
 
 /* Chaque joueur choisit un type d'aventurier */
 typedef enum{

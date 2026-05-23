@@ -2,11 +2,11 @@
 #include <stdlib.h>
 #include <time.h>
 #include "menu.h"
-#include "display.h"
+#include "affichage.h"
 #include "saisie.h"
-#include "game.h"
-#include "timer.h"
-#include "save.h"
+#include "jeu.h"
+#include "chrono.h"
+#include "sauvegarde.h"
 
 int main(void) {
     int choix;
@@ -33,7 +33,7 @@ int main(void) {
             do {
                 initialiser_plateau(&plateau);
                 positionner_joueurs(&plateau);
-                time_t debut = timer_demarrer();
+                time_t debut = chrono_demarrer();
                 effacer_ecran();
                 afficher_plateau(&plateau);
                 afficher_joueurs(&plateau);

@@ -1,11 +1,11 @@
 #include <stdio.h>
-#include "display.h"
-#include "player.h"
-#include "board.h"
+#include "affichage.h"
+#include "joueur.h"
+#include "plateau.h"
 
 
 void effacer_ecran(void){
-    printf(CLEAR_SCREEN);
+    printf(EFFACER_ECRAN);
     fflush(stdout);
     printf("\n");
 }
