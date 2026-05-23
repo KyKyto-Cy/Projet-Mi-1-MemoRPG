@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "combat.h"
 
+/* Retourne le nom du monstre */
 const char* NomMonstre(TypeMonstre monstre){
 
     if(monstre == BASILIC){
@@ -20,6 +21,7 @@ const char* NomMonstre(TypeMonstre monstre){
     }
 }
 
+/* Vérifie si l'arme choisie peut battre le monstre */
 int armeBatMonstre(armeActive arme, TypeMonstre monstre){
 
     if (arme == BOUCLIER && monstre == BASILIC){
@@ -41,12 +43,14 @@ int armeBatMonstre(armeActive arme, TypeMonstre monstre){
     return 0;
 }
 
+/* Replace le joueur à sa position de départ */
 void retourDepart(Joueur *joueur){
 
     joueur->positionLigne = joueur->ligneDepart;
     joueur->positionColonne = joueur->colonneDepart;
 }
 
+/* Gère le combat entre le joueur et le monstre */
 void combat(Joueur *joueur, TypeMonstre monstre){
 
     printf("Monstre rencontre : %s\n", NomMonstre(monstre));
@@ -70,6 +74,7 @@ void combat(Joueur *joueur, TypeMonstre monstre){
     }
 }
 
+/* Vérifie si le joueur a trouvé le coffre et son arme antique */
 int joueurGagne(const Joueur *joueur){
 
     if (joueur->trouveCoffre == 1 && joueur->trouveArmeAntique == 1){
