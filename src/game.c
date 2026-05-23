@@ -1,7 +1,9 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "board.h"
 #include "combat.h"
+#include "display.h"
 #include "saisie.h"
 #include "player.h"
 #include "game.h"
@@ -67,7 +69,7 @@ void tour_joueur(Plateau *plateau, Joueur *joueur){
 
     switch (c.type){
         case MONSTRE:
-            combattre(joueur, &plateau->grille[ligne][colonne]);
+            combat(joueur, c.monstre);
             break;
         case COFFRE:
             printf("Vous avez trouve un coffre au tresor !\n");
