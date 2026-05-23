@@ -5,6 +5,8 @@
 #include <string.h>
 #include "board.h"
 #include "combat.h"
+#include "saisie.h"
+#include "player.h"
 
 
 int case_accessible(Plateau *plateau, int ligne, int colonne);
