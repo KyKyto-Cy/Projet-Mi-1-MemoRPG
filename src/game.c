@@ -40,10 +40,10 @@ void deplacer_joueur(Plateau *plateau, Joueur *joueur, int ligne, int colonne){
 
 
 void tour_joueur(Plateau *plateau, Joueur *joueur){
-    // Etape 1 : choisir une arme
+    // choisir une arme
     choisirNouvelleArme(joueur);
 
-    // Etape 2 : choisir une case
+    //  choisir une case
     int ligne, colonne;
     do {
         printf("Choisissez une ligne (1-5) : ");
@@ -56,13 +56,13 @@ void tour_joueur(Plateau *plateau, Joueur *joueur){
         }
     } while (case_accessible(joueur, plateau, ligne, colonne) == 0);
 
-    // Etape 3 : se deplacer sur la case
+    //se deplacer sur la case
     deplacer_joueur(plateau, joueur, ligne, colonne);
 
-    // Etape 4 : afficher le plateau mis à jour
+    // afficher le plateau mis à jour
     afficher_plateau(plateau);
 
-    // Etape 5 : gérer ce qu'il y a sur la case
+    //gérer ce qu'il y a sur la case
     Case c = plateau->grille[ligne][colonne];
 
     switch (c.type){
