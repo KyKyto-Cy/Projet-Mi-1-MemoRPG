@@ -48,24 +48,42 @@ int tour_joueur(Plateau *plateau, Joueur *joueur){
     // choisir une arme
     choisirNouvelleArme(joueur);
 
-    // lister les directions accessibles
-    int disponibles[4] = {0, 0, 0, 0};
-    int num = 1;
-    printf("Cases accessibles :\n");
-    for (int d = 0; d < 4; d++) {
-        int lig = joueur->positionLigne  + dx[d];
-        int col = joueur->positionColonne + dy[d];
-        if (case_accessible(joueur, plateau, lig, col)) {
-            disponibles[d] = 1;
-            printf("  [%d/%c] %-5s -> (%d, %d)\n", num++, lettres[d], noms[d], lig + 1, col + 1);
+    int ligne, colonne;
+
+    if (joueur->portail_actif == 1) {
+        printf("=== TELEPORTATION ! Choisissez une case cachee ===\n");
+        do {
+            printf("Ligne (1-5) : ");
+            ligne = lire_entier(1, 5) - 1;
+            printf("Colonne (1-5) : ");
+            colonne = lire_entier(1, 5) - 1;
+            if (plateau->grille[ligne][colonne].revelee == 1) {
+                printf("Cette case est deja revelee. Choisissez une case cachee.\n");
+            }
+        } while (plateau->grille[ligne][colonne].revelee == 1);
+
+        joueur->portail_actif = 0;
+        deplacer_joueur(plateau, joueur, ligne, colonne);
+    } else {
+        // lister les directions accessibles
+        int disponibles[4] = {0, 0, 0, 0};
+        int num = 1;
+        printf("Cases accessibles :\n");
+        for (int d = 0; d < 4; d++) {
+            int lig = joueur->positionLigne  + dx[d];
+            int col = joueur->positionColonne + dy[d];
+            if (case_accessible(joueur, plateau, lig, col)) {
+                disponibles[d] = 1;
+                printf("  [%d/%c] %-5s -> (%d, %d)\n", num++, lettres[d], noms[d], lig + 1, col + 1);
+            }
         }
+
+        Direction dir = lire_direction(disponibles);
+        ligne   = joueur->positionLigne   + dx[dir];
+        colonne = joueur->positionColonne + dy[dir];
+
+        deplacer_joueur(plateau, joueur, ligne, colonne);
     }
-
-    Direction dir = lire_direction(disponibles);
-    int ligne   = joueur->positionLigne   + dx[dir];
-    int colonne = joueur->positionColonne + dy[dir];
-
-    deplacer_joueur(plateau, joueur, ligne, colonne);
 
     // afficher le plateau mis à jour
     afficher_plateau(plateau);
@@ -91,8 +109,8 @@ int tour_joueur(Plateau *plateau, Joueur *joueur){
             }
             break;
         case PORTAIL:
-            printf("Vous avez trouve un portail magique !\n");
-            // la prochaine case peut etre n'importe où
+            printf("Vous avez trouve un portail magique ! Au prochain tour, vous pourrez vous teleporter n'importe ou.\n");
+            joueur->portail_actif = 1;
             break;
         case TOTEM:
             printf("Vous avez trouve un totem de transmutation !\n");

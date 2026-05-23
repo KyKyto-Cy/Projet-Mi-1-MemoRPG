@@ -116,6 +116,7 @@ void creerJoueur(Joueur *joueur){
 
     joueur->trouveCoffre = 0;
     joueur->trouveArmeAntique = 0;
+    joueur->portail_actif = 0;
 
     joueur->vivant = 1;
 }

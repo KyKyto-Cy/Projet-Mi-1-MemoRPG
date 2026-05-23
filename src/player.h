@@ -35,6 +35,7 @@ typedef struct{
     int trouveCoffre;
     int trouveArmeAntique;
     int vivant;
+    int portail_actif;
 
 } Joueur;
 
