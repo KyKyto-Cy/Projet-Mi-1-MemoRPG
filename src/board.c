@@ -51,6 +51,12 @@ void reset_cartes_cachees(Plateau *plateau) {
             plateau->grille[i][j].revelee = 0;
 }
 
+void reveler_tout(Plateau *plateau) {
+    for (int i = 0; i < TAILLE_PLATEAU; i++)
+        for (int j = 0; j < TAILLE_PLATEAU; j++)
+            plateau->grille[i][j].revelee = 1;
+}
+
 void initialiser_plateau(Plateau *plateau) {
     Case cartes[NB_CARTES];
     creer_cartes(cartes);

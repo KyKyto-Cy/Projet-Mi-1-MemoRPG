@@ -20,5 +20,6 @@ void initialiser_plateau(Plateau *plateau);     /* Mélange et place les cartes 
 const char* NomCote(int ligneDepart, int colonneDepart); /* Retourne "Nord"/"Est"/"Sud"/"Ouest" selon la position de départ */
 void positionner_joueurs(Plateau *plateau);     /* Positionne chaque joueur sur un côté du plateau */
 void reset_cartes_cachees(Plateau *plateau);    /* Remet toutes les cases face cachée */
+void reveler_tout(Plateau *plateau);            /* Met toutes les cases face visible */
 
 #endif

@@ -43,7 +43,17 @@ int main(void) {
                         }
                     }
                 }
-                printf("Le gagnant est %s !\n", plateau.joueurs[gagnant].nom);
+                reveler_tout(&plateau);
+                effacer_ecran();
+                afficher_plateau(&plateau);
+                afficher_joueurs(&plateau);
+                printf(GRAS VERT "\n==============================\n");
+                printf("        PARTIE TERMINEE\n");
+                printf("==============================\n" RESET);
+                printf(GRAS "Le gagnant est %s (%s)\n" RESET,
+                       plateau.joueurs[gagnant].nom,
+                       NomAventurier(plateau.joueurs[gagnant].type));
+                printf(GRAS VERT "==============================\n" RESET);
                 attendre_entree();
 
                 choix_final = menu_final(&plateau);
