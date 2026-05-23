@@ -1,0 +1,50 @@
+# ================================
+#  .gitignore — MemoRPG (projet C)
+# ================================
+ 
+# --- Binaire compilé ---
+memo_rpg
+memo_rpg.exe
+ 
+# --- Fichiers objets ---
+obj/
+*.o
+*.a
+ 
+# --- Fichiers de débogage ---
+*.dSYM/
+core
+ 
+# --- Éditeur VSCode ---
+.vscode/settings.json
+.vscode/launch.json
+.vscode/c_cpp_properties.json
+# (on garde .vscode/ s'il contient des configs partagées utiles)
+# décommente la ligne suivante pour tout ignorer :
+# .vscode/
+ 
+# --- Éditeur CLion / JetBrains ---
+.idea/
+cmake-build-*/
+ 
+# --- Éditeur Vim / Emacs ---
+*.swp
+*.swo
+*~
+\#*\#
+ 
+# --- macOS ---
+.DS_Store
+.AppleDouble
+.LSOverride
+ 
+# --- Windows ---
+Thumbs.db
+desktop.ini
+ 
+# --- Linux ---
+*~
+ 
+# --- Variables d'environnement (ne jamais versionner !) ---
+.env
+.env.*
