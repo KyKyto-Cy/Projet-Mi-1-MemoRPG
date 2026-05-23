@@ -18,11 +18,8 @@ int case_accessible(Joueur *joueur, Plateau *plateau, int ligne, int colonne){
     int diff_ligne = ligne - joueur->positionLigne;
     int diff_colonne = colonne - joueur->positionColonne;
 
-    //Vérifier l'adjacence
-    if (abs(diff_ligne) > 1 || abs(diff_colonne) > 1){
-        return 0;
-    }
-    if (diff_ligne == 0 && diff_colonne == 0){
+    //Vérifier l'adjacence orthogonale (haut/bas/gauche/droite uniquement)
+    if (abs(diff_ligne) + abs(diff_colonne) != 1){
         return 0;
     }
     //Vérifier que la case est cachée
