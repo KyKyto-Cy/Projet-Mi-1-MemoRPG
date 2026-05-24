@@ -3,7 +3,6 @@
  *
  * Toutes les saisies utilisateur passent par ce module.
  * Il garantit que les valeurs retournées sont dans les bornes attendues
- * et que le tampon stdin est toujours vidé après la lecture.
  */
 
 #include <stdio.h>

@@ -232,7 +232,7 @@ void afficher_objectifs(Joueur *joueur) {
 }
 
 /*
- * Affiche un encadré ╔═══╗ annonçant le tour du joueur avec le chrono.
+ * Affiche un encadré annonçant le tour du joueur avec le chrono.
  * index_joueur est l'index 0-based dans le tableau des joueurs.
  */
 void afficher_banniere_tour(Joueur *joueur, int index_joueur, time_t debut) {

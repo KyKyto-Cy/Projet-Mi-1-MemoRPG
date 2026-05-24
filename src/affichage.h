@@ -1,9 +1,4 @@
-/*
- * affichage.h — Macros ANSI et prototypes d'affichage
- *
- * Centralise les séquences d'échappement ANSI pour les couleurs et
- * le contrôle du terminal, ainsi que les prototypes des fonctions d'affichage.
- */
+
 
 #ifndef AFFICHAGE_H
 #define AFFICHAGE_H
@@ -12,8 +7,8 @@
 #include "plateau.h"
 #include "joueur.h"
 
-/* --- Centrage horizontal — une seule constante à ajuster --- */
-#define MARGE_GAUCHE 20  /* Nombre d'espaces avant chaque bloc (15-30 selon le terminal) */
+/* --- Centrage horizontal  */
+#define MARGE_GAUCHE 20  /* Nombre d'espaces avant chaque bloc  */
 
 /* --- Contrôle du terminal --- */
 #define EFFACER_ECRAN    "\033[2J\033[H" /* Efface l'écran et remet le curseur en haut */

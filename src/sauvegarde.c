@@ -1,7 +1,7 @@
 /*
  * sauvegarde.c — Persistance des statistiques de jeu
  *
- * Les statistiques (parties jouées, victoires) sont stockées dans save.txt,
+ * Les statistiques sont stockées dans save.txt,
  * une ligne par joueur au format : "nom parties_jouees victoires".
  * La première ligne du fichier contient le nombre total de joueurs enregistrés.
  */
