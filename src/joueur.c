@@ -56,11 +56,11 @@ TypeArmeAntique associerArmeAntique(TypeAventurier type) {
  * desc     : description de la classe
  */
 static void afficher_boite_aventurier(const char *color, int num,
-                                      const char *name, const char *arme,
-                                      const char *desc) {
+                                      const char *name, const char *arme
+                                      ) {
     printf("%s  ┌─ %d. %-8s ───────────────────────────┐\n", color, num, name);
     printf("  │  Arme antique : %-24s│\n", arme);
-    printf("  │                                         │\n", desc);
+    printf("  │                                         │\n");
     printf("  └─────────────────────────────────────────┘\n" RESET "\n");
 }
 
