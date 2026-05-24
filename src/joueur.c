@@ -101,22 +101,6 @@ void creerJoueur(Joueur *joueur) {
     joueur->vivant            = 1;
 }
 
-/* Demande le nombre de joueurs (2 à 4). */
-int choisirNombreJoueur() {
-    int nbJoueur;
-    printf("Nombre de joueurs (entre 2 et 4) :\n");
-    nbJoueur = lire_entier(2, 4);
-    return nbJoueur;
-}
-
-/* Crée tous les joueurs d'une partie en appelant creerJoueur pour chacun. */
-void creationJoueur(Joueur joueur[], int nbJoueur) {
-    for (int i = 0; i < nbJoueur; i++) {
-        printf("\n===== Joueur %d =====\n", i + 1);
-        creerJoueur(&joueur[i]);
-    }
-}
-
 /* Permet au joueur de choisir son arme au début de chaque sous-tour. */
 void choisirNouvelleArme(Joueur *joueur) {
     printf("\n");

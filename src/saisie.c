@@ -20,6 +20,7 @@ char *lire_chaine(char *chaine, int taille){
         fgets(chaine, taille, stdin);
         chaine[strcspn(chaine, "\n")] = '\0'; /* Supprime le \n de fgets */
         if (chaine[0] == '\0') {
+            afficher_marge();
             printf("Erreur, le nom ne peut pas etre vide : \n");
         }
     } while (chaine[0] == '\0');

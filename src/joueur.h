@@ -50,9 +50,7 @@ const char* NomArme(armeActive arme);                 /* Retourne le nom lisible
 const char* NomArmeAntique(TypeArmeAntique arme);     /* Retourne le nom lisible de l'arme antique */
 TypeArmeAntique associerArmeAntique(TypeAventurier type); /* Associe l'arme antique au type */
 
-void creerJoueur(Joueur *joueur);                   /* Saisie interactive d'un joueur */
-int  choisirNombreJoueur(void);                     /* Demande le nombre de joueurs */
-void creationJoueur(Joueur joueur[], int nbJoueur); /* Crée tous les joueurs */
-void choisirNouvelleArme(Joueur *joueur);           /* Choix d'arme en début de sous-tour */
+void creerJoueur(Joueur *joueur);        /* Saisie interactive d'un joueur */
+void choisirNouvelleArme(Joueur *joueur); /* Choix d'arme en début de sous-tour */
 
 #endif

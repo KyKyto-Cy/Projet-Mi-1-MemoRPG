@@ -17,6 +17,7 @@
 void sauvegarder_stats(StatJoueur stats[], int nb_joueurs){
     FILE *fichier = fopen(FICHIER_SAUVEGARDE, "w");
     if (fichier == NULL){
+        afficher_marge();
         printf("Erreur : impossible d'ouvrir le fichier de sauvegarde.\n");
         return;
     }
