@@ -97,7 +97,7 @@ void choisir_joueur(Plateau *plateau){
         afficher_marge();
         printf(GRAS "┌─ Joueur %d ─────────────────────────┐\n" RESET, i + 1);
         afficher_marge();
-        printf(GRAS "└─────────────────────────────────────┘\n" RESET "\n");
+        printf(GRAS "└────────────────────────────────────┘\n" RESET "\n");
         creerJoueur(&plateau->joueurs[i]);
     }
 }
