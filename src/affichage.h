@@ -12,6 +12,9 @@
 #include "plateau.h"
 #include "joueur.h"
 
+/* --- Centrage horizontal — une seule constante à ajuster --- */
+#define MARGE_GAUCHE 20  /* Nombre d'espaces avant chaque bloc (15-30 selon le terminal) */
+
 /* --- Contrôle du terminal --- */
 #define EFFACER_ECRAN    "\033[2J\033[H" /* Efface l'écran et remet le curseur en haut */
 #define MASQUER_CURSEUR  "\033[?25l"     /* Cache le curseur */
@@ -31,6 +34,7 @@
 #define BLEU_FAIBLE "\033[2m\033[34m"  /* Bleu atténué — cases cachées */
 
 void effacer_ecran(void);                              /* Vide le terminal */
+void afficher_marge(void);                             /* Imprime MARGE_GAUCHE espaces */
 void afficher_plateau(Plateau *plateau);               /* Grille 5x5 avec bordures Unicode et joueurs */
 void afficher_joueurs(Plateau *plateau, int index_actif); /* Liste des joueurs ; index_actif >= 0 surligne le joueur en cours */
 void afficher_case(Case c);                            /* Affiche une case individuelle colorée */

@@ -4,6 +4,9 @@
  * Fonctions d'affichage du plateau (grille 5x5 avec bordures Unicode),
  * des joueurs, des cases individuelles, et utilitaires terminal.
  *
+ * Centrage horizontal : toutes les fonctions appellent afficher_marge()
+ * avant chaque ligne. Ajuster MARGE_GAUCHE dans affichage.h suffit.
+ *
  * Légende des couleurs :
  *   Bleu atténué → case cachée [ ? ]
  *   Gris foncé   → case vide
@@ -26,6 +29,11 @@ void effacer_ecran(void){
     printf(EFFACER_ECRAN);
     fflush(stdout);
     printf("\n");
+}
+
+/* Imprime MARGE_GAUCHE espaces pour centrer horizontalement le contenu. */
+void afficher_marge(void) {
+    printf("%*s", MARGE_GAUCHE, "");
 }
 
 /*
@@ -83,10 +91,13 @@ static const char* COULEURS_JOUEURS[] = { ROUGE, VERT, JAUNE, CYAN };
  * du joueur actif (index_actif >= 0 surligne ce joueur en gras).
  */
 void afficher_joueurs(Plateau *plateau, int index_actif) {
-    printf("\n" GRAS "Joueurs :\n" RESET);
+    printf("\n");
+    afficher_marge();
+    printf(GRAS "Joueurs :\n" RESET);
     for (int i = 0; i < plateau->nb_joueurs; i++) {
         Joueur *j = &plateau->joueurs[i];
         const char *couleur = COULEURS_JOUEURS[i];
+        afficher_marge();
         if (i == index_actif) {
             printf("  %s" GRAS "[%d] %-12s (%s) - Cote %-6s - Arme: %-8s - Cherche: %-32s ◄ EN JEU" RESET "\n",
                 couleur, i + 1, j->nom, NomAventurier(j->type),
@@ -111,7 +122,7 @@ static const char *legende[5] = {
 };
 
 /*
- * Affiche la grille 5x5 avec bordures Unicode.
+ * Affiche la grille 5x5 avec bordures Unicode et marge gauche.
  * Les joueurs encore hors grille sont affichés sur leur bord (N/S/E/O).
  * Les joueurs à l'intérieur sont affichés [Px] sur leur case courante.
  */
@@ -129,14 +140,20 @@ void afficher_plateau(Plateau *plateau) {
     }
 
     /* Joueur Nord au-dessus de la grille */
-    if (nord >= 0)
-        printf("\n%19s%s[P%d]" RESET "\n", "", COULEURS_JOUEURS[nord], nord + 1);
-    else
+    if (nord >= 0) {
+        printf("\n");
+        afficher_marge();
+        printf("%19s%s[P%d]" RESET "\n", "", COULEURS_JOUEURS[nord], nord + 1);
+    } else {
         printf("\n\n");
+    }
 
+    afficher_marge();
     printf("      ┌─────┬─────┬─────┬─────┬─────┐\n");
 
     for (int i = 0; i < 5; i++) {
+        afficher_marge();
+
         /* Joueur Ouest sur la ligne du milieu uniquement */
         if (i == 2 && ouest >= 0)
             printf("%s[P%d]" RESET "  ", COULEURS_JOUEURS[ouest], ouest + 1);
@@ -169,6 +186,7 @@ void afficher_plateau(Plateau *plateau) {
 
         printf("%s\n", legende[i]);
 
+        afficher_marge();
         if (i < 4)
             printf("      ├─────┼─────┼─────┼─────┼─────┤\n");
         else
@@ -176,26 +194,32 @@ void afficher_plateau(Plateau *plateau) {
     }
 
     /* Joueur Sud sous la grille */
-    if (sud >= 0)
+    if (sud >= 0) {
+        afficher_marge();
         printf("%19s%s[P%d]" RESET "\n", "", COULEURS_JOUEURS[sud], sud + 1);
+    }
 }
 
 /*
  * Affiche les objectifs personnels du joueur : coffre et arme antique.
  * Cases cochées en vert ([V]) si déjà trouvées, en rouge ([X]) sinon.
- * Largeur interne = 49 caractères.
+ * Largeur interne = 49 caractères visibles.
  */
 void afficher_objectifs(Joueur *joueur) {
     const char *arme = NomArmeAntique(joueur->armeRecherchee);
     char buf[64];
 
-    printf("\n  ┌─ Vos objectifs ─────────────────────────────────┐\n");
+    printf("\n");
+    afficher_marge();
+    printf("  ┌─ Vos objectifs ─────────────────────────────────┐\n");
 
+    afficher_marge();
     if (joueur->trouveCoffre)
         printf(VERT  "  │  [V] Coffre au tresor                     TROUVE│\n" RESET);
     else
         printf(ROUGE "  │  [X] Coffre au tresor                  a trouver│\n" RESET);
 
+    afficher_marge();
     if (joueur->trouveArmeAntique) {
         snprintf(buf, sizeof(buf), "  [V] %-32s TROUVE", arme);
         printf(VERT  "  │%-49s│\n" RESET, buf);
@@ -204,6 +228,7 @@ void afficher_objectifs(Joueur *joueur) {
         printf(ROUGE "  │%-49s│\n" RESET, buf);
     }
 
+    afficher_marge();
     printf("  └─────────────────────────────────────────────────┘\n");
 }
 
@@ -225,9 +250,15 @@ void afficher_banniere_tour(Joueur *joueur, int index_joueur, time_t debut) {
              joueur->nom, NomAventurier(joueur->type), min, sec);
     int len = (int)strlen(titre);
 
-    printf("\n" GRAS "%s╔", couleur);
+    printf("\n");
+    afficher_marge();
+    printf(GRAS "%s╔", couleur);
     for (int i = 0; i < len; i++) printf("═");
-    printf("╗\n║%s║\n╚", titre);
+    printf("╗\n");
+    afficher_marge();
+    printf("║%s║\n", titre);
+    afficher_marge();
+    printf("╚");
     for (int i = 0; i < len; i++) printf("═");
     printf("╝\n" RESET);
 }

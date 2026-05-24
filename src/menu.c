@@ -16,34 +16,56 @@
  *   1 = Nouvelle partie
  *   2 = Statistiques
  *   3 = Quitter
+ *
+ * Boîte interne : 64 caractères visibles.
  */
 int menu_principal(void){
     int choix = 0;
 
     effacer_ecran();
 
-    /* Titre ANSI Shadow */
-    printf(GRAS CYAN);
-    printf("  ███╗   ███╗███████╗███╗   ███╗ ██████╗     ██████╗ ██████╗  ██████╗ \n");
-    printf("  ████╗ ████║██╔════╝████╗ ████║██╔═══██╗    ██╔══██╗██╔══██╗██╔════╝ \n");
-    printf("  ██╔████╔██║█████╗  ██╔████╔██║██║   ██║    ██████╔╝██████╔╝██║  ███╗\n");
-    printf("  ██║╚██╔╝██║██╔══╝  ██║╚██╔╝██║██║   ██║    ██╔══██╗██╔═══╝ ██║   ██║\n");
-    printf("  ██║ ╚═╝ ██║███████╗██║ ╚═╝ ██║╚██████╔╝    ██║  ██║██║     ╚██████╔╝\n");
-    printf("  ╚═╝     ╚═╝╚══════╝╚═╝     ╚═╝ ╚═════╝     ╚═╝  ╚═╝╚═╝      ╚═════╝ \n");
-    printf(RESET "\n");
+    /* Titre ANSI Shadow centré */
+    afficher_marge();
+    printf(GRAS CYAN "  ███╗   ███╗███████╗███╗   ███╗ ██████╗     ██████╗ ██████╗  ██████╗ \n" RESET);
+    afficher_marge();
+    printf(GRAS CYAN "  ████╗ ████║██╔════╝████╗ ████║██╔═══██╗    ██╔══██╗██╔══██╗██╔════╝ \n" RESET);
+    afficher_marge();
+    printf(GRAS CYAN "  ██╔████╔██║█████╗  ██╔████╔██║██║   ██║    ██████╔╝██████╔╝██║  ███╗\n" RESET);
+    afficher_marge();
+    printf(GRAS CYAN "  ██║╚██╔╝██║██╔══╝  ██║╚██╔╝██║██║   ██║    ██╔══██╗██╔═══╝ ██║   ██║\n" RESET);
+    afficher_marge();
+    printf(GRAS CYAN "  ██║ ╚═╝ ██║███████╗██║ ╚═╝ ██║╚██████╔╝    ██║  ██║██║     ╚██████╔╝\n" RESET);
+    afficher_marge();
+    printf(GRAS CYAN "  ╚═╝     ╚═╝╚══════╝╚═╝     ╚═╝ ╚═════╝     ╚═╝  ╚═╝╚═╝      ╚═════╝ \n" RESET);
+    printf("\n");
 
-    /* Menu avec bordures Unicode */
-    printf(CYAN "  ╔══════════════════════════════════════╗\n");
-    printf("  ║                                      ║\n");
-    printf("  ║    " GRAS "1." RESET CYAN "  Nouvelle partie              ║\n");
-    printf("  ║                                      ║\n");
-    printf("  ║    " GRAS "2." RESET CYAN "  Statistiques                 ║\n");
-    printf("  ║                                      ║\n");
-    printf("  ║    " GRAS "3." RESET CYAN "  Quitter                      ║\n");
-    printf("  ║                                      ║\n");
-    printf("  ╚══════════════════════════════════════╝\n" RESET);
+    /* Menu — boîte 64 caractères internes */
+    afficher_marge();
+    printf(CYAN "╔════════════════════════════════════════════════════════════════╗\n");
+    afficher_marge();
+    printf("║                                                                ║\n");
+    afficher_marge();
+    printf("║                                                                ║\n");
+    afficher_marge();
+    printf("║                  " GRAS "1." RESET CYAN "   NOUVELLE PARTIE                          ║\n");
+    afficher_marge();
+    printf("║                                                                ║\n");
+    afficher_marge();
+    printf("║                  " GRAS "2." RESET CYAN "   STATISTIQUES                             ║\n");
+    afficher_marge();
+    printf("║                                                                ║\n");
+    afficher_marge();
+    printf("║                  " GRAS "3." RESET CYAN "   QUITTER                                   ║\n");
+    afficher_marge();
+    printf("║                                                                ║\n");
+    afficher_marge();
+    printf("║                                                                ║\n");
+    afficher_marge();
+    printf("╚════════════════════════════════════════════════════════════════╝\n" RESET);
 
-    printf("\nVotre choix : ");
+    printf("\n");
+    afficher_marge();
+    printf("  Votre choix : ");
     choix = lire_entier(1, 3);
 
     return choix;
@@ -57,19 +79,25 @@ void choisir_joueur(Plateau *plateau){
     int nb = 0;
 
     effacer_ecran();
-    printf(GRAS CYAN "\n  ╔══════════════════════════════════╗\n");
-    printf("  ║       CHOIX DES JOUEURS          ║\n");
-    printf("  ╚══════════════════════════════════╝\n" RESET "\n");
+    afficher_marge();
+    printf(GRAS CYAN "╔══════════════════════════════════════╗\n");
+    afficher_marge();
+    printf("║          CHOIX DES JOUEURS           ║\n");
+    afficher_marge();
+    printf("╚══════════════════════════════════════╝\n" RESET "\n");
 
-    printf("Nombre de joueurs (2 a 4) : ");
+    afficher_marge();
+    printf("  Nombre de joueurs (2 a 4) : ");
     nb = lire_entier(2, 4);
 
     plateau->nb_joueurs = nb;
 
     for (int i = 0; i < nb; i++){
         effacer_ecran();
-        printf(GRAS "\n  ┌─ Joueur %d ─────────────────────┐\n" RESET, i + 1);
-        printf(GRAS "  └────────────────────────────────┘\n" RESET "\n");
+        afficher_marge();
+        printf(GRAS "┌─ Joueur %d ─────────────────────────┐\n" RESET, i + 1);
+        afficher_marge();
+        printf(GRAS "└──────────────────────────────────────┘\n" RESET "\n");
         creerJoueur(&plateau->joueurs[i]);
     }
 }
@@ -83,12 +111,18 @@ int menu_final(Plateau *plateau){
     int choix = 0;
 
     effacer_ecran();
-    printf(GRAS VERT "\n  ╔══════════════════════════════════╗\n");
-    printf("  ║          FIN DE PARTIE           ║\n");
-    printf("  ╚══════════════════════════════════╝\n" RESET "\n");
+    afficher_marge();
+    printf(GRAS VERT "╔══════════════════════════════════════╗\n");
+    afficher_marge();
+    printf("║            FIN DE PARTIE             ║\n");
+    afficher_marge();
+    printf("╚══════════════════════════════════════╝\n" RESET "\n");
 
+    afficher_marge();
     printf("  1. Rejouer avec les memes joueurs\n");
+    afficher_marge();
     printf("  2. Retour au menu principal\n\n");
+    afficher_marge();
     printf("  Votre choix : ");
     choix = lire_entier(1, 2);
 

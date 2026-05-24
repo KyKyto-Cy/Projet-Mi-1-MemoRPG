@@ -27,7 +27,8 @@ int main(void) {
 
     /* Animation de démarrage */
     effacer_ecran();
-    printf(CYAN GRAS "\n  Initialisation de Memo RPG" RESET);
+    afficher_marge();
+    printf(CYAN GRAS "Initialisation de Memo RPG" RESET);
     fflush(stdout);
     for (int i = 0; i < 3; i++) {
         usleep(300000);
@@ -78,18 +79,26 @@ int main(void) {
                 afficher_joueurs(&plateau, gagnant);
 
                 printf(GRAS VERT "\n");
+                afficher_marge();
                 printf("  ██╗   ██╗██╗ ██████╗████████╗ ██████╗ ██╗██████╗ ███████╗\n");
+                afficher_marge();
                 printf("  ██║   ██║██║██╔════╝╚══██╔══╝██╔═══██╗██║██╔══██╗██╔════╝\n");
+                afficher_marge();
                 printf("  ██║   ██║██║██║        ██║   ██║   ██║██║██████╔╝█████╗  \n");
+                afficher_marge();
                 printf("  ╚██╗ ██╔╝██║██║        ██║   ██║   ██║██║██╔══██╗██╔══╝  \n");
+                afficher_marge();
                 printf("   ╚████╔╝ ██║╚██████╗   ██║   ╚██████╔╝██║██║  ██║███████╗\n");
+                afficher_marge();
                 printf("    ╚═══╝  ╚═╝ ╚═════╝   ╚═╝    ╚═════╝ ╚═╝╚═╝  ╚═╝╚══════╝\n");
                 printf(RESET);
 
+                afficher_marge();
                 printf(GRAS "\n  Le gagnant est %s (%s)\n" RESET,
                        plateau.joueurs[gagnant].nom,
                        NomAventurier(plateau.joueurs[gagnant].type));
 
+                afficher_marge();
                 afficher_duree(debut);
 
                 mettre_a_jour_stats(stats, &nb_stats, &plateau, gagnant);
