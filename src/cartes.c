@@ -1,14 +1,27 @@
+/*
+ * cartes.c — Création et mélange du jeu de 25 cartes
+ *
+ * Distribution fixe :
+ *   16 monstres  (4 Basilic, 4 Zombie, 4 Troll, 4 Harpie)
+ *    4 armes antiques (une par type)
+ *    2 coffres
+ *    1 portail
+ *    2 totems
+ * Les cartes sont mélangées avec l'algorithme Fisher-Yates avant
+ * d'être copiées sur la grille.
+ */
+
 #include "cartes.h"
-#include<stdlib.h>
+#include <stdlib.h>
 
 
 
-
-
-
+/*
+ * Remplit le tableau cartes[NB_CARTES] avec la distribution fixe définie
+ * par le cahier des charges, puis le mélange aléatoirement.
+ * Toutes les cases sont initialisées avec revelee = 0 (face cachée).
+ */
 void creer_cartes(Case cartes[]){
- 
-   
     int i;
 
     /* 4 monstres BASILIC (indices 0-3) */
@@ -79,18 +92,18 @@ void creer_cartes(Case cartes[]){
 
     /* Mélange aléatoire des 25 cartes avec Fisher-Yates */
     melanger_fisher_yates(cartes);
-
 }
 
-
-
-
+/*
+ * Mélange le tableau cartes[NB_CARTES] en place avec l'algorithme Fisher-Yates.
+ * Chaque permutation est choisie uniformément, garantissant une distribution équitable.
+ * Précondition : srand() doit avoir été appelé avant la première partie.
+ */
 
 
 
 
 void melanger_fisher_yates(Case cartes[]) {
-
     for (int i = NB_CARTES - 1; i > 0; i--) {
         /* Choisit un indice aléatoire entre 0 et i (inclus) */
         int j = rand() % (i + 1);

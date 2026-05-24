@@ -1,3 +1,11 @@
+/*
+ * plateau.h — Structure du plateau et fonctions d'initialisation
+ *
+ * Définit la structure Plateau (grille + joueurs + compteur),
+ * les constantes de dimension, et les prototypes d'initialisation,
+ * de positionnement et de gestion de l'état des cases.
+ */
+
 #ifndef PLATEAU_H
 #define PLATEAU_H
 

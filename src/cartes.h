@@ -1,6 +1,14 @@
+/*
+ * cartes.h — Types de cases et jeu de cartes
+ *
+ * Définit les énumérations TypeCase, TypeMonstre, TypeArmeAntique,
+ * la structure Case et les prototypes de creer_cartes / melanger_fisher_yates.
+ */
+
 #ifndef CARTES_H
 #define CARTES_H
-#define NB_CARTES 25
+
+#define NB_CARTES 25  /* Taille exacte de la grille 5x5 */
 /* Type de contenu d'une case du plateau */
 typedef enum {
     VIDE,        /* Case sans contenu particulier */
@@ -34,7 +42,10 @@ typedef struct {
     int revelee;         /* 1 si la case a été révélée, 0 sinon */
 } Case;
 
-void melanger_fisher_yates(Case cartes[]);
+/* Remplit cartes[NB_CARTES] avec la distribution fixe, puis mélange. */
 void creer_cartes(Case cartes[]);
+
+/* Mélange cartes[NB_CARTES] en place (algorithme Fisher-Yates). */
+void melanger_fisher_yates(Case cartes[]);
 
 #endif
