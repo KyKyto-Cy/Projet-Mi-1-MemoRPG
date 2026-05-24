@@ -59,7 +59,7 @@ static void afficher_boite_aventurier(const char *color, int num,
                                       const char *name, const char *arme,
                                       const char *desc) {
     printf("%s  ┌─ %d. %-8s ────────────────────────────┐\n", color, num, name);
-    printf("  │  Arme antique : %-23s│\n", arme);
+    printf("  │  Arme antique : %-24s│\n", arme);
     printf("  │  %-39s│\n", desc);
     printf("  └─────────────────────────────────────────┘\n" RESET "\n");
 }
