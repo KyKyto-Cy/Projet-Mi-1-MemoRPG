@@ -4,8 +4,7 @@
  * Fonctions d'affichage du plateau (grille 5x5 avec bordures Unicode),
  * des joueurs, des cases individuelles, et utilitaires terminal.
  *
- * Centrage horizontal : toutes les fonctions appellent afficher_marge()
- * avant chaque ligne. Ajuster MARGE_GAUCHE dans affichage.h suffit.
+ 
  *
  * Légende des couleurs :
  *   Bleu atténué → case cachée [ ? ]
