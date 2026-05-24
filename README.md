@@ -60,7 +60,6 @@ make run
 
 | Action            | Touche(s)              |
 |-------------------|------------------------|
-| Se déplacer       | `Z` Nord · `D` Est · `S` Sud · `Q` Ouest |
 | Choisir une option | Chiffre correspondant + Entrée |
 | Quitter           | Option `3` du menu principal |
 
