@@ -62,12 +62,8 @@ int main(void) {
                 int gagnant = -1;
                 while (gagnant == -1) {
                     for (int i = 0; i < plateau.nb_joueurs; i++) {
-                        effacer_ecran();
-                        afficher_plateau(&plateau);
-                        afficher_joueurs(&plateau, i);
-                        afficher_banniere_tour(&plateau.joueurs[i], i, debut);
-
-                        int resultat = tour_joueur(&plateau, &plateau.joueurs[i]);
+                        /* L'affichage initial du sous-tour est géré par tour_joueur */
+                        int resultat = tour_joueur(&plateau, &plateau.joueurs[i], i, debut);
                         if (resultat == 1) {
                             gagnant = i;
                             break;

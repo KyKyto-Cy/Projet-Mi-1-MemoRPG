@@ -35,5 +35,6 @@ void afficher_plateau(Plateau *plateau);               /* Grille 5x5 avec bordur
 void afficher_joueurs(Plateau *plateau, int index_actif); /* Liste des joueurs ; index_actif >= 0 surligne le joueur en cours */
 void afficher_case(Case c);                            /* Affiche une case individuelle colorée */
 void afficher_banniere_tour(Joueur *joueur, int index_joueur, time_t debut); /* Encadré ╔═╗ avec nom, classe et chrono */
+void afficher_objectifs(Joueur *joueur);    /* Boîte ┌─┐ coffre + arme antique avec statut coloré */
 
 #endif

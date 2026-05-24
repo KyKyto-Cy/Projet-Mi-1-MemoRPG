@@ -181,6 +181,33 @@ void afficher_plateau(Plateau *plateau) {
 }
 
 /*
+ * Affiche les objectifs personnels du joueur : coffre et arme antique.
+ * Cases cochées en vert ([V]) si déjà trouvées, en rouge ([X]) sinon.
+ * Largeur interne = 49 caractères.
+ */
+void afficher_objectifs(Joueur *joueur) {
+    const char *arme = NomArmeAntique(joueur->armeRecherchee);
+    char buf[64];
+
+    printf("\n  ┌─ Vos objectifs ─────────────────────────────────┐\n");
+
+    if (joueur->trouveCoffre)
+        printf(VERT  "  │  [V] Coffre au tresor                     TROUVE│\n" RESET);
+    else
+        printf(ROUGE "  │  [X] Coffre au tresor                  a trouver│\n" RESET);
+
+    if (joueur->trouveArmeAntique) {
+        snprintf(buf, sizeof(buf), "  [V] %-32s TROUVE", arme);
+        printf(VERT  "  │%-49s│\n" RESET, buf);
+    } else {
+        snprintf(buf, sizeof(buf), "  [X] %-32s cherche", arme);
+        printf(ROUGE "  │%-49s│\n" RESET, buf);
+    }
+
+    printf("  └─────────────────────────────────────────────────┘\n");
+}
+
+/*
  * Affiche un encadré ╔═══╗ annonçant le tour du joueur avec le chrono.
  * index_joueur est l'index 0-based dans le tableau des joueurs.
  */
