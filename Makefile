@@ -1,6 +1,6 @@
-# ================================
+
 #  Makefile — MemoRPG
-# ================================
+
  
 # Compilateur et options
 CC      = gcc
@@ -22,9 +22,9 @@ SRCS    = $(wildcard $(SRC_DIR)/*.c)
 # Transforme chaque src/xxx.c en obj/xxx.o
 OBJS    = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
  
-# ================================
+
 #  Règle principale : compiler tout
-# ================================
+
 all: $(NAME)
  
 # Lier tous les .o pour produire le binaire
@@ -37,15 +37,15 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
  
-# ================================
+
 #  Lancer le jeu
-# ================================
+
 run: all
 	./$(NAME)
  
-# ================================
+
 #  Nettoyage
-# ================================
+
  
 # Supprime les fichiers objets
 clean:
