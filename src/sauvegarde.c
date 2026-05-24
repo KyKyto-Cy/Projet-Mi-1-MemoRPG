@@ -55,12 +55,12 @@ void charger_stats(StatJoueur stats[], int *nb_joueurs){
  */
 void afficher_stats(StatJoueur stats[], int nb_joueurs){
     effacer_ecran();
-    printf(GRAS CYAN "  ╔══════════════════════════════════════════════╗\n");
-    printf("  ║           TABLEAU DES SCORES                 ║\n");
-    printf("  ╚══════════════════════════════════════════════╝\n" RESET "\n");
+    afficher_marge(); printf(GRAS CYAN "╔══════════════════════════════════════════════╗\n");
+    afficher_marge(); printf("║           TABLEAU DES SCORES                 ║\n");
+    afficher_marge(); printf("╚══════════════════════════════════════════════╝\n" RESET "\n");
 
     if (nb_joueurs == 0){
-        printf("  Aucun joueur enregistre\n");
+        afficher_marge(); printf("Aucun joueur enregistre\n");
         return;
     }
 
@@ -88,7 +88,8 @@ void afficher_stats(StatJoueur stats[], int nb_joueurs){
 
         const char *medaille = (i < 3) ? medailles[i] : "  -   ";
 
-        printf("  %s %-20s  %2d victoires / %2d parties  (%d%%)\n",
+        afficher_marge();
+        printf("%s %-20s  %2d victoires / %2d parties  (%d%%)\n",
                medaille,
                stats[i].nom,
                stats[i].victoires,

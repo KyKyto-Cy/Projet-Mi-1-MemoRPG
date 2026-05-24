@@ -58,12 +58,17 @@ make run
 
 ### Contrôles en jeu
 
-| Action            | Touche(s)              |
-|-------------------|------------------------|
-| Choisir une option | Chiffre correspondant + Entrée |
-| Quitter           | Option `3` du menu principal |
+| Action                        | Touche(s)                                  |
+|-------------------------------|--------------------------------------------|
+| Saisir son nom                | Texte libre + Entrée                       |
+| Choisir une option de menu    | Chiffre correspondant + Entrée             |
+| Choisir une direction         | Chiffre `1`–`4` (directions disponibles) + Entrée |
+| Choisir une arme active       | Chiffre `1`–`4` + Entrée                  |
+| Quitter                       | Option `3` du menu principal               |
 
-Les statistiques (victoires, parties jouées) sont sauvegardées automatiquement dans `save.txt`.
+**Condition de victoire** : trouver **son arme antique** (propre à chaque classe) **ET** un coffre au trésor lors d'une même partie.
+
+Les statistiques (victoires, parties jouées) sont **chargées et sauvegardées automatiquement** dans `save.txt` à chaque lancement.
 
 ---
 

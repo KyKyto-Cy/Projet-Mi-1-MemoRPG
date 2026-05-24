@@ -90,14 +90,14 @@ int tour_joueur(Plateau *plateau, Joueur *joueur, int index_joueur, time_t debut
         int ligne, colonne;
 
         if (joueur->portail_actif == 1) {
-            printf("\n=== TELEPORTATION ! Choisissez une case cachee ===\n");
+            printf("\n"); afficher_marge(); printf("=== TELEPORTATION ! Choisissez une case cachee ===\n");
             do {
-                printf("Ligne (1-5) : ");
+                afficher_marge(); printf("Ligne (1-5) : ");
                 ligne   = lire_entier(1, 5) - 1;
-                printf("Colonne (1-5) : ");
+                afficher_marge(); printf("Colonne (1-5) : ");
                 colonne = lire_entier(1, 5) - 1;
                 if (plateau->grille[ligne][colonne].revelee == 1)
-                    printf("Cette case est deja revelee. Choisissez une case cachee.\n");
+                    { afficher_marge(); printf("Cette case est deja revelee. Choisissez une case cachee.\n"); }
             } while (plateau->grille[ligne][colonne].revelee == 1);
 
             joueur->portail_actif = 0;
@@ -115,7 +115,7 @@ int tour_joueur(Plateau *plateau, Joueur *joueur, int index_joueur, time_t debut
             }
 
             if (nb_accessibles == 0) {
-                printf("\nVous etes bloque dans le labyrinthe ! Fin du tour.\n");
+                printf("\n"); afficher_marge(); printf("Vous etes bloque dans le labyrinthe ! Fin du tour.\n");
                 retourDepart(joueur);
                 reset_cartes_cachees(plateau);
                 continuer = 0;
@@ -123,13 +123,13 @@ int tour_joueur(Plateau *plateau, Joueur *joueur, int index_joueur, time_t debut
                 continue;
             }
 
-            printf("\nCases accessibles :\n");
+            printf("\n"); afficher_marge(); printf("Cases accessibles :\n");
             int num = 1;
             for (int d = 0; d < 4; d++) {
                 if (disponibles[d]) {
                     int lig = joueur->positionLigne  + dx[d];
                     int col = joueur->positionColonne + dy[d];
-                    printf("  [%d/%c] %-5s -> (%d, %d)\n", num++, lettres[d], noms[d], lig + 1, col + 1);
+                    afficher_marge(); printf("  [%d/%c] %-5s -> (%d, %d)\n", num++, lettres[d], noms[d], lig + 1, col + 1);
                 }
             }
 
@@ -141,7 +141,7 @@ int tour_joueur(Plateau *plateau, Joueur *joueur, int index_joueur, time_t debut
         /* --- 3. Déplacement : révèle la case, puis suspense, puis ré-affichage --- */
         deplacer_joueur(plateau, joueur, ligne, colonne);
 
-        printf("\nVous revelez la case...\n");
+        printf("\n"); afficher_marge(); printf("Vous revelez la case...\n");
         fflush(stdout);
         usleep(500000);
 
@@ -162,7 +162,7 @@ int tour_joueur(Plateau *plateau, Joueur *joueur, int index_joueur, time_t debut
                 break;
 
             case COFFRE:
-                printf("\nVous avez trouve un coffre au tresor ! ");
+                printf("\n"); afficher_marge(); printf("Vous avez trouve un coffre au tresor ! ");
                 joueur->trouveCoffre = 1;
                 if (joueur->trouveArmeAntique)
                     printf("(Arme antique deja trouvee : continuez pour gagner !)\n");
@@ -173,38 +173,42 @@ int tour_joueur(Plateau *plateau, Joueur *joueur, int index_joueur, time_t debut
 
             case ARME_ANTIQUE:
                 if (c.arme == joueur->armeRecherchee) {
-                    printf("\nVous avez trouve VOTRE arme antique : %s !\n",
+                    printf("\n"); afficher_marge();
+                    printf("Vous avez trouve VOTRE arme antique : %s !\n",
                            NomArmeAntique(c.arme));
                     joueur->trouveArmeAntique = 1;
                     if (joueur->trouveCoffre)
-                        printf("(Vous avez aussi le coffre : continuez pour gagner !)\n");
+                        { afficher_marge(); printf("(Vous avez aussi le coffre : continuez pour gagner !)\n"); }
                     else
-                        printf("(Il vous reste a trouver un coffre.)\n");
+                        { afficher_marge(); printf("(Il vous reste a trouver un coffre.)\n"); }
                 } else {
-                    printf("\nVous decouvrez une arme antique : %s. Ce n'est pas la votre, continuez !\n",
+                    printf("\n"); afficher_marge();
+                    printf("Vous decouvrez une arme antique : %s. Ce n'est pas la votre, continuez !\n",
                            NomArmeAntique(c.arme));
                 }
                 break;
 
             case PORTAIL:
-                printf("\nPortail magique decouvert ! Au prochain tour, vous pourrez vous teleporter n'importe ou sur le plateau.\n");
+                printf("\n"); afficher_marge();
+                printf("Portail magique decouvert ! Au prochain tour, vous pourrez vous teleporter n'importe ou sur le plateau.\n");
                 joueur->portail_actif = 1;
                 continuer = 0;
                 break;
 
             case TOTEM: {
-                printf("\nTotem de transmutation ! Choisissez une autre case cachee : elle sera echangee avec ce totem.\n");
+                printf("\n"); afficher_marge();
+                printf("Totem de transmutation ! Choisissez une autre case cachee : elle sera echangee avec ce totem.\n");
 
                 int lig_cible, col_cible;
                 do {
-                    printf("Ligne (1-5) : ");
+                    afficher_marge(); printf("Ligne (1-5) : ");
                     lig_cible = lire_entier(1, 5) - 1;
-                    printf("Colonne (1-5) : ");
+                    afficher_marge(); printf("Colonne (1-5) : ");
                     col_cible = lire_entier(1, 5) - 1;
                     if (plateau->grille[lig_cible][col_cible].revelee == 1)
-                        printf("Cette case est deja revelee. Choisissez une case cachee.\n");
+                        { afficher_marge(); printf("Cette case est deja revelee. Choisissez une case cachee.\n"); }
                     else if (lig_cible == ligne && col_cible == colonne)
-                        printf("C'est la case du totem elle-meme. Choisissez une autre case.\n");
+                        { afficher_marge(); printf("C'est la case du totem elle-meme. Choisissez une autre case.\n"); }
                 } while (plateau->grille[lig_cible][col_cible].revelee == 1
                          || (lig_cible == ligne && col_cible == colonne));
 
@@ -219,13 +223,13 @@ int tour_joueur(Plateau *plateau, Joueur *joueur, int index_joueur, time_t debut
             }
 
             case VIDE:
-                printf("\nCase vide. Vous pouvez continuer votre exploration.\n");
+                printf("\n"); afficher_marge(); printf("Case vide. Vous pouvez continuer votre exploration.\n");
                 break;
         }
 
         /* --- 5. Test de victoire --- */
         if (joueurGagne(joueur)) {
-            printf("\n" GRAS VERT "%s a gagne !\n" RESET, joueur->nom);
+            printf("\n"); afficher_marge(); printf(GRAS VERT "%s a gagne !\n" RESET, joueur->nom);
             attendre_entree();
             return 1;
         }

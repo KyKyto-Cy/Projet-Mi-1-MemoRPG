@@ -53,15 +53,14 @@ TypeArmeAntique associerArmeAntique(TypeAventurier type) {
  * num      : numéro de choix (1-4)
  * name     : nom de la classe
  * arme     : arme antique associée
- * desc     : description de la classe
  */
 static void afficher_boite_aventurier(const char *color, int num,
                                       const char *name, const char *arme
                                       ) {
-    printf("%s  ┌─ %d. %-8s ───────────────────────────┐\n", color, num, name);
-    printf("  │  Arme antique : %-24s│\n", arme);
-    printf("  │                                         │\n");
-    printf("  └─────────────────────────────────────────┘\n" RESET "\n");
+    afficher_marge(); printf("%s┌─ %d. %-8s ───────────────────────────┐\n", color, num, name);
+    afficher_marge(); printf("│  Arme antique : %-24s│\n", arme);
+    afficher_marge(); printf("│                                         │\n");
+    afficher_marge(); printf("└─────────────────────────────────────────┘\n" RESET "\n");
 }
 
 /*
@@ -69,10 +68,10 @@ static void afficher_boite_aventurier(const char *color, int num,
  * Affiche des boîtes descriptives pour chaque classe d'aventurier.
  */
 void creerJoueur(Joueur *joueur){
-    printf("Entrez votre nom :\n");
+    afficher_marge(); printf("Entrez votre nom :\n");
     lire_chaine(joueur->nom, 50);
 
-    printf("\nChoisissez votre aventurier :\n\n");
+    printf("\n"); afficher_marge(); printf("Choisissez votre aventurier :\n\n");
 
     afficher_boite_aventurier(ROUGE,   1, "GUERRIER", "Epee de feu");
     afficher_boite_aventurier(VERT,    2, "RANGER",   "Baton des familiers");
@@ -114,11 +113,11 @@ void creationJoueur(Joueur joueur[], int nbJoueur){
 
 /* Permet au joueur de choisir son arme au début de chaque sous-tour. */
 void choisirNouvelleArme(Joueur *joueur){
-    printf("\n%s" GRAS " Choisissez votre arme :\n" RESET, joueur->nom);
-    printf("  1. Bouclier  " ROUGE "(Basilic)" RESET "\n");
-    printf("  2. Torche    " ROUGE "(Zombie)" RESET "\n");
-    printf("  3. Arc       " ROUGE "(Harpie)" RESET "\n");
-    printf("  4. Hache     " ROUGE "(Troll)" RESET "\n");
+    printf("\n"); afficher_marge(); printf("%s" GRAS "Choisissez votre arme :\n" RESET, joueur->nom);
+    afficher_marge(); printf("  1. Bouclier  " ROUGE "(Basilic)" RESET "\n");
+    afficher_marge(); printf("  2. Torche    " ROUGE "(Zombie)" RESET "\n");
+    afficher_marge(); printf("  3. Arc       " ROUGE "(Harpie)" RESET "\n");
+    afficher_marge(); printf("  4. Hache     " ROUGE "(Troll)" RESET "\n");
 
     int choixArme = lire_entier(1, 4);
     joueur->armeChoisi = choixArme - 1;
