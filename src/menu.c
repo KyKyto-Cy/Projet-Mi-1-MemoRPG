@@ -26,17 +26,17 @@ int menu_principal(void){
 
     /* Titre ANSI Shadow centré */
     afficher_marge();
-    printf(GRAS CYAN "  ███╗   ███╗███████╗███╗   ███╗ ██████╗     ██████╗ ██████╗  ██████╗ \n" RESET);
+    printf(GRAS BLANC "  ███╗   ███╗███████╗███╗   ███╗ ██████╗     ██████╗ ██████╗  ██████╗ \n" RESET);
     afficher_marge();
-    printf(GRAS CYAN "  ████╗ ████║██╔════╝████╗ ████║██╔═══██╗    ██╔══██╗██╔══██╗██╔════╝ \n" RESET);
+    printf(GRAS BLANC "  ████╗ ████║██╔════╝████╗ ████║██╔═══██╗    ██╔══██╗██╔══██╗██╔════╝ \n" RESET);
     afficher_marge();
-    printf(GRAS CYAN "  ██╔████╔██║█████╗  ██╔████╔██║██║   ██║    ██████╔╝██████╔╝██║  ███╗\n" RESET);
+    printf(GRAS BLANC "  ██╔████╔██║█████╗  ██╔████╔██║██║   ██║    ██████╔╝██████╔╝██║  ███╗\n" RESET);
     afficher_marge();
-    printf(GRAS CYAN "  ██║╚██╔╝██║██╔══╝  ██║╚██╔╝██║██║   ██║    ██╔══██╗██╔═══╝ ██║   ██║\n" RESET);
+    printf(GRAS BLANC "  ██║╚██╔╝██║██╔══╝  ██║╚██╔╝██║██║   ██║    ██╔══██╗██╔═══╝ ██║   ██║\n" RESET);
     afficher_marge();
-    printf(GRAS CYAN "  ██║ ╚═╝ ██║███████╗██║ ╚═╝ ██║╚██████╔╝    ██║  ██║██║     ╚██████╔╝\n" RESET);
+    printf(GRAS BLANC "  ██║ ╚═╝ ██║███████╗██║ ╚═╝ ██║╚██████╔╝    ██║  ██║██║     ╚██████╔╝\n" RESET);
     afficher_marge();
-    printf(GRAS CYAN "  ╚═╝     ╚═╝╚══════╝╚═╝     ╚═╝ ╚═════╝     ╚═╝  ╚═╝╚═╝      ╚═════╝ \n" RESET);
+    printf(GRAS BLANC "  ╚═╝     ╚═╝╚══════╝╚═╝     ╚═╝ ╚═════╝     ╚═╝  ╚═╝╚═╝      ╚═════╝ \n" RESET);
     printf("\n");
 
     /* Menu — boîte 64 caractères internes */
