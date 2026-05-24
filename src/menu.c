@@ -55,7 +55,7 @@ int menu_principal(void){
     afficher_marge();
     printf("║                                                                ║\n");
     afficher_marge();
-    printf("║                  " GRAS "3." RESET CYAN "   QUITTER                                   ║\n");
+    printf("║                  " GRAS "3." RESET CYAN "   QUITTER                                  ║\n");
     afficher_marge();
     printf("║                                                                ║\n");
     afficher_marge();
