@@ -30,7 +30,7 @@ all: $(NAME)
 # Lier tous les .o pour produire le binaire
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
-	@echo "✅ Compilation réussie : ./$(NAME)"
+	@echo "Compilation réussie : ./$(NAME)"
  
 # Compiler chaque .c en .o (crée le dossier obj/ si besoin)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
