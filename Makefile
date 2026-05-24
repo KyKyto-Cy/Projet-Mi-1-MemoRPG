@@ -16,7 +16,7 @@ NAME    = memo_rpg
 SRC_DIR = src
 OBJ_DIR = obj
  
-# Récupère automatiquement tous les fichiers .c dans src/
+# Récupère automatiquement tous les fichiers .c dans src
 SRCS    = $(wildcard $(SRC_DIR)/*.c)
  
 # Transforme chaque src/xxx.c en obj/xxx.o
