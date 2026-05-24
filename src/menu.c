@@ -21,24 +21,29 @@ int menu_principal(void){
     int choix = 0;
 
     effacer_ecran();
-    printf(GRAS CYAN "\n");
-    printf("==================================================== \n");
-    printf("|||                                              ||| \n");
-    printf("|||                    MEMO RPG                  ||| \n");
-    printf("|||                                              ||| \n");
-    printf("|||                                              ||| \n");
-    printf("|||                                              ||| \n");
-    printf("|||                                              ||| \n");
-    printf("|||               1. NOUVELLE PARTIE             ||| \n");
-    printf("|||                                              ||| \n");
-    printf("|||           2. STATISTIQUES                    ||| \n");
-    printf("|||                                              ||| \n");
-    printf("|||                                              ||| \n");
-    printf("|||                                              ||| \n");
-    printf("|||  3.QUITTER                                   ||| \n");
-    printf("==================================================== \n");
+
+    /* Titre ANSI Shadow */
+    printf(GRAS CYAN);
+    printf("  ███╗   ███╗███████╗███╗   ███╗ ██████╗     ██████╗ ██████╗  ██████╗ \n");
+    printf("  ████╗ ████║██╔════╝████╗ ████║██╔═══██╗    ██╔══██╗██╔══██╗██╔════╝ \n");
+    printf("  ██╔████╔██║█████╗  ██╔████╔██║██║   ██║    ██████╔╝██████╔╝██║  ███╗\n");
+    printf("  ██║╚██╔╝██║██╔══╝  ██║╚██╔╝██║██║   ██║    ██╔══██╗██╔═══╝ ██║   ██║\n");
+    printf("  ██║ ╚═╝ ██║███████╗██║ ╚═╝ ██║╚██████╔╝    ██║  ██║██║     ╚██████╔╝\n");
+    printf("  ╚═╝     ╚═╝╚══════╝╚═╝     ╚═╝ ╚═════╝     ╚═╝  ╚═╝╚═╝      ╚═════╝ \n");
     printf(RESET "\n");
-    printf("Votre choix : \n");
+
+    /* Menu avec bordures Unicode */
+    printf(CYAN "  ╔══════════════════════════════════════╗\n");
+    printf("  ║                                      ║\n");
+    printf("  ║    " GRAS "1." RESET CYAN "  Nouvelle partie              ║\n");
+    printf("  ║                                      ║\n");
+    printf("  ║    " GRAS "2." RESET CYAN "  Statistiques                 ║\n");
+    printf("  ║                                      ║\n");
+    printf("  ║    " GRAS "3." RESET CYAN "  Quitter                      ║\n");
+    printf("  ║                                      ║\n");
+    printf("  ╚══════════════════════════════════════╝\n" RESET);
+
+    printf("\nVotre choix : ");
     choix = lire_entier(1, 3);
 
     return choix;
@@ -52,16 +57,19 @@ void choisir_joueur(Plateau *plateau){
     int nb = 0;
 
     effacer_ecran();
-    printf(GRAS "\n     ======= CHOIX DES JOUEURS =======   \n\n" RESET);
+    printf(GRAS CYAN "\n  ╔══════════════════════════════════╗\n");
+    printf("  ║       CHOIX DES JOUEURS          ║\n");
+    printf("  ╚══════════════════════════════════╝\n" RESET "\n");
 
-    printf("Nombre de joueurs de 2 a 4 joueurs : ");
+    printf("Nombre de joueurs (2 a 4) : ");
     nb = lire_entier(2, 4);
 
     plateau->nb_joueurs = nb;
 
     for (int i = 0; i < nb; i++){
         effacer_ecran();
-        printf("\n===== Joueur %d =====\n", i + 1);
+        printf(GRAS "\n  ┌─ Joueur %d ─────────────────────┐\n" RESET, i + 1);
+        printf(GRAS "  └────────────────────────────────┘\n" RESET "\n");
         creerJoueur(&plateau->joueurs[i]);
     }
 }
@@ -75,11 +83,13 @@ int menu_final(Plateau *plateau){
     int choix = 0;
 
     effacer_ecran();
-    printf(GRAS "\n === FIN DE PARTIE ===\n\n" RESET);
+    printf(GRAS VERT "\n  ╔══════════════════════════════════╗\n");
+    printf("  ║          FIN DE PARTIE           ║\n");
+    printf("  ╚══════════════════════════════════╝\n" RESET "\n");
 
-    printf(" 1. Rejouer avec les memes joueurs\n");
-    printf(" 2. Retour au menu principal\n");
-    printf(" Votre choix : \n");
+    printf("  1. Rejouer avec les memes joueurs\n");
+    printf("  2. Retour au menu principal\n\n");
+    printf("  Votre choix : ");
     choix = lire_entier(1, 2);
 
     /* Réinitialise les compteurs de progression pour une nouvelle partie */

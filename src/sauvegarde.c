@@ -50,18 +50,21 @@ void charger_stats(StatJoueur stats[], int *nb_joueurs){
 }
 
 /*
- * Affiche les statistiques triées par nombre de victoires décroissant.
- * Le tri à bulles modifie l'ordre du tableau en place — cela n'affecte pas
- * la recherche par nom dans mettre_a_jour_stats qui utilise strcmp.
+ * Affiche les statistiques triées par nombre de victoires décroissant,
+ * avec médailles et pourcentage de victoire.
  */
 void afficher_stats(StatJoueur stats[], int nb_joueurs){
-    printf(GRAS "=== STATISTIQUES ===\n" RESET);
+    effacer_ecran();
+    printf(GRAS CYAN "  ╔══════════════════════════════════════════════╗\n");
+    printf("  ║           TABLEAU DES SCORES                 ║\n");
+    printf("  ╚══════════════════════════════════════════════╝\n" RESET "\n");
+
     if (nb_joueurs == 0){
-        printf("Aucun joueur enregistre\n");
+        printf("  Aucun joueur enregistre\n");
         return;
     }
 
-    /* Tri à bulles décroissant par victoires pour un effet "classement" */
+    /* Tri à bulles décroissant par victoires */
     for (int i = 0; i < nb_joueurs - 1; i++) {
         for (int j = 0; j < nb_joueurs - 1 - i; j++) {
             if (stats[j].victoires < stats[j + 1].victoires) {
@@ -72,10 +75,27 @@ void afficher_stats(StatJoueur stats[], int nb_joueurs){
         }
     }
 
+    static const char *medailles[] = {
+        JAUNE  " [1er]" RESET,
+        BLANC  " [2me]" RESET,
+        ROUGE  " [3me]" RESET
+    };
+
     for (int i = 0; i < nb_joueurs; i++) {
-        printf("%-20s  parties : %d  victoires : %d\n",
-               stats[i].nom, stats[i].parties_jouees, stats[i].victoires);
+        int pct = (stats[i].parties_jouees > 0)
+                ? stats[i].victoires * 100 / stats[i].parties_jouees
+                : 0;
+
+        const char *medaille = (i < 3) ? medailles[i] : "  -   ";
+
+        printf("  %s %-20s  %2d victoires / %2d parties  (%d%%)\n",
+               medaille,
+               stats[i].nom,
+               stats[i].victoires,
+               stats[i].parties_jouees,
+               pct);
     }
+    printf("\n");
 }
 
 /*

@@ -1,20 +1,22 @@
 /*
  * affichage.c — Rendu visuel du jeu dans le terminal
  *
- * Fonctions d'affichage du plateau (grille 5x5 avec bordures ASCII),
+ * Fonctions d'affichage du plateau (grille 5x5 avec bordures Unicode),
  * des joueurs, des cases individuelles, et utilitaires terminal.
  *
  * Légende des couleurs :
- *   Bleu    → case cachée [ ? ]
- *   Blanc   → case vide
- *   Rouge   → monstre
- *   Jaune   → coffre
- *   Magenta → arme antique
- *   Cyan    → portail
- *   Vert    → totem
+ *   Bleu atténué → case cachée [ ? ]
+ *   Gris foncé   → case vide
+ *   Rouge        → monstre
+ *   Jaune        → coffre
+ *   Magenta      → arme antique
+ *   Cyan         → portail
+ *   Vert         → totem
  */
 
 #include <stdio.h>
+#include <string.h>
+#include <time.h>
 #include "affichage.h"
 #include "joueur.h"
 #include "plateau.h"
@@ -32,17 +34,16 @@ void effacer_ecran(void){
  */
 void afficher_case(Case c) {
     if (c.revelee == 0){
-        printf(BLEU "[ ? ]" RESET); /* Case cachée : contenu inconnu */
+        printf(BLEU_FAIBLE "[ ? ]" RESET);
         return;
     }
 
     switch (c.type){
         case VIDE:
-            printf(BLANC "[   ]" RESET);
+            printf(GRIS_FONCE "[   ]" RESET);
             break;
 
         case MONSTRE:
-            /* Chaque monstre a sa propre lettre : B=Basilic, Z=Zombie, T=Troll, H=Harpie */
             switch (c.monstre) {
                 case BASILIC: printf(ROUGE "[ B ]" RESET); break;
                 case ZOMBIE:  printf(ROUGE "[ Z ]" RESET); break;
@@ -56,10 +57,9 @@ void afficher_case(Case c) {
             break;
 
         case ARME_ANTIQUE:
-            /* E=Épée de feu, B=Bâton des familiers, G=Grimoire, D=Dague */
             switch (c.arme) {
                 case EPEE_DE_FEU:         printf(MAGENTA "[ E ]" RESET); break;
-                case BATON_DES_FAMILIERS: printf(MAGENTA "[ B ]" RESET); break;
+                case BATON_DES_FAMILIERS: printf(MAGENTA "[ Bt]" RESET); break;
                 case GRIMOIRE_INTERDIT:   printf(MAGENTA "[ G ]" RESET); break;
                 case DAGUE_DE_SOMMEIL:    printf(MAGENTA "[ D ]" RESET); break;
             }
@@ -70,7 +70,7 @@ void afficher_case(Case c) {
             break;
 
         case TOTEM:
-            printf(VERT "[ TO]" RESET);
+            printf(VERT "[TO ]" RESET);
             break;
     }
 }
@@ -78,77 +78,127 @@ void afficher_case(Case c) {
 /* Couleurs associées à chaque joueur (P1=Rouge, P2=Vert, P3=Jaune, P4=Cyan) */
 static const char* COULEURS_JOUEURS[] = { ROUGE, VERT, JAUNE, CYAN };
 
-/* Affiche la liste des joueurs avec leur couleur, côté d'entrée et arme active. */
-void afficher_joueurs(Plateau *plateau) {
+/*
+ * Affiche la liste des joueurs avec couleur, côté, arme et indicateur
+ * du joueur actif (index_actif >= 0 surligne ce joueur en gras).
+ */
+void afficher_joueurs(Plateau *plateau, int index_actif) {
     printf("\n" GRAS "Joueurs :\n" RESET);
     for (int i = 0; i < plateau->nb_joueurs; i++) {
         Joueur *j = &plateau->joueurs[i];
         const char *couleur = COULEURS_JOUEURS[i];
-        printf("  %s[%d] %-12s (%s) - Cote %-6s - Arme: %s" RESET "\n",
-            couleur,
-            i + 1,
-            j->nom,
-            NomAventurier(j->type),
-            NomCote(j->ligneDepart, j->colonneDepart),
-            NomArme(j->armeChoisi));
+        if (i == index_actif) {
+            printf("  %s" GRAS "[%d] %-12s (%s) - Cote %-6s - Arme: %-8s  ◄ EN JEU" RESET "\n",
+                couleur, i + 1, j->nom, NomAventurier(j->type),
+                NomCote(j->ligneDepart, j->colonneDepart), NomArme(j->armeChoisi));
+        } else {
+            printf("  %s[%d] %-12s (%s) - Cote %-6s - Arme: %s" RESET "\n",
+                couleur, i + 1, j->nom, NomAventurier(j->type),
+                NomCote(j->ligneDepart, j->colonneDepart), NomArme(j->armeChoisi));
+        }
     }
 }
 
-/* Légende affichée à droite du plateau pour rappeler les correspondances arme/monstre */
+/* Légende des symboles, affichée à droite du plateau (une entrée par rangée). */
 static const char *legende[5] = {
-    GRAS "  Armes vs Monstres :" RESET,
-    "  Bouclier -> Basilic",
-    "  Torche   -> Zombie",
-    "  Hache    -> Troll",
-    "  Arc      -> Harpie"
+    GRAS "   LEGENDE :" RESET,
+    "   " ROUGE "[ B/Z/T/H ]" RESET " Monstres  " JAUNE "[ C ]" RESET " Coffre",
+    "   " CYAN  "[ P ]" RESET " Portail   " VERT  "[TO ]" RESET " Totem",
+    "   " MAGENTA "[ E/Bt/G/D ]" RESET " Arme antique",
+    "   " GRIS_FONCE "[   ]" RESET " Vide   " BLEU_FAIBLE "[ ? ]" RESET " Cache"
 };
 
 /*
- * Affiche la grille 5x5 avec les joueurs positionnés sur les bords.
- * Les joueurs sur les bords (position hors grille) sont affichés en [Px]
- * coloré au Nord/Sud/Est/Ouest selon leur case de départ.
+ * Affiche la grille 5x5 avec bordures Unicode.
+ * Les joueurs encore hors grille sont affichés sur leur bord (N/S/E/O).
+ * Les joueurs à l'intérieur sont affichés [Px] sur leur case courante.
  */
 void afficher_plateau(Plateau *plateau) {
-    /* Identifie quel joueur se trouve sur chaque bord (-1 = personne) */
+    /* Identifie les joueurs encore hors grille (position < 0 ou > 4) */
     int nord = -1, est = -1, sud = -1, ouest = -1;
     for (int i = 0; i < plateau->nb_joueurs; i++) {
         Joueur *j = &plateau->joueurs[i];
-        if      (j->ligneDepart   == -1) nord  = i;
-        else if (j->colonneDepart ==  5) est   = i;
-        else if (j->ligneDepart   ==  5) sud   = i;
-        else                             ouest = i;
+        if (j->positionLigne < 0 || j->positionLigne > 4) {
+            if      (j->ligneDepart   == -1) nord  = i;
+            else if (j->colonneDepart ==  5) est   = i;
+            else if (j->ligneDepart   ==  5) sud   = i;
+            else                             ouest = i;
+        }
     }
 
-    /* Affiche le joueur Nord au-dessus de la grille */
+    /* Joueur Nord au-dessus de la grille */
     if (nord >= 0)
         printf("\n%19s%s[P%d]" RESET "\n", "", COULEURS_JOUEURS[nord], nord + 1);
     else
         printf("\n\n");
 
-    printf("      +-----+-----+-----+-----+-----+\n");
+    printf("      ┌─────┬─────┬─────┬─────┬─────┐\n");
+
     for (int i = 0; i < 5; i++) {
-        /* Joueur Ouest affiché sur la ligne du milieu (i == 2) uniquement */
+        /* Joueur Ouest sur la ligne du milieu uniquement */
         if (i == 2 && ouest >= 0)
             printf("%s[P%d]" RESET "  ", COULEURS_JOUEURS[ouest], ouest + 1);
         else
-            printf("      "); /* 6 espaces pour aligner avec [Px] */
+            printf("      ");
 
-        printf("|");
+        printf("│");
         for (int j = 0; j < 5; j++) {
-            afficher_case(plateau->grille[i][j]);
-            printf("|");
+            /* Cherche un joueur sur cette case */
+            int p = -1;
+            for (int k = 0; k < plateau->nb_joueurs; k++) {
+                if (plateau->joueurs[k].positionLigne   == i &&
+                    plateau->joueurs[k].positionColonne == j) {
+                    p = k;
+                    break;
+                }
+            }
+            if (p >= 0)
+                printf("%s[P%-2d]" RESET, COULEURS_JOUEURS[p], p + 1);
+            else
+                afficher_case(plateau->grille[i][j]);
+            printf("│");
         }
 
-        /* Joueur Est affiché à droite sur la ligne du milieu */
+        /* Joueur Est à droite sur la ligne du milieu, sinon padding */
         if (i == 2 && est >= 0)
             printf("  %s[P%d]" RESET, COULEURS_JOUEURS[est], est + 1);
         else
             printf("      ");
 
-        printf("%s\n      +-----+-----+-----+-----+-----+\n", legende[i]);
+        printf("%s\n", legende[i]);
+
+        if (i < 4)
+            printf("      ├─────┼─────┼─────┼─────┼─────┤\n");
+        else
+            printf("      └─────┴─────┴─────┴─────┴─────┘\n");
     }
 
-    /* Affiche le joueur Sud sous la grille */
+    /* Joueur Sud sous la grille */
     if (sud >= 0)
         printf("%19s%s[P%d]" RESET "\n", "", COULEURS_JOUEURS[sud], sud + 1);
+}
+
+/*
+ * Affiche un encadré ╔═══╗ annonçant le tour du joueur avec le chrono.
+ * index_joueur est l'index 0-based dans le tableau des joueurs.
+ */
+void afficher_banniere_tour(Joueur *joueur, int index_joueur, time_t debut) {
+    time_t maintenant = time(NULL);
+    int duree = (int)difftime(maintenant, debut);
+    int min   = duree / 60;
+    int sec   = duree % 60;
+
+    const char *couleur = COULEURS_JOUEURS[index_joueur];
+
+    char titre[128];
+    snprintf(titre, sizeof(titre),
+             "  TOUR DE %s (%s)  [Chrono: %02d:%02d]  ",
+             joueur->nom, NomAventurier(joueur->type), min, sec);
+    int len = (int)strlen(titre);
+
+    printf("\n" GRAS "%s╔", couleur);
+    for (int i = 0; i < len; i++) printf("═");
+    printf("╗\n║%s║\n╚", titre);
+    for (int i = 0; i < len; i++) printf("═");
+    printf("╝\n" RESET);
 }

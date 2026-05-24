@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 #include "direction.h"
 #include "plateau.h"
 #include "combat.h"
@@ -144,9 +145,13 @@ int tour_joueur(Plateau *plateau, Joueur *joueur){
             colonne = joueur->positionColonne + dy[dir];
         }
 
-        /* --- 3. Déplacement et affichage --- */
+        /* --- 3. Déplacement, animation de révélation et affichage --- */
         deplacer_joueur(plateau, joueur, ligne, colonne);
         afficher_plateau(plateau);
+
+        printf("Vous revelez la case... ");
+        fflush(stdout);
+        usleep(500000); /* 500 ms de suspense */
 
         /* --- 4. Traitement du contenu de la case révélée --- */
         Case c = plateau->grille[ligne][colonne];

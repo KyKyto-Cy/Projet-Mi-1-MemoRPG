@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "joueur.h"
+#include "affichage.h"
 #include "saisie.h"
 
 /* Retourne le nom lisible du type d'aventurier. */
@@ -37,8 +38,7 @@ const char* NomArmeAntique(TypeArmeAntique arme){
 
 /*
  * Retourne l'arme antique associée au type d'aventurier.
- * Chaque aventurier recherche une arme précise — cette correspondance
- * est fixe et définie par le cahier des charges.
+ * Chaque aventurier recherche une arme précise — correspondance fixe.
  */
 TypeArmeAntique associerArmeAntique(TypeAventurier type) {
     if (type == GUERRIER) return EPEE_DE_FEU;
@@ -48,39 +48,56 @@ TypeArmeAntique associerArmeAntique(TypeAventurier type) {
 }
 
 /*
+ * Affiche une boîte Unicode décrivant un type d'aventurier.
+ * color    : code ANSI de couleur
+ * num      : numéro de choix (1-4)
+ * name     : nom de la classe
+ * arme     : arme antique associée
+ * desc     : description de la classe
+ */
+static void afficher_boite_aventurier(const char *color, int num,
+                                      const char *name, const char *arme,
+                                      const char *desc) {
+    printf("%s  ┌─ %d. %-8s ────────────────────────────┐\n", color, num, name);
+    printf("  │  Arme antique : %-27s│\n", arme);
+    printf("  │  %-39s│\n", desc);
+    printf("  └─────────────────────────────────────────┘\n" RESET "\n");
+}
+
+/*
  * Remplit la structure Joueur par saisie interactive.
- * Initialise tous les champs à leur valeur de départ :
- * position à -1 (hors plateau, sera fixée par positionner_joueurs),
- * arme de départ = Bouclier, tous les flags à 0.
+ * Affiche des boîtes descriptives pour chaque classe d'aventurier.
  */
 void creerJoueur(Joueur *joueur){
     printf("Entrez votre nom :\n");
     lire_chaine(joueur->nom, 50);
 
-    printf("\nChoisissez votre aventurier :\n");
-    printf("1 = Guerrier\n");
-    printf("2 = Ranger\n");
-    printf("3 = Magicien\n");
-    printf("4 = Voleur\n");
+    printf("\nChoisissez votre aventurier :\n\n");
+
+    afficher_boite_aventurier(ROUGE,   1, "GUERRIER", "Epee de feu",
+                              "Force brute et combat rapproche");
+    afficher_boite_aventurier(VERT,    2, "RANGER",   "Baton des familiers",
+                              "Agilite et maitrise de la nature");
+    afficher_boite_aventurier(CYAN,    3, "MAGICIEN", "Grimoire interdit",
+                              "Savoir arcanique et sorts puissants");
+    afficher_boite_aventurier(JAUNE,   4, "VOLEUR",   "Dague de sommeil",
+                              "Furtivite et rapidite de frappe");
 
     int choixType = lire_entier(1, 4);
     joueur->type = choixType - 1; /* L'enum commence à 0, le menu à 1 */
 
-    /* L'arme antique est déterminée automatiquement par le type d'aventurier */
     joueur->armeRecherchee = associerArmeAntique(joueur->type);
-    joueur->armeChoisi     = BOUCLIER; /* Arme par défaut au début */
+    joueur->armeChoisi     = BOUCLIER;
 
-    /* Position hors plateau : sera affectée par positionner_joueurs() */
     joueur->positionLigne   = -1;
     joueur->positionColonne = -1;
     joueur->ligneDepart     = -1;
     joueur->colonneDepart   = -1;
 
-    /* Flags de progression et d'état */
-    joueur->trouveCoffre     = 0;
+    joueur->trouveCoffre      = 0;
     joueur->trouveArmeAntique = 0;
-    joueur->portail_actif    = 0;
-    joueur->vivant           = 1;
+    joueur->portail_actif     = 0;
+    joueur->vivant            = 1;
 }
 
 /* Demande le nombre de joueurs (2 à 4). */
@@ -101,12 +118,12 @@ void creationJoueur(Joueur joueur[], int nbJoueur){
 
 /* Permet au joueur de choisir son arme au début de chaque sous-tour. */
 void choisirNouvelleArme(Joueur *joueur){
-    printf("\n%s choisissez votre arme :\n", joueur->nom);
-    printf("1 = Bouclier\n");
-    printf("2 = Torche\n");
-    printf("3 = Arc\n");
-    printf("4 = Hache\n");
+    printf("\n%s" GRAS " Choisissez votre arme :\n" RESET, joueur->nom);
+    printf("  1. Bouclier  " ROUGE "(Basilic)" RESET "\n");
+    printf("  2. Torche    " ROUGE "(Zombie)" RESET "\n");
+    printf("  3. Arc       " ROUGE "(Harpie)" RESET "\n");
+    printf("  4. Hache     " ROUGE "(Troll)" RESET "\n");
 
     int choixArme = lire_entier(1, 4);
-    joueur->armeChoisi = choixArme - 1; /* L'enum commence à 0, le menu à 1 */
+    joueur->armeChoisi = choixArme - 1;
 }

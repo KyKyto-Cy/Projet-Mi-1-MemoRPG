@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <unistd.h>
 #include "menu.h"
 #include "affichage.h"
 #include "saisie.h"
@@ -18,76 +19,83 @@
 int main(void) {
     int choix;
 
-    /* Chargement des statistiques persistantes depuis save.txt.
-       Si le fichier n'existe pas, nb_stats reste à 0. */
     StatJoueur stats[MAX_JOUEURS_SAUVEGARDES];
     int nb_stats = 0;
     charger_stats(stats, &nb_stats);
 
-    /* Initialise le générateur de nombres aléatoires avec l'heure courante
-       pour que chaque partie ait un plateau différent. */
     srand(time(NULL));
+
+    /* Animation de démarrage */
+    effacer_ecran();
+    printf(CYAN GRAS "\n  Initialisation de Memo RPG" RESET);
+    fflush(stdout);
+    for (int i = 0; i < 3; i++) {
+        usleep(300000);
+        printf(CYAN GRAS "." RESET);
+        fflush(stdout);
+    }
+    usleep(400000);
 
     do {
         choix = menu_principal();
 
         if (choix == 2) {
-            /* Option "Statistiques" : affiche le classement des joueurs */
-            effacer_ecran();
             afficher_stats(stats, nb_stats);
             attendre_entree();
 
         } else if (choix == 1) {
-            /* Option "Nouvelle partie" */
             Plateau plateau;
             int choix_final;
 
             choisir_joueur(&plateau);
 
-            /* Boucle de rejeu : même groupe de joueurs, nouveau plateau */
             do {
                 initialiser_plateau(&plateau);
                 positionner_joueurs(&plateau);
-                time_t debut = chrono_demarrer(); /* Démarre le chrono de la partie */
+                time_t debut = chrono_demarrer();
+
                 effacer_ecran();
                 afficher_plateau(&plateau);
-                afficher_joueurs(&plateau);
+                afficher_joueurs(&plateau, -1); /* Pas de joueur actif au départ */
                 attendre_entree();
 
-                /* Boucle de jeu : tourne jusqu'à ce qu'un joueur gagne */
                 int gagnant = -1;
                 while (gagnant == -1) {
-                    /* Chaque joueur joue son tour à la suite */
                     for (int i = 0; i < plateau.nb_joueurs; i++) {
                         effacer_ecran();
                         afficher_plateau(&plateau);
-                        afficher_joueurs(&plateau);
-                        printf("Tour de %s !\n", plateau.joueurs[i].nom);
+                        afficher_joueurs(&plateau, i);
+                        afficher_banniere_tour(&plateau.joueurs[i], i, debut);
 
-                        /* tour_joueur retourne 1 si ce joueur a gagné */
                         int resultat = tour_joueur(&plateau, &plateau.joueurs[i]);
                         if (resultat == 1) {
                             gagnant = i;
-                            break; /* Arrête la rotation des tours immédiatement */
+                            break;
                         }
                     }
                 }
 
-                /* Fin de partie : révéler tout le plateau puis annoncer le gagnant */
+                /* Fin de partie : plateau complet + bannière de victoire */
                 reveler_tout(&plateau);
                 effacer_ecran();
                 afficher_plateau(&plateau);
-                afficher_joueurs(&plateau);
-                printf(GRAS VERT "\n==============================\n");
-                printf("        PARTIE TERMINEE\n");
-                printf("==============================\n" RESET);
-                printf(GRAS "Le gagnant est %s (%s)\n" RESET,
+                afficher_joueurs(&plateau, gagnant);
+
+                printf(GRAS VERT "\n");
+                printf("  ██╗   ██╗██╗ ██████╗████████╗ ██████╗ ██╗██████╗ ███████╗\n");
+                printf("  ██║   ██║██║██╔════╝╚══██╔══╝██╔═══██╗██║██╔══██╗██╔════╝\n");
+                printf("  ██║   ██║██║██║        ██║   ██║   ██║██║██████╔╝█████╗  \n");
+                printf("  ╚██╗ ██╔╝██║██║        ██║   ██║   ██║██║██╔══██╗██╔══╝  \n");
+                printf("   ╚████╔╝ ██║╚██████╗   ██║   ╚██████╔╝██║██║  ██║███████╗\n");
+                printf("    ╚═══╝  ╚═╝ ╚═════╝   ╚═╝    ╚═════╝ ╚═╝╚═╝  ╚═╝╚══════╝\n");
+                printf(RESET);
+
+                printf(GRAS "\n  Le gagnant est %s (%s)\n" RESET,
                        plateau.joueurs[gagnant].nom,
                        NomAventurier(plateau.joueurs[gagnant].type));
-                printf(GRAS VERT "==============================\n" RESET);
-                afficher_duree(debut); /* Affiche la durée totale de la partie */
 
-                /* Mise à jour et sauvegarde des statistiques après chaque partie */
+                afficher_duree(debut);
+
                 mettre_a_jour_stats(stats, &nb_stats, &plateau, gagnant);
                 sauvegarder_stats(stats, nb_stats);
                 printf(BLEU "\n  (Statistiques mises a jour)\n" RESET);
@@ -98,7 +106,7 @@ int main(void) {
             } while (choix_final == 1);
         }
 
-    } while (choix != 3); /* 3 = Quitter */
+    } while (choix != 3);
 
     return 0;
 }
