@@ -60,7 +60,7 @@ static void afficher_boite_aventurier(const char *color, int num,
                                       const char *desc) {
     printf("%s  ┌─ %d. %-8s ───────────────────────────┐\n", color, num, name);
     printf("  │  Arme antique : %-24s│\n", arme);
-    printf("  │  %-39s│\n", desc);
+    printf("  │                                         │\n", desc);
     printf("  └─────────────────────────────────────────┘\n" RESET "\n");
 }
 
@@ -74,14 +74,10 @@ void creerJoueur(Joueur *joueur){
 
     printf("\nChoisissez votre aventurier :\n\n");
 
-    afficher_boite_aventurier(ROUGE,   1, "GUERRIER", "Epee de feu",
-                              "Force brute et combat rapproche");
-    afficher_boite_aventurier(VERT,    2, "RANGER",   "Baton des familiers",
-                              "Agilite et maitrise de la nature");
-    afficher_boite_aventurier(CYAN,    3, "MAGICIEN", "Grimoire interdit",
-                              "Savoir arcanique et sorts puissants");
-    afficher_boite_aventurier(JAUNE,   4, "VOLEUR",   "Dague de sommeil",
-                              "Furtivite et rapidite de frappe");
+    afficher_boite_aventurier(ROUGE,   1, "GUERRIER", "Epee de feu");
+    afficher_boite_aventurier(VERT,    2, "RANGER",   "Baton des familiers");
+    afficher_boite_aventurier(CYAN,    3, "MAGICIEN", "Grimoire interdit");
+    afficher_boite_aventurier(JAUNE,   4, "VOLEUR",   "Dague de sommeil");
 
     int choixType = lire_entier(1, 4);
     joueur->type = choixType - 1; /* L'enum commence à 0, le menu à 1 */
