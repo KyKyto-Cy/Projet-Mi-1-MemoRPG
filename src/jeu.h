@@ -8,12 +8,7 @@
 #ifndef JEU_H
 #define JEU_H
 
-#include <stdio.h>
-#include <string.h>
-#include "direction.h"
 #include "plateau.h"
-#include "combat.h"
-#include "saisie.h"
 #include "joueur.h"
 
 /* Retourne 1 si (ligne, colonne) est adjacente au joueur et non encore révélée. */

@@ -16,7 +16,8 @@ obj/
 core
  
 # --- Éditeur VSCode ---
-.vscode/settings.json
+# settings.json est intentionnellement versionné : il prouve la désactivation
+# de Copilot/IA, argument de soutenance.
 .vscode/launch.json
 .vscode/c_cpp_properties.json
 # (on garde .vscode/ s'il contient des configs partagées utiles)

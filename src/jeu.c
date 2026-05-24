@@ -36,8 +36,7 @@ static const char   lettres[4] = {'Z',    'D',   'S',   'Q'   };
  * et non encore révélée.
  */
 int case_accessible(Joueur *joueur, Plateau *plateau, int ligne, int colonne){
-    /* Vérifier les limites du plateau (0 à 4 inclus) */
-    if (ligne < 0 || ligne > 4 || colonne < 0 || colonne > 4){
+    if (ligne < 0 || ligne > TAILLE_PLATEAU - 1 || colonne < 0 || colonne > TAILLE_PLATEAU - 1){
         return 0;
     }
 
@@ -199,7 +198,6 @@ int tour_joueur(Plateau *plateau, Joueur *joueur){
 
             case TOTEM: {
                 printf("Totem de transmutation ! Choisissez une autre case cachee : elle sera echangee avec ce totem.\n");
-                afficher_plateau(plateau);
 
                 int lig_cible, col_cible;
                 do {
