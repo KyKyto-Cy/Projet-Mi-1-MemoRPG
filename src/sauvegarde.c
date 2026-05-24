@@ -55,12 +55,16 @@ void charger_stats(StatJoueur stats[], int *nb_joueurs){
  */
 void afficher_stats(StatJoueur stats[], int nb_joueurs){
     effacer_ecran();
-    afficher_marge(); printf(GRAS CYAN "╔══════════════════════════════════════════════╗\n");
-    afficher_marge(); printf("║           TABLEAU DES SCORES                 ║\n");
-    afficher_marge(); printf("╚══════════════════════════════════════════════╝\n" RESET "\n");
+    afficher_marge();
+    printf(GRAS CYAN "╔══════════════════════════════════════════════╗\n");
+    afficher_marge();
+    printf("║           TABLEAU DES SCORES                 ║\n");
+    afficher_marge();
+    printf("╚══════════════════════════════════════════════╝\n" RESET "\n");
 
-    if (nb_joueurs == 0){
-        afficher_marge(); printf("Aucun joueur enregistre\n");
+    if (nb_joueurs == 0) {
+        afficher_marge();
+        printf("Aucun joueur enregistre\n");
         return;
     }
 

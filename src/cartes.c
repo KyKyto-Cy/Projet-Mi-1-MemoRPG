@@ -87,9 +87,6 @@ void creer_cartes(Case cartes[]){
     cartes[24].type  = TOTEM;
     cartes[24].revelee = 0;
 
-
-
-
     /* Mélange aléatoire des 25 cartes avec Fisher-Yates */
     melanger_fisher_yates(cartes);
 }
@@ -99,10 +96,6 @@ void creer_cartes(Case cartes[]){
  * Chaque permutation est choisie uniformément, garantissant une distribution équitable.
  * Précondition : srand() doit avoir été appelé avant la première partie.
  */
-
-
-
-
 void melanger_fisher_yates(Case cartes[]) {
     for (int i = NB_CARTES - 1; i > 0; i--) {
         /* Choisit un indice aléatoire entre 0 et i (inclus) */

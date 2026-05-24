@@ -10,6 +10,7 @@
 #include <string.h>
 #include <ctype.h>
 #include "saisie.h"
+#include "affichage.h"
 
 /*
  * Lit une chaîne non vide depuis stdin (max `taille - 1` caractères).
@@ -27,8 +28,10 @@ char *lire_chaine(char *chaine, int taille){
 }
 
 /* Attend que l'utilisateur appuie sur Entrée avant de continuer. */
-void attendre_entree(void){
-    printf("\nAppuyez sur Entree pour continuer...");
+void attendre_entree(void) {
+    printf("\n");
+    afficher_marge();
+    printf("Appuyez sur Entree pour continuer...");
     fflush(stdout);
     getchar();
 }
@@ -50,6 +53,7 @@ Direction lire_direction(int disponibles[4]) {
 
     char saisie[10];
     while (1) {
+        afficher_marge();
         printf("Votre choix : ");
         lire_chaine(saisie, sizeof(saisie));
         char c = toupper((unsigned char)saisie[0]); /* Normalise en majuscule */
@@ -63,6 +67,7 @@ Direction lire_direction(int disponibles[4]) {
             if (c == lettres[i] && disponibles[i])
                 return (Direction)i;
 
+        afficher_marge();
         printf("Direction invalide ou inaccessible, recommencez.\n");
     }
 }
@@ -76,9 +81,11 @@ int lire_entier(int min, int max){
     int choix = 0;
     do {
         if (scanf("%d", &choix) != 1) {
+            afficher_marge();
             printf("Erreur, saisissez un nombre : \n");
             choix = min - 1; /* Force la boucle à recommencer */
         } else if (choix < min || choix > max) {
+            afficher_marge();
             printf("Erreur, saisissez un entier entre %d et %d : \n", min, max);
         }
         while (getchar() != '\n'); /* Vide le tampon dans tous les cas */

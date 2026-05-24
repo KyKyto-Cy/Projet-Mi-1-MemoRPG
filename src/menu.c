@@ -127,8 +127,8 @@ int menu_final(Plateau *plateau){
     choix = lire_entier(1, 2);
 
     /* Réinitialise les compteurs de progression pour une nouvelle partie */
-    if(choix == 1){
-        for(int i = 0; i < plateau->nb_joueurs; i++){
+    if (choix == 1) {
+        for (int i = 0; i < plateau->nb_joueurs; i++) {
             plateau->joueurs[i].trouveCoffre      = 0;
             plateau->joueurs[i].trouveArmeAntique = 0;
             plateau->joueurs[i].portail_actif     = 0;

@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 #include "combat.h"
+#include "affichage.h"
 
 /* Retourne le nom lisible du monstre. */
 const char* NomMonstre(TypeMonstre monstre){
@@ -42,16 +43,22 @@ void retourDepart(Joueur *joueur){
  * Affiche le résultat et retourne 1 (victoire) ou 0 (mort).
  * En cas de mort, retourDepart est appelé ici.
  */
-int combat(Joueur *joueur, TypeMonstre monstre){
+int combat(Joueur *joueur, TypeMonstre monstre) {
+    afficher_marge();
     printf("Monstre rencontre : %s\n", NomMonstre(monstre));
+    afficher_marge();
     printf("Arme utilisee : %s\n", NomArme(joueur->armeChoisi));
 
     if (armeBatMonstre(joueur->armeChoisi, monstre)) {
+        afficher_marge();
         printf("L'arme fonctionne contre ce monstre.\n");
+        afficher_marge();
         printf("%s gagne le combat.\n", joueur->nom);
         return 1; /* Victoire : le joueur continue son tour */
     } else {
+        afficher_marge();
         printf("Arme incompatible avec ce monstre.\n");
+        afficher_marge();
         printf("Retour a la case depart.\n");
         retourDepart(joueur);
         return 0; /* Mort : fin du tour */
