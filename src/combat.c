@@ -14,19 +14,19 @@
 
 /* Retourne le nom lisible du monstre. */
 const char* NomMonstre(TypeMonstre monstre){
-    if (monstre == BASILIC) return "Basilic";
-    if (monstre == ZOMBIE)  return "Zombie";
-    if (monstre == TROLL)   return "Troll";
+    if (monstre == BASILIC) { return "Basilic"; }
+    if (monstre == ZOMBIE)  { return "Zombie"; }
+    if (monstre == TROLL)   { return "Troll"; }
     return "Harpie";
 }
 
 /* Retourne 1 si l'arme est efficace contre le monstre, 0 sinon.
    La table de correspondance est fixe (définie par le CDC). */
 int armeBatMonstre(armeActive arme, TypeMonstre monstre){
-    if (arme == BOUCLIER && monstre == BASILIC) return 1;
-    if (arme == TORCHE   && monstre == ZOMBIE)  return 1;
-    if (arme == HACHE    && monstre == TROLL)   return 1;
-    if (arme == ARC      && monstre == HARPIE)  return 1;
+    if (arme == BOUCLIER && monstre == BASILIC) { return 1; }
+    if (arme == TORCHE   && monstre == ZOMBIE)  { return 1; }
+    if (arme == HACHE    && monstre == TROLL)   { return 1; }
+    if (arme == ARC      && monstre == HARPIE)  { return 1; }
     return 0;
 }
 

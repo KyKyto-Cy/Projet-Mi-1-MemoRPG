@@ -15,9 +15,9 @@
  *              colonne == 5 → Est, ligne == 5 → Sud, sinon → Ouest.
  */
 const char* NomCote(int ligneDepart, int colonneDepart) {
-    if (ligneDepart   == -1) return "Nord";
-    if (colonneDepart ==  5) return "Est";
-    if (ligneDepart   ==  5) return "Sud";
+    if (ligneDepart   == -1) { return "Nord"; }
+    if (colonneDepart ==  5) { return "Est"; }
+    if (ligneDepart   ==  5) { return "Sud"; }
     return "Ouest";
 }
 

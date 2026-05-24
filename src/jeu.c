@@ -105,11 +105,11 @@ int tour_joueur(Plateau *plateau, Joueur *joueur, int index_joueur, time_t debut
         } else {
             int disponibles[4] = {0, 0, 0, 0};
             int nb_accessibles = 0;
-            for (int d = 0; d < 4; d++) {
-                int lig = joueur->positionLigne  + dx[d];
-                int col = joueur->positionColonne + dy[d];
+            for (int i = 0; i < 4; i++) {
+                int lig = joueur->positionLigne  + dx[i];
+                int col = joueur->positionColonne + dy[i];
                 if (case_accessible(joueur, plateau, lig, col)) {
-                    disponibles[d] = 1;
+                    disponibles[i] = 1;
                     nb_accessibles++;
                 }
             }
@@ -125,11 +125,11 @@ int tour_joueur(Plateau *plateau, Joueur *joueur, int index_joueur, time_t debut
 
             printf("\n"); afficher_marge(); printf("Cases accessibles :\n");
             int num = 1;
-            for (int d = 0; d < 4; d++) {
-                if (disponibles[d]) {
-                    int lig = joueur->positionLigne  + dx[d];
-                    int col = joueur->positionColonne + dy[d];
-                    afficher_marge(); printf("  [%d/%c] %-5s -> (%d, %d)\n", num++, lettres[d], noms[d], lig + 1, col + 1);
+            for (int i = 0; i < 4; i++) {
+                if (disponibles[i]) {
+                    int lig = joueur->positionLigne  + dx[i];
+                    int col = joueur->positionColonne + dy[i];
+                    afficher_marge(); printf("  [%d/%c] %-5s -> (%d, %d)\n", num++, lettres[i], noms[i], lig + 1, col + 1);
                 }
             }
 

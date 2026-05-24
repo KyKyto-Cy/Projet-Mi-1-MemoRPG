@@ -14,25 +14,25 @@
 
 /* Retourne le nom lisible du type d'aventurier. */
 const char* NomAventurier(TypeAventurier type){
-    if (type == GUERRIER) return "Guerrier";
-    if (type == RANGER)   return "Ranger";
-    if (type == MAGICIEN) return "Magicien";
+    if (type == GUERRIER) { return "Guerrier"; }
+    if (type == RANGER)   { return "Ranger"; }
+    if (type == MAGICIEN) { return "Magicien"; }
     return "Voleur";
 }
 
 /* Retourne le nom lisible de l'arme active. */
 const char* NomArme(armeActive arme){
-    if (arme == BOUCLIER) return "Bouclier";
-    if (arme == TORCHE)   return "Torche";
-    if (arme == ARC)      return "Arc";
+    if (arme == BOUCLIER) { return "Bouclier"; }
+    if (arme == TORCHE)   { return "Torche"; }
+    if (arme == ARC)      { return "Arc"; }
     return "Hache";
 }
 
 /* Retourne le nom lisible de l'arme antique. */
 const char* NomArmeAntique(TypeArmeAntique arme){
-    if (arme == EPEE_DE_FEU)         return "Epee de feu";
-    if (arme == BATON_DES_FAMILIERS) return "Baton de controle des familiers";
-    if (arme == GRIMOIRE_INTERDIT)   return "Grimoire interdit";
+    if (arme == EPEE_DE_FEU)         { return "Epee de feu"; }
+    if (arme == BATON_DES_FAMILIERS) { return "Baton de controle des familiers"; }
+    if (arme == GRIMOIRE_INTERDIT)   { return "Grimoire interdit"; }
     return "Dague de sommeil";
 }
 
@@ -41,9 +41,9 @@ const char* NomArmeAntique(TypeArmeAntique arme){
  * Chaque aventurier recherche une arme précise — correspondance fixe.
  */
 TypeArmeAntique associerArmeAntique(TypeAventurier type) {
-    if (type == GUERRIER) return EPEE_DE_FEU;
-    if (type == RANGER)   return BATON_DES_FAMILIERS;
-    if (type == MAGICIEN) return GRIMOIRE_INTERDIT;
+    if (type == GUERRIER) { return EPEE_DE_FEU; }
+    if (type == RANGER)   { return BATON_DES_FAMILIERS; }
+    if (type == MAGICIEN) { return GRIMOIRE_INTERDIT; }
     return DAGUE_DE_SOMMEIL;
 }
 
