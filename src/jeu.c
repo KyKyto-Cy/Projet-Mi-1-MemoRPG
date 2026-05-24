@@ -167,33 +167,38 @@ int tour_joueur(Plateau *plateau, Joueur *joueur){
                 break;
 
             case COFFRE:
-                printf("Vous avez trouve un coffre au tresor !\n");
+                printf("Vous avez trouve un coffre au tresor ! ");
                 joueur->trouveCoffre = 1;
-                /* continuer reste à 1 : le joueur continue d'avancer */
+                if (joueur->trouveArmeAntique)
+                    printf("(Arme antique deja trouvee : continuez pour gagner !)\n");
+                else
+                    printf("(Il vous reste a trouver votre arme antique : %s)\n",
+                           NomArmeAntique(joueur->armeRecherchee));
                 break;
 
             case ARME_ANTIQUE:
                 if (c.arme == joueur->armeRecherchee) {
-                    printf("Vous avez trouve votre arme antique !\n");
+                    printf("Vous avez trouve VOTRE arme antique : %s !\n",
+                           NomArmeAntique(c.arme));
                     joueur->trouveArmeAntique = 1;
+                    if (joueur->trouveCoffre)
+                        printf("(Vous avez aussi le coffre : continuez pour gagner !)\n");
+                    else
+                        printf("(Il vous reste a trouver un coffre.)\n");
                 } else {
-                    printf("Ce n'est pas votre arme antique, continuez !\n");
+                    printf("Vous decouvrez une arme antique : %s. Ce n'est pas la votre, continuez !\n",
+                           NomArmeAntique(c.arme));
                 }
-                /* continuer reste à 1 dans les deux cas */
                 break;
 
             case PORTAIL:
-                /* Le portail n'agit pas immédiatement : le flag sera utilisé
-                   au prochain appel de tour_joueur. */
-                printf("Vous avez trouve un portail magique ! Au prochain tour, vous pourrez vous teleporter n'importe ou.\n");
+                printf("Portail magique decouvert ! Au prochain tour, vous pourrez vous teleporter n'importe ou sur le plateau.\n");
                 joueur->portail_actif = 1;
-                continuer = 0; /* Fin du tour : le portail se consomme au tour suivant */
+                continuer = 0;
                 break;
 
             case TOTEM: {
-                /* Le totem échange sa case avec une case cachée choisie par le joueur,
-                   puis renvoie tout le monde à sa case de départ. */
-                printf("Vous avez trouve un totem de transmutation ! Choisissez une case cachee a echanger avec le totem.\n");
+                printf("Totem de transmutation ! Choisissez une autre case cachee : elle sera echangee avec ce totem.\n");
                 afficher_plateau(plateau);
 
                 int lig_cible, col_cible;
@@ -222,8 +227,7 @@ int tour_joueur(Plateau *plateau, Joueur *joueur){
             }
 
             case VIDE:
-                printf("Case vide, continuez !\n");
-                /* continuer reste à 1 : la case vide n'interrompt pas le tour */
+                printf("Case vide. Vous pouvez continuer votre exploration.\n");
                 break;
         }
 

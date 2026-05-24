@@ -88,13 +88,15 @@ void afficher_joueurs(Plateau *plateau, int index_actif) {
         Joueur *j = &plateau->joueurs[i];
         const char *couleur = COULEURS_JOUEURS[i];
         if (i == index_actif) {
-            printf("  %s" GRAS "[%d] %-12s (%s) - Cote %-6s - Arme: %-8s  ◄ EN JEU" RESET "\n",
+            printf("  %s" GRAS "[%d] %-12s (%s) - Cote %-6s - Arme: %-8s - Cherche: %-32s ◄ EN JEU" RESET "\n",
                 couleur, i + 1, j->nom, NomAventurier(j->type),
-                NomCote(j->ligneDepart, j->colonneDepart), NomArme(j->armeChoisi));
+                NomCote(j->ligneDepart, j->colonneDepart), NomArme(j->armeChoisi),
+                NomArmeAntique(j->armeRecherchee));
         } else {
-            printf("  %s[%d] %-12s (%s) - Cote %-6s - Arme: %s" RESET "\n",
+            printf("  %s[%d] %-12s (%s) - Cote %-6s - Arme: %-8s - Cherche: %s" RESET "\n",
                 couleur, i + 1, j->nom, NomAventurier(j->type),
-                NomCote(j->ligneDepart, j->colonneDepart), NomArme(j->armeChoisi));
+                NomCote(j->ligneDepart, j->colonneDepart), NomArme(j->armeChoisi),
+                NomArmeAntique(j->armeRecherchee));
         }
     }
 }
